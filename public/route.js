@@ -4,7 +4,7 @@
     angular.module('myra')
         .config(routeConfig)
         .run(highLightMenu);
-  
+
     function routeConfig($stateProvider, $urlRouterProvider) {
 
         $stateProvider
@@ -16,23 +16,23 @@
                 title : 'Login',
                 onEnter: ['$state', 'Authentication', function ($state, Authentication) {
                     if (Authentication.isAuthenticated()) {
-                        $state.go('secure.home');
+                        $state.go('secure.dashboard');
                     }
                 }],
             })
-            .state('home', {
-                url: '/',
-                templateUrl: '/home/unsecurehome.html',
-                title: 'Home',
-                highlight : 'home',
-                controller: 'HomeController',
-                controllerAs: 'vm',
-                onEnter: ['$state', 'Authentication', function ($state, Authentication) {
-                    if (Authentication.isAuthenticated()) {
-                        $state.go('secure.home');
-                    }
-                }],
-            })
+            // .state('home', {
+            //     url: '/',
+            //     templateUrl: '/home/unsecurehome.html',
+            //     title: 'Home',
+            //     highlight : 'home',
+            //     controller: 'HomeController',
+            //     controllerAs: 'vm',
+            //     onEnter: ['$state', 'Authentication', function ($state, Authentication) {
+            //         if (Authentication.isAuthenticated()) {
+            //             $state.go('secure.home');
+            //         }
+            //     }],
+            // })
             .state('secure', {
                 url: '/secure',
                 templateUrl: '/shared/secure.html',
@@ -106,6 +106,23 @@
                 title: 'Order',
                 highlight: 'order',
                 controller: 'OrderController',
+                controllerAs: 'vm'
+            })
+            //=======================================New Changes===========================
+            .state('secure.reports', {
+                url: '/reports',
+                templateUrl: '/reports/reports.html',
+                title: 'Reports',
+                highlight: 'reports',
+                controller: 'ReportsController',
+                controllerAs: 'vm'
+            })
+            .state('secure.notifications', {
+                url: '/notifications',
+                templateUrl: '/notifications/notifications.html',
+                title: 'Notifications',
+                highlight: 'notifications',
+                controller: 'NotificationsController',
                 controllerAs: 'vm'
             })
             .state('secure.setting', {
@@ -252,8 +269,8 @@
                 controllerAs: 'vm'
             })
             ;
-        
-        $urlRouterProvider.otherwise('/');
+
+        $urlRouterProvider.otherwise('/login');
     }
 
     function highLightMenu($rootScope) {
@@ -262,5 +279,5 @@
 
         });
     }
-    
+
 })();

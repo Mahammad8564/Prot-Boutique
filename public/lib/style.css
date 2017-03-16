@@ -7,7 +7,7 @@ input {
 textarea{resize: none;}
 .container{width: 1170px !important;margin: 0 auto;padding: 0px !important;}
 .main-header{width:100%; display: block; background: #fff; height:70px;}
-.logo{float: left; margin: 13px 0 0 30px;}
+.logo{float: left; margin: 24px 30px;}
 .uib-day button, .btn-default span{
     color: #777 !important;
     margin-left: 0 !important;
@@ -133,7 +133,7 @@ transform: translate(-50%, -50%);
     font-size:25px;
     color:#fff;
     margin: 0px 0 20px 0;
-    background: #1d5619;
+    background: #00BFFF;
     padding: 4px 0 4px 37px;
     font-weight: bold;
     text-align: left;
@@ -203,11 +203,11 @@ transform: translate(-50%, -50%);
 .centered #login .button input {
     width: 100px;
 	cursor: pointer;
-	background: #1d5619;
+	background: #00BFFF;
 	padding: 9px 5px;
 	color: #fff;
 	font-size: 15px;
-	border: 1px solid #e928a3;
+	border: 1px solid #1e90ff;
 	margin-bottom: 10px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -220,7 +220,7 @@ transform: translate(-50%, -50%);
 	margin-bottom: 20px;
 	float: left;
 }
-.centered #login .button input:hover{background: #e527a0;}
+.centered #login .button input:hover{background: #1e90ff;}
 .centered textarea{
   width: 99%;
   float: left;
@@ -244,12 +244,12 @@ transform: translate(-50%, -50%);
 }
 
 .forget-password{font-size: 15px; color: #333; text-align: center;}
-.forget-password a{ font-size: 15px; font-weight: bold;color: #1d5619; text-decoration:none;}
+.forget-password a{ font-size: 15px; font-weight: bold;color: #00BFFF; text-decoration:none;}
 .forget-password a:hover{ font-size: 15px; color: #333; text-decoration: none;}
 .submit-btn-for-pass{display:block; margin-top: 12px !important;padding-bottom: 30px !important;}
 
 .admin-setting-heading {
-    background: #1d5619;
+    background: #00BFFF;
     padding: 12px;
     color: #fff;
     display: inline-block;
@@ -271,7 +271,7 @@ transform: translate(-50%, -50%);
 	box-sizing: border-box;
 }
 
-.inner-heading-bar{width:100%; background: #1d5619; line-height: 60px; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
+.inner-heading-bar{width:100%; background: #00BFFF; line-height: 60px; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
 .main-contant-part{width:100%; float: left; background: #fff; padding: 30px; box-sizing: border-box;min-height: 500px;}
 .main-contant-part p{font-size: 17px; color: #242424; line-height: 23px; margin: 0px; padding: 0px 0 15px 0; text-align: center;}
 .cont-image{width: 100%; display: block; margin: 25px 0; text-align: center;}
@@ -292,7 +292,7 @@ background: -webkit-linear-gradient(271deg, rgba(255,54,182,1) 0%, rgba(225,39,1
 background: -o-linear-gradient(271deg, rgba(255,54,182,1) 0%, rgba(225,39,157,1) 100%); /* opera 11.10+ */
 background: -ms-linear-gradient(271deg, rgba(255,54,182,1) 0%, rgba(225,39,157,1) 100%); /* ie10+ */
 background: linear-gradient(179deg, rgba(255,54,182,1) 0%, rgba(225,39,157,1) 100%); /* w3c */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', endColorstr='#e1279d',GradientType=0 ); /* ie6-9 */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BFFF', endColorstr='#e1279d',GradientType=0 ); /* ie6-9 */
 }
 .contant-three-box-bottom .orderform-btn a:hover{ color: #fff;
   background: -moz-linear-gradient(271deg, rgba(225,39,157,1) 0%, rgba(255,54,182,1) 100%); /* ff3.6+ */
@@ -301,7 +301,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
  background: -o-linear-gradient(271deg, rgba(225,39,157,1) 0%, rgba(255,54,182,1) 100%); /* opera 11.10+ */
  background: -ms-linear-gradient(271deg, rgba(225,39,157,1) 0%, rgba(255,54,182,1) 100%); /* ie10+ */
  background: linear-gradient(179deg, rgba(225,39,157,1) 0%, rgba(255,54,182,1) 100%); /* w3c */
- filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1279d', endColorstr='#1d5619',GradientType=0 ); /* ie6-9 */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1279d', endColorstr='#00BFFF',GradientType=0 ); /* ie6-9 */
 }
 
 .order-form-left-section{width:60%; float: left;}
@@ -411,7 +411,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
     margin-left: 30%;
 }
 .form-section-box .Edit-Design-Measurement{width: 59% !important;}
-.edit-design-add-btn{width:50px !important; float: right !important;background: #1d5619 !important;border: 1px solid #e928a3 !important; color: #fff !important; cursor: pointer;}
+.edit-design-add-btn{width:50px !important; float: right !important;background: #00BFFF !important;border: 1px solid #1e90ff !important; color: #fff !important; cursor: pointer;}
 .form-section-box .birthdate{width:18% !important; float: left; margin-right: 12px;}
 .form-box{width:100%; display: inline-block;position: relative;}
 
@@ -473,11 +473,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
     width:105px;
      margin-right: 10px;
     cursor: pointer;
-    background:#1d5619;
+    background:#00BFFF;
     padding: 9px 5px;
     color: #fff;
     font-size:16px;
-    border: 1px solid #e928a3;
+    border: 1px solid #1e90ff;
     margin-bottom: 10px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -491,7 +491,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
 }
 .Proceed-with-Order-btn{width: 200px !important;margin-left: 144px;}
 .top-mar-none{margin-top: 0px;}
-.submit-button input:hover{background: #e527a0;}
+.submit-button input:hover{background: #1e90ff;}
 .submit-button{float: left; width:115px;}
 .cancel-button{float: left;width:120px;}
 .cancel-button input{
@@ -545,7 +545,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
   font-weight: normal;
 }
 .date-icon-right{position: absolute;right: 10px;top: 9px;z-index: 999;}
-.register-submit-btn{border: 1px solid #1d5619 !important; box-shadow: none !important;}
+.register-submit-btn{border: 1px solid #00BFFF !important; box-shadow: none !important;}
 .register-cancel-btn{border: 1px solid #2b2b2b !important; box-shadow: none !important;}
 
 .customer-detail-page-contant{width: 100%; float: left;}
@@ -627,9 +627,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
 }
 .design-label-1 span button {
     border-radius: 3px;
-    border: 1px solid #1d5619;
+    border: 1px solid #00BFFF;
     padding: 3px 7px;
-    background: #1d5619;
+    background: #00BFFF;
     color: #fff;
     font-size: 14px;
     margin-left: 6px;
@@ -643,7 +643,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
     float: left;
 }
 .admin-setting-heding {
-    background: #1d5619;
+    background: #00BFFF;
     padding: 12px;
     color: #fff;
     display: inline-block;
@@ -766,11 +766,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  background:#1d5619;
+  background:#00BFFF;
   padding: 9px 5px;
   color: #fff;
   font-size:16px;
-  border: 1px solid #e928a3;
+  border: 1px solid #1e90ff;
   margin-bottom: 10px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -782,7 +782,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
   display: inline-block;
   box-shadow: none;
 }
-.right-add-new-button a:hover{background: #e0229b;color: #fff !important;text-decoration: none;}
+.right-add-new-button a:hover{background: #1e90ff;color: #fff !important;text-decoration: none;}
 .details-table{width:100%; float: left;}
 .table-part {
 	width: 100%;
@@ -844,12 +844,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1d5619', end
 .alerts-page-table{width:70%;margin: 0 auto;float: none;}
 
 .home-banner{width: 100%; float: left;height: 378px;}
-.home-baner-btm-bar{width: 100%; float: left; background: #1d5619; padding: 25px 0px; text-align: center;}
+.home-baner-btm-bar{width: 100%; float: left; background: #00BFFF; padding: 25px 0px; text-align: center;}
 .home-baner-btm-bar h2{font-size: 25px; color: #fff; font-weight:600;margin: 0px;}
 .home-baner-btm-bar p{font-size: 17px; color: #fff;}
 .request-appoint-btn{width: 100%; display: inline-block;; text-align: center; margin-top: 12px; margin-bottom: 6px}
 .request-appoint-btn a{
-  padding: 10px 14px; font-size: 15px; color: #1d5619; background: #fff; border-radius: 4px; text-decoration: none;
+  padding: 10px 14px; font-size: 15px; color: #00BFFF; background: #fff; border-radius: 4px; text-decoration: none;
   -moz-box-shadow: 0px 5px 0px 0px #bf2085;
   -webkit-box-shadow: 0px 5px 0px 0px #bf2085;
   box-shadow: 0px 5px 0px 0px #bf2085;
@@ -889,12 +889,12 @@ float:right;
 .clothaddbutton a{
 float: right;
 cursor: pointer;
-background: #1d5619;
+background: #00BFFF;
 text-decoration: none;
 padding: 7px 9px;
 color: #fff;
 font-size: 15px;
-border: 1px solid #e928a3;
+border: 1px solid #1e90ff;
 margin-top: 0px;
 -webkit-border-radius: 3px;
 -moz-border-radius: 3px;
@@ -905,7 +905,7 @@ border-radius: 4px;
 transition: all 0.2s linear;
 text-align: center;
 }
-.clothaddbutton a:hover{background: #e527a0;}
+.clothaddbutton a:hover{background: #1e90ff;}
 
 .float-left{
   float: left;
@@ -944,7 +944,7 @@ text-align: center;
   	padding: 0 0px;
   }
   .container{width: 100% !important;}
-  .logo {margin: 13px 0 0 20px;}
+  .logo {margin: 24px 30px;}
   .home-banner{height: auto; display: inline-flex;}
   .home-banner img{width: 100%; height: auto;}
   .cont-image img{width: 100%;}
@@ -994,10 +994,10 @@ text-align: center;
   	padding: 0 0px;
   	display: inline-block;
   }
-  .logo{width:180px;margin:20px 0 0 20px;}
+  .logo{width:180px;margin:24px 30px;}
   .logo img{width:100%; height: auto;}
   .container{width: 100% !important;}
-  .logo {margin: 20px 0 0 20px;}
+  .logo {margin: 24px 30px;}
   .home-banner{height: auto; display: inline-flex;}
   .home-banner img{width: 100%; height: auto;}
   .cont-image img{width: 100%;}
@@ -1099,7 +1099,7 @@ text-align: center;
 .centered #login{width: 100%;margin: 0 0 0px 0;}
 .container {width:100% !important;}
 .main-header{height: 60px;}
-.logo{width:200px;margin: 13px 0 0 20px;}
+.logo{width:200px;margin: 24px 30px;}
 .logo img{width:100%; height: auto;}
 
 
@@ -1228,8 +1228,8 @@ text-align: center;
 
 .addproducttable-Add-BTN input{
   border-radius: 3px;
-  border: 1px solid #1d5619;
-  background: #1d5619;
+  border: 1px solid #00BFFF;
+  background: #00BFFF;
   color: #fff;
   float: left;
   font-size: 22px;
@@ -1294,9 +1294,9 @@ text-align: center;
 }
 .addproducttable-B button {
     border-radius: 3px;
-    border: 1px solid #1d5619;
+    border: 1px solid #00BFFF;
     padding: 3px 7px;
-    background: #1d5619;
+    background: #00BFFF;
     color: #fff;
     font-size: 14px;
     margin-left: 6px;
@@ -1364,14 +1364,14 @@ margin-left: 5px;
     box-sizing: border-box;
     margin-bottom: 15px;
 }
-  
+
 /* Configure the radio buttons to hide off screen */
 .tabGroup > input[type="radio"] {
     position: absolute;
     left:-100px;
     top:-100px;
 }
-  
+
 /* Configure labels to look like tabs */
 .tabGroup > input[type="radio"] + label {
     /* inline-block such that the label can be given dimensions */
@@ -1379,30 +1379,30 @@ margin-left: 5px;
      cursor: pointer;
     font-size: 15px;
     /* A nice curved border around the tab */
-    border: 1px solid #1d5619;
+    border: 1px solid #00BFFF;
     border-radius: 4px 4px 0 0;
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
-      
+
     /* the bottom border is handled by the tab content div */
     border-bottom: 0;
-  
+
     /* Padding around tab text */
     padding: 10px 0px;
     color: #fff;
-  
+
     /* Set the background color to default gray (non-selected tab) */
-    background-color:#1d5619;
+    background-color:#00BFFF;
     width: 150px;
     text-align: center;
     margin-bottom: 0px !important;
 }
-  
+
 /* Focused tabs need to be highlighted as such */
 .tabGroup > input[type="radio"]:focus + label {
     border:1px solid #DEDBD1; cursor: pointer;
 }
-  
+
 /* Checked tabs must be white with the bottom border removed */
 .tabGroup > input[type="radio"]:checked + label {
     background-color:white;
@@ -1412,7 +1412,7 @@ margin-left: 5px;
     color: #000;
     border:1px solid #DEDBD1;
 }
-  
+
 /* The tab content must fill the widgets size and have a nice border */
 .tabGroup > div {
     display: none;
@@ -1422,13 +1422,14 @@ margin-left: 5px;
     height: 81%;
     overflow: auto;
     margin-top: -1px;
-      
+
     border-radius: 0 4px 4px 4px;
     -moz-border-radius: 0 4px 4px 4px;
     -webkit-border-radius: 0 4px 4px 4px;
 }
-  
+
 /* This matchs tabs displaying to thier associated radio inputs */
 #rad1:checked ~ .tab1, #rad2:checked ~ .tab2, #rad3:checked ~ .tab3, #rad4:checked ~ .tab4 {
     display: block;
+    float: right;
 }
