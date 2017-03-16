@@ -1431,5 +1431,4 @@ margin-left: 5px;
 /* This matchs tabs displaying to thier associated radio inputs */
 #rad1:checked ~ .tab1, #rad2:checked ~ .tab2, #rad3:checked ~ .tab3, #rad4:checked ~ .tab4 {
     display: block;
-    float: right;
 }
