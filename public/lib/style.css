@@ -4,6 +4,54 @@ body{margin:0px; padding:0px; background:#292929 !important;font-family: Helveti
 input {
     outline: none;
 }
+
+.invoice-main{width:100%; display: inline-block;background: #fff;}
+.invoice-main-table{width:670px; margin: 20px auto; display: table; background:#fff;padding: 30px;border: 1px solid #ccc;}
+.invoice-header{width:100%; display:inline-block; padding: 0px 15px 20px 15px;box-sizing: border-box; position:relative;}
+.print{background:#333; padding: 5px 13px; position:absolute; right:0px; top:-15px;border-radius: 3px;color:#fff; cursor:pointer;}
+.print:hover{background:#00bfff;}
+.invoice-header img{border-bottom: 1px solid #00bfff;padding-bottom:5px;}
+.invoice-header span{float:right; text-align:right;width: 100%;padding-top:4px; text-align:center;}
+.customer-address-box{width:100%; display:inline-block; padding:20px 0px; border-top:1px solid #ccc;box-sizing: border-box;}
+.customer-left-bx{width:310px; float:left; padding:0 0px;border-left: 1px solid #ccc;}
+.customer-left-bx-rt{width:297px !important;}
+.customer-left-bx:first-child{border-left:0px;}
+.customer-left-bx table td{padding:5px 0px;}
+.customer-left-bx span{width:100%; float:left; padding:5px 0; font-size:15px; color:#333;}
+.contant-table-bx {width:100%; display:inline-block; padding:10px 0px;box-sizing: border-box;}
+.contant-table-bx table{width:100%; display:table;border-right:1px solid #ccc; font-size:15px; text-align:left;}
+.contant-table-bx table td{ border:1px solid #ccc; padding:7px;border-bottom:0px;border-right:0px;}
+.contant-table-bx table th{ border:1px solid #ccc; padding:7px;border-bottom:0px;border-right:0px; background:#e4e4e4;}
+#border-bottom-table{ border-top:1px solid #ccc !important;}
+.border-bottom-table-0px{ border:0px !important;}
+.bottom-address-bx{width:100%; display:inline-block;box-sizing: border-box;padding:10px 15px; margin-top:15px; margin-bottom:15px;}
+
+.noti-date-text{width:100%; display: inline-block; border-bottom: 1px solid #ccc; padding: 0 0; margin: 0px 0 12px 0;}
+.noti-date-text input{width:40%;margin-bottom: 16px; float: left; border: 1px solid #ccc; border-radius: 4px; background: #fff; padding: 7px; font-size: 15px; color: #333;}
+.notification-main-bx{width:600px; margin: 0 auto; display: table; background:#fff;padding: 30px;}
+.notification-box{
+	background: #ededed;
+	border-radius: 6px;
+	padding: 10px 30px;
+	width: 100%;
+	box-sizing: border-box;
+	display:inline-block;
+	margin-bottom: 15px;
+}
+.left-icon-bx{width:16%; float:left;height: 82px;line-height: 82px;}
+.left-icon-bx img{width: 100%; border-radius: 6px; padding: 10px;}
+.right-heading-bx{width:81%; float:left; margin-left: 3%;}
+.right-heading-bx h4{font-size:22px; color:#333; margin:0px; padding:16px 0 8px 0;}
+.right-heading-bx .notification-heading1{color: #00bfff;}
+.right-heading-bx .notification-heading2{color: #f18902;}
+.right-heading-bx .notification-heading3{color: #d80a0a;}
+.right-heading-bx .notification-heading4{color: #40c018;}
+
+.right-heading-bx span{font-size:16px; color:#333; margin:0px; padding:0 0 0px 0;line-height:22px;}
+
+
+
+
 textarea{resize: none;}
 .container{width: 1170px !important;margin: 0 auto;padding: 0px !important;}
 .main-header{width:100%; display: block; background: #fff; height:70px;}
