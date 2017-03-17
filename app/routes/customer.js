@@ -12,5 +12,8 @@ module.exports = function (app) {
         .patch(customer.update)
         //.delete(measurement.delete);
 
+    app.route('/api/notify')
+        .get(queryBuilder.queryBuilder, customer.notify);
+
     app.param('customerId', customer.getById);
 }

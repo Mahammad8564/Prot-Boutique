@@ -33,7 +33,7 @@ var getErrorMessage = function (err) {
 //    "createdById" : 1
 //  }
 
-//getting List of 
+//getting List of
 //For Geting list of Measurements
 exports.list = function (req, res) {
     //include: [{ model: User, as: 'createdBy' }]
@@ -45,6 +45,15 @@ exports.list = function (req, res) {
     }).catch(function (err) {
         console.log(err);
         res.staus(400).send({ message: getErrorMessage(err) });
+    });
+}
+
+exports.notify = function (req, res) {
+
+    Customer.findAll({attributes: ['id','name','dob','annerversary']}).then(function (arrs) {
+        res.json(arrs);
+    }).catch(function (err) {
+        console.log(err);
     });
 }
 
@@ -89,7 +98,7 @@ exports.update = function (req, res) {
         customer.dataValues[key] = val;
     });
     var arrAdd = [];
-    //add newly added measurments 
+    //add newly added measurments
     _.forEach(req.body.CustomerMeasurements, function (dt) {
         arrAdd.push({ val: dt.val, CustomerId: customer.dataValues.id, MeasurementId: dt.MeasurementId });
     });
