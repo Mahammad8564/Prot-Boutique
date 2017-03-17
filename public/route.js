@@ -125,6 +125,15 @@
                 controller: 'NotificationsController',
                 controllerAs: 'vm'
             })
+            .state('secure.invoice', {
+                url: '/invoice',
+                templateUrl: '/order/invoice.html',
+                title: 'Invoice',
+                highlight: 'invoice',
+                controller: 'InvoiceController',
+                controllerAs: 'vm'
+            })
+            //===============================================================================
             .state('secure.setting', {
                 url: '/setting',
                 templateUrl: '/setting/setting.html',
