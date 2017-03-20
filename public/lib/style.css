@@ -49,8 +49,82 @@ input {
 
 .right-heading-bx span{font-size:16px; color:#333; margin:0px; padding:0 0 0px 0;line-height:22px;}
 
+.stats-container > div {
+    box-sizing: border-box;
+    color: #333;
+    float: left;
+    font-weight: 600;
+    padding: 0 20px 40px 0;
+    text-align: center;
+    width: 20%;
+}
 
+.stats-container .circle {
+    background: #00BFFF none repeat scroll 0 0;
+    border-radius: 50%;
+    color: #fff ;
+    font-weight: 600;
+    height: 140px;
+    margin: 0 auto 20px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+    width: 140px;
+    font-size: 35px;
+    z-index: 10;
+    line-height: 140px;
+}
 
+.inner-middle-main {
+    padding: 20px 0 40px 0;
+    float: left;
+    width: 100%;
+}
+
+.static-middle-section {
+    float: left;
+    width: 100%;
+}
+
+.site-m-middle-main {
+    width: 100%;
+    float: left;
+}
+
+.site-m-middle-main ul {
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.site-m-middle-main ul li {
+    width: 23%;
+    float: left;
+    padding: 0px;
+    background-position: 0 13px;
+    clear: none;
+    background: #dadada ;
+    margin: 20px 10px;
+    list-style: none;
+    text-decoration: none;
+    outline: none;
+}
+
+.site-m-middle-main ul li a {
+    float: left;
+    width: 100%;
+    color: #000;
+    font-size: 20px;
+    padding: 50px 0px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.site-m-middle-main ul li a:hover {
+    color: #fff;
+    background: #00BFFF ;
+    text-decoration: none;
+}
 
 textarea{resize: none;}
 .container{width: 1170px !important;margin: 0 auto;padding: 0px !important;}

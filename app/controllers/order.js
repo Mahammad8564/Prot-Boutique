@@ -24,7 +24,7 @@ var getErrorMessage = function (err) {
     }
 }
 
-//getting List of 
+//getting List of
 //For Geting list of Orders
 exports.list = function (req, res) {
     req.options.include = [{ model: OrderItem, include: [{ model: OrderItemMeasurement, include: [Measurement] }, Design, Material, OrderStatus, Style] }, Customer, OrderStatus];
@@ -102,7 +102,7 @@ exports.create = function (req, res) {
     });
     if (!req.body.order.id) {
         req.body.order.UserId = req.user.id;
-       
+
         Order.create(req.body.order, {
             include: [{ model: OrderItem, include: { model: OrderItemMeasurement } }]
         }).then(function (obj) {
@@ -165,7 +165,7 @@ exports.create = function (req, res) {
             })
             .catch(function (error) {
                 return res.status(400).send({ message: getErrorMessage(error) });
-        }); 
+        });
     }
 }
 

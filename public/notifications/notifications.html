@@ -1,22 +1,29 @@
-﻿<div class="inner-heading-bar">Dashboard</div>
+﻿<div class="inner-heading-bar">Notifications</div>
 <div class="main-contant-part minpageheight">
   <div class="notification-main-bx">
-    <div class="noti-date-text"><input class="serchInput" placeholder="17/03/2017" type="text"></div>
-	 <div class="notification-box">
+    <div class="noti-date-text">
+      <input type="date" readonly
+             name=""
+             uib-datepicker-popup="" is-open="vm.open_orderDate"
+             convert-to-date ng-model="vm.today"
+             ng-click="vm.openCal()"
+             ng-max="vm.today" ng-required="true">
+    </div>
+	 <div ng-if="vm.birthday.length > 0" class="notification-box">
 	  <div class="left-icon-bx"><img src="images/birthday.png"></div>
 	  <div class="right-heading-bx">
 	   <h4 class="notification-heading1">Birthday</h4>
 	   <span><a href="">Mukesh Rawat</a> has a Birthday today.</span>
 	  </div>
 	 </div>
-	 <div class="notification-box">
+	 <div ng-if="vm.annerversary.length > 0" class="notification-box">
 	  <div class="left-icon-bx"><img src="images/anniversary.png"></div>
 	  <div class="right-heading-bx">
 	   <h4 class="notification-heading2">Anniversary</h4>
 	   <span><a href="">Mukesh Rawat</a> has a Birthday today.</span>
 	  </div>
 	 </div>
-	 <div class="notification-box">
+	 <!-- <div class="notification-box">
 	  <div class="left-icon-bx"><img src="images/alert.png"></div>
 	  <div class="right-heading-bx">
 	   <h4 class="notification-heading3">Alert</h4>
@@ -29,6 +36,6 @@
 	   <h4 class="notification-heading4">Delivery</h4>
 	   <span><a href="">Mukesh Rawat</a> has a Birthday today.</span>
 	  </div>
-	 </div>
+	 </div> -->
 	</div>
 </div>
