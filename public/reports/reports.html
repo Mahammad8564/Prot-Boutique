@@ -1,5 +1,91 @@
-<div class="inner-heading-bar">Reports </div>
+<div class="inner-heading-bar">Dashboard</div>
 
-<div class="main-contant-part minpageheight">
+<div class="main-contant-part minpageheight" ng-init="vm.activate()">
 
+    <!-- Dashboard Tab start here -->
+    <div class="tabGroup">
+
+        <input type="radio" name="tabGroup1" id="rad2" />
+        <label for="rad2" class="dashboad-label-mobile-btm-mar wd">Order Based Reports</label>
+
+        <input type="radio" name="tabGroup1" id="rad3" />
+        <label for="rad3" class="dashboad-label-mobile-btm-mar wd">Invoice Based Reports</label>
+
+        <input type="radio" name="tabGroup1" id="rad1" checked="checked" />
+        <label for="rad1" class="dashboad-label-mobile-btm-mar wd">Customer Based Reports</label>
+
+        <br/>
+
+        <div class="tab1">
+            <div class="summary-bx-2" ng-init="vm.getCustomerList()">
+                <div class="orderdate-bx">
+                    <label>Customer Name</label>
+                    <select required name="customerId" ng-init="vm.order.CustomerId = 'all'" ng-model="vm.order.CustomerId" ng-change="vm.customerChange(vm.order.CustomerId)"
+                        convert-to-number>
+                            <option value="all">All</option>
+                            <option value="{{cust.id}}" ng-repeat="cust in vm.customers">{{cust.name}}</option>
+                        </select>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label>Frequency
+                    <input type="radio" ng-init="option='frequency'" ng-model="option" value="frequency">
+                </label>
+                    <label>Custom
+                    <input type="radio" ng-model="option" value="custom">
+                </label>
+                </div>
+                <div>
+                    <div ng-if="option == 'frequency'">
+                        <label>Filter by</label>
+                        <select ng-init="frequencyOption = 'today'" ng-model="frequencyOption">
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                    </select>
+                    </div>
+                    <div ng-if="option == 'custom'">
+                        <div class="fromtodatepicker">
+                            <label>From</label>
+                            <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate" convert-to-date ng-model="vm.datefrom"
+                                ng-click="vm.openCal()" ng-max="" ng-required="true">
+
+                        </div>
+                        <div>
+                            <label>To</label>
+                            <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate2" convert-to-date ng-model="vm.dateto"
+                                ng-click="vm.openCal2()" ng-max="" ng-required="true">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div ng-if="option == 'frequency'">
+                    <label>Filter by</label>
+                    <select class="Create-Order-respo-table-mobile" ng-change="vm.changeOrderItemStatus()" class="outside2 edit-order-status-td-input" placeholder="Search by Name" name="customeruser" ng-model="vm.order.OrderItems[$index].OrderStatusId" convert-to-number ng-disabled="!vm.order.id">
+                        <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true}">{{os.title}}</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="tab2">
+
+        </div>
+
+
+        <div class="tab3">
+
+        </div>
+
+
+        <div class="tab4">
+
+        </div>
+    </div>
 </div>

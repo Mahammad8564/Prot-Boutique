@@ -117,6 +117,30 @@
                 controller: 'ReportsController',
                 controllerAs: 'vm'
             })
+            .state('secure.customerRports', {
+                url: '/reports',
+                templateUrl: '/reports/reports.html',
+                title: 'Reports',
+                highlight: 'reports',
+                controller: 'ReportsController',
+                controllerAs: 'vm'
+            })
+            .state('secure.orderReports', {
+                url: '/reports',
+                templateUrl: '/reports/reports.html',
+                title: 'Reports',
+                highlight: 'reports',
+                controller: 'ReportsController',
+                controllerAs: 'vm'
+            })
+            .state('secure.invoiceReports', {
+                url: '/reports',
+                templateUrl: '/reports/reports.html',
+                title: 'Reports',
+                highlight: 'reports',
+                controller: 'ReportsController',
+                controllerAs: 'vm'
+            })
             .state('secure.stats', {
                 url: '/stats',
                 templateUrl: '/stats/stats.html',
