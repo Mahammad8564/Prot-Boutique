@@ -4,20 +4,22 @@ body{margin:0px; padding:0px; background:#292929 !important;font-family: Helveti
 input {
     outline: none;
 }
-
+.floatdate{float: left;margin: -6px 0 0 12px;}
 .invoice-main{width:100%; display: inline-block;background: #fff;}
 .invoice-main-table{width:670px; margin: 20px auto; display: table; background:#fff;padding: 30px;border: 1px solid #ccc;}
 .invoice-header{width:100%; display:inline-block; padding: 0px 15px 20px 15px;box-sizing: border-box; position:relative;}
 .print{background:#333; padding: 5px 13px; position:absolute; right:0px; top:-15px;border-radius: 3px;color:#fff; cursor:pointer;}
 .print:hover{background:#00bfff;}
 .invoice-header img{border-bottom: 1px solid #00bfff;padding-bottom:5px;}
-.invoice-header span{float:right; text-align:right;width: 100%;padding-top:4px; text-align:center;}
-.customer-address-box{width:100%; display:inline-block; padding:20px 0px; border-top:1px solid #ccc;box-sizing: border-box;}
-.customer-left-bx{width:310px; float:left; padding:0 0px;border-left: 1px solid #ccc;}
+.invoice-header p{float:right; width: 100%;padding-top:4px; text-align:left;}
+.customer-address-box{width:100%; padding:20px 0px;border-top:1px solid #ccc; margin-bottom: 70px;}
+.customer-right-bx{width:310px; float:right; padding:0 0px;}
+.customer-left-bx table tr{margin-bottom: 10px;}
+.customer-left-bx{width:310px; float:left; padding:0 0px;border-right: 1px solid #ccc;}
 .customer-left-bx-rt{width:297px !important;}
-.customer-left-bx:first-child{border-left:0px;}
-.customer-left-bx table td{padding:5px 0px;}
-.customer-left-bx span{width:100%; float:left; padding:5px 0; font-size:15px; color:#333;}
+.customer-right-bx:first-child{border-left:0px;}
+/*.customer-left-bx table td{padding:5px 0px;}*/
+.customer-left-bx p{width:100%; float:left; padding:5px 0; font-size:15px; color:#333; text-align:left !important;}
 .contant-table-bx {width:100%; display:inline-block; padding:10px 0px;box-sizing: border-box;}
 .contant-table-bx table{width:100%; display:table;border-right:1px solid #ccc; font-size:15px; text-align:left;}
 .contant-table-bx table td{ border:1px solid #ccc; padding:7px;border-bottom:0px;border-right:0px;}
@@ -56,7 +58,7 @@ input {
     font-weight: 600;
     padding: 0 20px 40px 0;
     text-align: center;
-    width: 20%;
+    width: 16%;
 }
 
 .stats-container .circle {
@@ -64,14 +66,46 @@ input {
     border-radius: 50%;
     color: #fff ;
     font-weight: 600;
-    height: 140px;
+    height: 120px;
     margin: 0 auto 20px;
     position: relative;
     transition: all 0.3s ease 0s;
-    width: 140px;
+    width: 120px;
     font-size: 35px;
     z-index: 10;
-    line-height: 140px;
+    line-height: 120px;
+}
+
+.stats-container .oval {
+    background: #00BFFF none repeat scroll 0 0;
+    border-radius: 50%;
+    color: #fff ;
+    font-weight: 600;
+    height: 150px;
+    margin: 0 auto 20px;
+    position: relative;
+    transition: all 0.3s ease 0s;
+    width: 230px;
+    font-size: 35px;
+    z-index: 10;
+    line-height: 150px;
+}
+
+.oval-margin{width:30% !important;}
+
+.statusUnderline{
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 30px;
+}
+
+.statsinchar{
+    margin-bottom: 300px;
+
+}
+
+.statsinnumber{
+    margin-bottom: 20px;
+
 }
 
 .inner-middle-main {
@@ -395,7 +429,7 @@ transform: translate(-50%, -50%);
 
 .inner-heading-bar{width:100%; background: #00BFFF; line-height: 60px; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
 .main-contant-part{width:100%; float: left; background: #fff; padding: 30px; box-sizing: border-box;min-height: 500px;}
-.main-contant-part p{font-size: 17px; color: #242424; line-height: 23px; margin: 0px; padding: 0px 0 15px 0; text-align: center;}
+.main-contant-part p{font-size: 17px; color: #242424; line-height: 5px; margin: 0px; padding: 0px 0 15px 0; text-align: center;}
 .cont-image{width: 100%; display: block; margin: 25px 0; text-align: center;}
 .contant-three-box-bottom{width: 100%; display: block;}
 .contant-three-box-bottom .box{width: 33%; float: left;padding-left: 4%;box-sizing: border-box;}

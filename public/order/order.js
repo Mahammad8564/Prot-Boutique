@@ -9,6 +9,9 @@
     
     function OrderController(Restangular, $state, SweetAlert, $stateParams, Upload) {
         var vm = this;
+        vm.date = new Date();
+        vm.invoice = invoice;
+        vm.print = print;
         vm.getList = getList;
         vm.edit = edit;
         vm.detail = detail;
@@ -95,6 +98,23 @@
         vm.getFilterStyle = getFilterStyle;
         vm.sprayColour = sprayColour;
         vm.sColor = true;
+
+        function print(divName){
+            
+            var printContents = document.getElementById(divName).innerHTML;
+            console.log(printContents);
+            var popupWin = window.open('', '_blank');
+            popupWin.document.open();
+            popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="/lib/style.css" /></head><body onload="window.print()">' + printContents + '</body></html>');
+            popupWin.document.close();
+        }
+
+
+        function invoice(index){
+            localStorage.setItem('index',index);
+            $state.go('secure.invoice');
+        }
+
         function sprayColour(idx, arr) {
             if (idx > 0) {
                 //check for previous matched colour and maintain a flag;
@@ -282,7 +302,7 @@
             //delete vm.order["1"];
             Upload.upload({
                 url: '/api/order',
-                data: { order: vm.order},
+                data: { order: data},
                 file: vm.files
             }).then(function (resp) {
                 console.log(resp);
@@ -305,6 +325,12 @@
         function getList() {
             Restangular.all('api/order').getList(vm.options).then(function (res) {
                 vm.list = res.data;
+                vm.newList = res.data[localStorage.getItem('index')];
+                console.log(vm.newList);
+                vm.totalamount = 0;
+                vm.newList.OrderItems.forEach(function(element) {
+                    vm.totalamount += element.amount;
+                }, this);
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
         }

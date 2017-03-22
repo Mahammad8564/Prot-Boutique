@@ -9,8 +9,11 @@ module.exports = function (app) {
 
     app.route('/api/orderItem/:orderItemId')
         .get(orderItem.read)
-        .patch(orderItem.update)
+        .patch(orderItem.update);
         //.delete(measurement.delete);
+    
+    app.route('/api/notify')
+        .get(queryBuilder.queryBuilder, orderItem.notify);
 
     app.param('orderItemId', orderItem.getById);
 }

@@ -25,7 +25,19 @@ var getErrorMessage = function (err) {
 //getting List of 
 //For Geting list of Measurements
 exports.list = function (req, res) {
-    req.options.include = [{ model: Order, include: [{ model: Customer }] }, { model: Design }, { model: OrderStatus}];
+    req.options.include = [{ model: Order, include: [{ model: Customer }] }, { model: Design }, { model: Style }, { model: OrderStatus }];
+    req.options.distinct = true;
+    OrderItem.findAndCountAll(req.options).then(function (arrs) {
+        res.setHeader('total', arrs.count);
+        res.json(arrs.rows);
+    }).catch(function (err) {
+        console.log(err);
+        res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+
+exports.notify = function (req, res) {
+    req.options.include = [{ model: Design }, { model: Style }];
     req.options.distinct = true;
     OrderItem.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
@@ -40,7 +52,7 @@ exports.read = function (req, res) {
     res.json(req.orderItem);
 }
 
-exports.getById = function (req,res,next) {
+exports.getById = function (req, res, next) {
     OrderItem.findOne({
         where: { id: req.params.orderItemId },
         include: [{ model: User, as: 'createdBy', attributes: ["fullName", "email", "id"] }, CustomerMeasurement]
@@ -71,16 +83,16 @@ exports.create = function (req, res) {
 }
 
 exports.update = function (req, res) {
-   
+
     OrderItem.update(orderItem.dataValues, {
-            where: {
-                id: req.params.orderItemId
-            }
-        })
-     .then(function (obj) {
-         return res.json(obj);
-    }).catch(function (error) {
-        return res.status(400).send({ message: getErrorMessage(error) });
-    });
+        where: {
+            id: req.params.orderItemId
+        }
+    })
+        .then(function (obj) {
+            return res.json(obj);
+        }).catch(function (error) {
+            return res.status(400).send({ message: getErrorMessage(error) });
+        });
 
 }

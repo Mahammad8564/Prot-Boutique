@@ -48,15 +48,6 @@ exports.list = function (req, res) {
     });
 }
 
-exports.notify = function (req, res) {
-
-    Customer.findAll({attributes: ['id','name','dob','annerversary']}).then(function (arrs) {
-        res.json(arrs);
-    }).catch(function (err) {
-        console.log(err);
-    });
-}
-
 exports.read = function (req, res) {
     res.json(req.customer);
 }

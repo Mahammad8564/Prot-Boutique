@@ -16,7 +16,7 @@
                 title : 'Login',
                 onEnter: ['$state', 'Authentication', function ($state, Authentication) {
                     if (Authentication.isAuthenticated()) {
-                        $state.go('secure.dashboard');
+                        $state.go('secure.home');
                     }
                 }],
             })
@@ -117,6 +117,14 @@
                 controller: 'ReportsController',
                 controllerAs: 'vm'
             })
+            .state('secure.stats', {
+                url: '/stats',
+                templateUrl: '/stats/stats.html',
+                title: 'Stats',
+                highlight: 'tats',
+                controller: 'StatsController',
+                controllerAs: 'vm'
+            })
             .state('secure.notifications', {
                 url: '/notifications',
                 templateUrl: '/notifications/notifications.html',
@@ -130,7 +138,7 @@
                 templateUrl: '/order/invoice.html',
                 title: 'Invoice',
                 highlight: 'invoice',
-                controller: 'InvoiceController',
+                controller: 'OrderController',
                 controllerAs: 'vm'
             })
             //===============================================================================
