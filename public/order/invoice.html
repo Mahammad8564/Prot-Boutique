@@ -1,6 +1,7 @@
 <div class="inner-heading-bar" ng-init="vm.getList()">Invoice</div>
+<div id="printable">
 <div class="main-contant-part">
-<div id="printable" class="invoice-main-table">
+<div  class="invoice-main-table">
 	 <div class="invoice-header">
 	  <p><img src="images/newlogo.png" alt="ProT Boutique"></p>
 	  <p>B-303, Balleshwar Square, Opp. Iskon Temple</p>
@@ -15,11 +16,11 @@
 		  <tbody>
 			<tr>
 				<!--<td align="left">Customer Name:</td>-->
-			  <td align="left">{{vm.newList.Customer.name}}</td>
+			  <td align="left" style="padding: 0 0 10px 0px;">{{vm.newList.Customer.name}}</td>
 			</tr>
 			<tr>
 				<!--<td align="left">Address:</td>-->
-			  <td align="left">{{vm.newList.Customer.address}}</td>
+			  <td align="left" style="padding: 0 0 10px 0px;">{{vm.newList.Customer.address}}</td>
 			</tr>
 			<tr>
 				<!--<td align="left">Mobile No:</td>-->
@@ -32,20 +33,20 @@
 	   <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tbody>
 			<tr>
-			  <td align="right">Invoice #:</td>
-			  <td align="right">{{vm.newList.id|leadingZero}}</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">Invoice #:</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">{{vm.newList.id|leadingZero}}</td>
 			</tr>
 			<tr>
-			  <td align="right">Invoice Date:</td>
-			  <td align="right">{{vm.date | date: dd/mm/yyyy}}</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">Invoice Date:</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">{{vm.date | date: dd/mm/yyyy}}</td>
 			</tr>
 			<!--<tr>
 			  <td align="right">P.O. #:</td>
 			  <td align="right">1742/2014</td>
 			</tr>-->
 			<tr>
-			  <td align="right">Due Date:</td>
-			  <td align="right">18/03/2017</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">Due Date:</td>
+			  <td align="right" style="padding: 0 0 10px 0px;">18/03/2017</td>
 			</tr>
 		  </tbody>
 		</table>
@@ -85,4 +86,5 @@
 </table>
 	 </div>
 	</div>
+    </div>
     </div>

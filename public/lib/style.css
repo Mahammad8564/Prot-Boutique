@@ -51,7 +51,7 @@ input {
 
 .right-heading-bx span{font-size:16px; color:#333; margin:0px; padding:0 0 0px 0;line-height:22px;}
 
-.stats-container > div {
+/*.stats-container > div {
     box-sizing: border-box;
     color: #333;
     float: left;
@@ -59,54 +59,91 @@ input {
     padding: 0 20px 40px 0;
     text-align: center;
     width: 16%;
-}
+}*/
 
 .stats-container .circle {
     background: #00BFFF none repeat scroll 0 0;
-    border-radius: 50%;
-    color: #fff ;
+    border-radius: 6px;
+    color: #fff;
     font-weight: 600;
-    height: 120px;
+    height: 100px;
     margin: 0 auto 20px;
     position: relative;
     transition: all 0.3s ease 0s;
     width: 120px;
     font-size: 35px;
     z-index: 10;
-    line-height: 120px;
+    line-height: 100px;
 }
 
 .stats-container .oval {
     background: #00BFFF none repeat scroll 0 0;
-    border-radius: 50%;
+    border-radius:5px;
     color: #fff ;
     font-weight: 600;
-    height: 150px;
+    height: 156px;
     margin: 0 auto 20px;
     position: relative;
     transition: all 0.3s ease 0s;
-    width: 230px;
+    width:100%;
     font-size: 35px;
     z-index: 10;
-    line-height: 150px;
+}
+.stats-container .oval strong{font-weight: normal; width: 100%; display: table;text-align: center;padding-top: 40px;font-size: 29px;}
+.stats-container .oval span{
+    font-weight: normal;
+    width: 100%;
+    display: table;
+    background: #14A3D4;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size:17px;
+    text-align: center;
+    padding: 8px 0px;
+    border-radius: 0 0 5px 5px;
 }
 
-.oval-margin{width:30% !important;}
+.oval-margin{width:32%; float: left; margin-left: 2%;}
+.oval-margin:first-child{margin-left: 0px;}
 
 .statusUnderline{
     border-bottom: 2px solid #ddd;
     margin-bottom: 30px;
+    font-size: 26px;
 }
+.from-label{width: 19% !important;}
+.date-to-label{width:10% !important;}
+.fromtodatepicker input{width:81%;
+border: 1px solid #ccc;
+border-radius: 4px;
+padding: 5px 10px;}
 
+.order-status-checkbox{width:86%; float: left;}
+.order-status-checkbox span{width:12% !important; float: left; margin-left: 3%;}
+.order-status-checkbox span:first-child{margin-left: 0px;}
+.filter-btn-top-mar{margin-top: 20px;}
 .statsinchar{
-    margin-bottom: 300px;
-
+    margin-bottom:40px;
 }
+.orderdate-bx{width:100%; float: left;margin-bottom: 20px;}
+.orderdate-bx label{float: left; width:12%;padding-top: 5px;}
+.orderdate-bx select{
+    width: 26%;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+.orderdate-bx span{width: 12%;float: left;margin-top: 4px;}
+.orderdate-bx span input{font-style: normal;float: left; margin-right: 5px;}
+.orderdate-bx span i{font-style: normal;float: left;}
 
 .statsinnumber{
     margin-bottom: 20px;
-
+    width: 100%;
+   float: left;
 }
+.stats-number-bx{width: 16%;float: left;text-align: center;font-size: 17px;}
 
 .col-height{
     height: 200px;
@@ -141,27 +178,36 @@ input {
     padding: 0px;
     background-position: 0 13px;
     clear: none;
-    background: #dadada ;
+    background: #f0f0f0 ;
     margin: 20px 10px;
     list-style: none;
     text-decoration: none;
     outline: none;
+    height: 200px;
+    border-radius: 5px;
 }
 
 .site-m-middle-main ul li a {
     float: left;
     width: 100%;
-    color: #000;
-    font-size: 20px;
-    padding: 50px 0px;
+    color: #4d4d4d;
+    font-size: 22px;
+    padding: 0px 0px;
     box-sizing: border-box;
     text-align: center;
+    text-decoration: none;
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.site-m-middle-main ul li a i{width: 100%;text-align: center;display: table;padding-top: 12px;text-decoration: none; font-style: normal;}
+.site-m-middle-main ul li a img{margin-top: 47px;}
 
-.site-m-middle-main ul li a:hover {
+.site-m-middle-main ul li:hover {
     color: #fff;
     background: #00BFFF ;
     text-decoration: none;
+    transition: all .5s;-webkit-transition: all .5s;-moz-transition: all .5s;
+    
 }
 
 textarea{resize: none;}
@@ -433,7 +479,7 @@ transform: translate(-50%, -50%);
 
 .inner-heading-bar{width:100%; background: #00BFFF; line-height: 60px; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
 .main-contant-part{width:100%; float: left; background: #fff; padding: 30px; box-sizing: border-box;min-height: 500px;}
-.main-contant-part p{font-size: 17px; color: #242424; line-height: 5px; margin: 0px; padding: 0px 0 15px 0; text-align: center;}
+.main-contant-part p{font-size: 17px; color: #242424; line-height: 5px; margin: 0 auto; padding: 0px 0 15px 0; text-align: center; width:100%;display: table;}
 .cont-image{width: 100%; display: block; margin: 25px 0; text-align: center;}
 .contant-three-box-bottom{width: 100%; display: block;}
 .contant-three-box-bottom .box{width: 33%; float: left;padding-left: 4%;box-sizing: border-box;}
@@ -1538,7 +1584,7 @@ margin-left: 5px;
 
 .fromtodatepicker{
     float: left;
-        margin-right: 25px;
+        margin-right: 25px;width:21%;
 }
 
 /* Configure labels to look like tabs */
