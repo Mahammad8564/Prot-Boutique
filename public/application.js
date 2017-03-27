@@ -5,7 +5,8 @@ var mainApplicationModule = angular.module(mainApplicationModuleName ,
         'restangular',
         'oitozero.ngSweetAlert',
         'ngFileUpload',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'angularjs-dropdown-multiselect'
 ]);
 
 angular.element(document).ready(function () {

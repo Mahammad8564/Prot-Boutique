@@ -30,6 +30,7 @@
         vm.getOrderItemMeasurement = getOrderItemMeasurement;
         vm.proceedOrder = proceedOrder;
         vm.submitOrder = submitOrder;
+        vm.counttotal = counttotal;
         vm.changeOrderItemStatus = changeOrderItemStatus;
         vm.getCustomerByOrderList = getCustomerByOrderList;
         vm.searchByField = searchByField;
@@ -98,6 +99,18 @@
         vm.getFilterStyle = getFilterStyle;
         vm.sprayColour = sprayColour;
         vm.sColor = true;
+        vm.totalamount = 0;
+
+        function counttotal(){
+            vm.totalamount = 0;
+            vm.order.OrderItems.forEach(function(element) {
+                console.log(element.amount);
+                if(element.amount){
+                    vm.totalamount += element.amount;
+                }
+                
+            }, this);
+        }
 
         function print(divName){
             
@@ -298,6 +311,7 @@
         }
         function upload() {
             var data = Restangular.stripRestangular(vm.order);
+            data.totalamount = vm.totalamount;
             //delete vm.order["0"];
             //delete vm.order["1"];
             Upload.upload({

@@ -16,9 +16,45 @@
         var DesignIds = [];
         var StyleIds = [];
         var DesignIdsStyleIds = [];
+        vm.todayCollection = 0;
+        vm.thisweekCollection = 0;
+        vm.thismonthCollection = 0;
+        vm.todayorder = 0;
+        vm.thisweekorder = 0;
+        vm.thismonthorder = 0;
 
         vm.getList = getList;
+
+        //=======This week data===
+         var date = new Date();
+         var day = date.getDay();
+         var firstDayOfWeek = date.getDate() - day;
+         var startDate =  new Date();
+         startDate.setDate(firstDayOfWeek);
+         var endDate = new Date();
+         endDate.setDate(startDate.getDate() + 6);
+
         function getList() {
+            var d = new Date();
+
+            Restangular.all('api/listall').getList().then(function (res) {
+                res.data.forEach(function(element) {
+                    var t = new Date(element.orderDate);
+                    if(t.getDate() == d.getDate() && t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()){
+                        vm.todayCollection += element.totalamount;
+                        vm.todayorder++;
+                    }
+                    if(t>=startDate && t<=endDate){
+                        vm.thisweekCollection += element.totalamount;
+                        vm.thisweekorder++;
+                    }
+                    if(t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()){
+                        vm.thismonthCollection += element.totalamount;
+                        vm.thismonthorder++;
+                    }
+                }, this);
+            });
+
             Restangular.all('api/customer').getList(vm.options).then(function (res) {
                 vm.totalCustomers = res.data.length;
             });
@@ -28,7 +64,7 @@
                 res.data.forEach(function (element) {
                     DesignIds.push(element.Design.title);
                     StyleIds.push(element.Style.title);
-                    DesignIdsStyleIds.push(element.Design.title+element.Style.title);
+                    DesignIdsStyleIds.push(element.Design.title+" + "+element.Style.title);
                 }, this);
 
                 var newDesignId = DesignIds.slice().sort(), most = [undefined, 0], counter = 0;
