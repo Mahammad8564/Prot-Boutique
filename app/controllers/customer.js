@@ -119,16 +119,4 @@ exports.update = function (req, res) {
         return res.status(400).send({ message: getErrorMessage(error) });
     });
 
-
-    //Customer.update(customer.dataValues, {
-    //        where: {
-    //            id: req.params.customerId
-    //        }
-    //    })
-    // .then(function (obj) {
-    //     return res.json(obj);
-    //}).catch(function (error) {
-    //    return res.send({ message: getErrorMessage(error) });
-    //});
-
 }

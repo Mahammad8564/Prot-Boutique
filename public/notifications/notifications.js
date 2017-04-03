@@ -22,18 +22,15 @@
         }
 
         function edit2(obj) {
-            console.log(obj);
             $state.go('secure.edit-customer', { id: obj });
         }
 
         function edit3(obj) {
-            console.log(obj);
             $state.go('secure.edit-order', { id: obj });
         }
 
         function openCal() {
             vm.open_orderDate = !vm.open_orderDate;
-
         }
         
         function change(date) {

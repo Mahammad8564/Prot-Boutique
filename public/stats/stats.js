@@ -26,29 +26,38 @@
         vm.getList = getList;
 
         //=======This week data===
-         var date = new Date();
-         var day = date.getDay();
-         var firstDayOfWeek = date.getDate() - day;
-         var startDate =  new Date();
-         startDate.setDate(firstDayOfWeek);
-         var endDate = new Date();
-         endDate.setDate(startDate.getDate() + 6);
+        //  var date = new Date();
+        //  var day = date.getDay();
+        //  var firstDayOfWeek = date.getDate() - day;
+        //  var startDate =  new Date();
+        //  startDate.setDate(firstDayOfWeek);
+        //  var endDate = new Date();
+        //  endDate.setDate(startDate.getDate() + 6);
+
+
+        var endDate = new Date();
+        var startDate = new Date();
+        startDate.setDate(startDate.getDate() - 7);
+
+        var end = new Date();
+        var start = new Date();
+        start.setDate(start.getDate() - 30);
 
         function getList() {
             var d = new Date();
 
             Restangular.all('api/listall').getList().then(function (res) {
-                res.data.forEach(function(element) {
+                res.data.forEach(function (element) {
                     var t = new Date(element.orderDate);
-                    if(t.getDate() == d.getDate() && t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()){
+                    if (t.getDate() == d.getDate() && t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()) {
                         vm.todayCollection += element.totalamount;
                         vm.todayorder++;
                     }
-                    if(t>=startDate && t<=endDate){
+                    if (t >= startDate && t <= endDate) {
                         vm.thisweekCollection += element.totalamount;
                         vm.thisweekorder++;
                     }
-                    if(t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()){
+                    if (t >= start && t <= end) {
                         vm.thismonthCollection += element.totalamount;
                         vm.thismonthorder++;
                     }
@@ -60,7 +69,6 @@
             });
 
             Restangular.all('api/notify').getList(vm.options).then(function (res) {
-                console.log(res.data);
                 res.data.forEach(function (element) {
                     DesignIds.push(element.Design.title);
                     StyleIds.push(element.Style.title);
@@ -90,7 +98,6 @@
             });
 
             Restangular.all('api/order').getList(vm.options).then(function (res) {
-                console.log(res);
                 vm.totalOrders = res.data.length;
                 res.data.forEach(function (element) {
                     if (element.OrderStatusId == 1) {

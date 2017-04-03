@@ -6,7 +6,7 @@
     angular.module('myra').controller('OrderController', OrderController);
 
     OrderController.$inject = ['Restangular', '$state', 'SweetAlert', '$stateParams', 'Upload'];
-    
+
     function OrderController(Restangular, $state, SweetAlert, $stateParams, Upload) {
         var vm = this;
         vm.date = new Date();
@@ -60,17 +60,17 @@
             ],
             OrderStatusId: 1,
             OrderStatus: {
-                title : 'New'
+                title: 'New'
             }
         };
         vm.order = {
             Customer: {},
             OrderStatus: {
-                title : "New"
+                title: "New"
             },
             OrderStatusId: 1,
             OrderItems: [],
-            orderDate : new Date()
+            orderDate: new Date()
         };
         vm.isOrderProceed = false;
         vm.openCal = openCal;
@@ -85,7 +85,7 @@
             search: ''
         }
         vm.searchBy = {
-           
+
         };
         vm.dateOptions = {
             dateDisabled: false,
@@ -101,19 +101,19 @@
         vm.sColor = true;
         vm.totalamount = 0;
 
-        function counttotal(){
+        function counttotal() {
             vm.totalamount = 0;
-            vm.order.OrderItems.forEach(function(element) {
+            vm.order.OrderItems.forEach(function (element) {
                 console.log(element.amount);
-                if(element.amount){
+                if (element.amount) {
                     vm.totalamount += element.amount;
                 }
-                
+
             }, this);
         }
 
-        function print(divName){
-            
+        function print(divName) {
+
             var printContents = document.getElementById(divName).innerHTML;
             console.log(printContents);
             var popupWin = window.open('', '_blank');
@@ -123,8 +123,8 @@
         }
 
 
-        function invoice(index){
-            localStorage.setItem('index',index);
+        function invoice(index) {
+            localStorage.setItem('index', index);
             $state.go('secure.invoice');
         }
 
@@ -150,7 +150,7 @@
         }
 
         vm.activate = activate;
-        
+
         function getCustomerList() {
             Restangular.all('api/customer').getList().then(function (res) {
                 vm.customers = res.data;
@@ -164,8 +164,8 @@
         function getStyleList() {
             Restangular.all('api/style').getList().then(function (res) {
                 vm.styles = [];
-                res.data.forEach(function(element) {
-                    if(element.isActive){
+                res.data.forEach(function (element) {
+                    if (element.isActive) {
                         vm.styles.push(element);
                     }
                 }, this);
@@ -174,8 +174,8 @@
         function getMaterialList() {
             Restangular.all('api/material').getList().then(function (res) {
                 vm.materials = [];
-                res.data.forEach(function(element) {
-                    if(element.isActive){
+                res.data.forEach(function (element) {
+                    if (element.isActive) {
                         vm.materials.push(element);
                     }
                 }, this);
@@ -184,8 +184,8 @@
         function getMeasurementList() {
             Restangular.all('api/measurement').getList().then(function (res) {
                 vm.measurements = [];
-                res.data.forEach(function(element) {
-                    if(element.isActive){
+                res.data.forEach(function (element) {
+                    if (element.isActive) {
                         vm.measurements.push(element);
                     }
                 }, this);
@@ -237,11 +237,14 @@
             vm.order.OrderItems.splice(idx + 1, 0, oi);
         }
         function removeOrderItem() {
-            var idx = vm.order.OrderItems.length - 1;
-            if (vm.order.OrderItems[idx].hasPair) {
-                vm.order.OrderItems[idx - 1].hasPair = false;
+            if (vm.order.OrderItems.length > 1) {
+                var idx = vm.order.OrderItems.length - 1;
+                if (vm.order.OrderItems[idx].hasPair) {
+                    vm.order.OrderItems[idx - 1].hasPair = false;
+                }
+                vm.order.OrderItems.splice(idx, 1);
             }
-            vm.order.OrderItems.splice(idx, 1);
+
         }
         function styleChange(idx, sid) {
             var stl = _.find(vm.styles, ['id', parseInt(sid)]);
@@ -259,13 +262,13 @@
             });
         }
         function getOrderItemMeasurement(idx, dgnId) {
-            styleChange(idx,-1);
+            styleChange(idx, -1);
             //bind customer value as weel if customer is present and their exists value of measurement
             var cust = _.find(vm.customers, ['id', parseInt(vm.order.CustomerId)]);
             var dgn = _.find(vm.designs, ['id', parseInt(dgnId)]);
             if (dgn) {
                 vm.order.OrderItems[idx].Design = dgn;
-                
+
                 vm.order.OrderItems[idx].OrderItemMeasurements = [];
                 _.forEach(dgn.DesignMeasurements, function (dm) {
                     var val = '';
@@ -316,7 +319,7 @@
             //delete vm.order["1"];
             Upload.upload({
                 url: '/api/order',
-                data: { order: data},
+                data: { order: data },
                 file: vm.files
             }).then(function (resp) {
                 console.log(resp);
@@ -328,9 +331,9 @@
                 }
                 $state.go('secure.order');
                 //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-                }, function (resp) {
-                    console.log(resp.data);
-                    vm.error2 = resp.data.message;
+            }, function (resp) {
+                console.log(resp.data);
+                vm.error2 = resp.data.message;
                 vm.startProcessing = false;
             }, function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -342,7 +345,7 @@
                 vm.newList = res.data[localStorage.getItem('index')];
                 console.log(vm.newList);
                 vm.totalamount = 0;
-                vm.newList.OrderItems.forEach(function(element) {
+                vm.newList.OrderItems.forEach(function (element) {
                     vm.totalamount += element.amount;
                 }, this);
                 vm.options.totalItems = parseInt(res.headers('total'));
@@ -352,10 +355,10 @@
             Restangular.all('api/orderStatus').getList().then(function (res) {
                 vm.orderStatuses = res.data;
             });
-        }       
+        }
         function detail() {
             vm.isOrderProceed = false;
-        } 
+        }
         function activate() {
             getDesignList();
             getStyleList();
@@ -366,7 +369,7 @@
 
         }
         function changeOrderItemStatus() {
-            var gb = _.groupBy(vm.order.OrderItems, function (d) { return d.OrderStatusId});
+            var gb = _.groupBy(vm.order.OrderItems, function (d) { return d.OrderStatusId });
             if (gb[1] && gb[1].length === vm.order.OrderItems.length) {
                 vm.order.OrderStatusId = 1;
             } else if (gb[2] && gb[2].length > 0) {
@@ -422,10 +425,9 @@
             getList();
         }
 
-        function getCustomerByOrderList() 
-        {
-                vm.searchBy.CustomerId = $stateParams.customerId || '0';
-                searchByField();
+        function getCustomerByOrderList() {
+            vm.searchBy.CustomerId = $stateParams.customerId || '0';
+            searchByField();
         }
 
 

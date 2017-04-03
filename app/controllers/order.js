@@ -99,26 +99,47 @@ exports.getById = function (req, res, next) {
 }
 
 exports.Customerreport = function (req, res, next) {
-    console.log(req.body);
-    Order.findAll({
-        where: { CustomerId: req.body.CustomerId },
-        include: [{
-            model: OrderItem, where: {
-                OrderStatusId: {
-                    $in: req.body.OrderStatusId, 
-                }, 
-                createdAt: {
-                    $between: [req.body.start, req.body.end]
-                }
-            }, include: [Design, OrderStatus]
-        }, Customer]
-    }).then(function (obj) {
-        res.json(obj);
-        next();
-    }).catch(function (err) {
-        console.log(err);
-        res.status(400).send({ message: getErrorMessage(err) });
-    });
+    if (req.body.CustomerId == undefined){
+        Order.findAll({
+            include: [{
+                model: OrderItem, where: {
+                    OrderStatusId: {
+                        $in: req.body.OrderStatusId,
+                    },
+                    createdAt: {
+                        $between: [req.body.start, req.body.end]
+                    }
+                }, include: [Design, Style, OrderStatus]
+            }, Customer]
+        }).then(function (obj) {
+            res.json(obj);
+            next();
+        }).catch(function (err) {
+            console.log(err);
+            res.status(400).send({ message: getErrorMessage(err) });
+        });
+    }
+    else {
+        Order.findAll({
+            where: { CustomerId: req.body.CustomerId },
+            include: [{
+                model: OrderItem, where: {
+                    OrderStatusId: {
+                        $in: req.body.OrderStatusId,
+                    },
+                    createdAt: {
+                        $between: [req.body.start, req.body.end]
+                    }
+                }, include: [Design, Style, OrderStatus]
+            }, Customer]
+        }).then(function (obj) {
+            res.json(obj);
+            next();
+        }).catch(function (err) {
+            console.log(err);
+            res.status(400).send({ message: getErrorMessage(err) });
+        });
+    }
 }
 
 
