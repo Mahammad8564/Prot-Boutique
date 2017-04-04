@@ -143,7 +143,7 @@
                     <div class="addproducttable-Add-BTN" ng-if="!vm.order.id">
                         <input value="+" ng-click="vm.addOrderItem()" type="button">
                         <span>
-                            <input style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="submit">
+                            <input ng-if="vm.order.OrderItems.length > 1" style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="submit">
                         </span>
                     </div>
                 </div>

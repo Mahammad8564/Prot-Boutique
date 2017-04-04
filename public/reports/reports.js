@@ -65,6 +65,9 @@
 
         function filter3() {
             vm.showtable4 = true;
+            vm.showtable = false;
+            vm.showtable2 = false;
+            vm.showtable3 = false;
 
             if (vm.option3 == 'frequency') {
                 vm.CustomerBasedReports = [];
@@ -154,25 +157,32 @@
 
             }
             else {
-                vm.CustomerBasedReports = [];
-                var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
-                Restangular.all('api/customerreport').post(newObj).then(function (res) {
-                    res.data.forEach(function (element) {
-                        element.OrderItems.forEach(function (ele) {
-                            vm.CustomerBasedReports.push(
-                                {
-                                    id: element.id,
-                                    name: element.Customer.name,
-                                    Design: ele.Design.title,
-                                    Style: ele.Style.title,
-                                    OrderStatus: ele.OrderStatus.title,
-                                    deliveryDate: ele.deliveryDate
-                                });
+                if (vm.datefrom && vm.dateto) {
+                    vm.CustomerBasedReports = [];
+                    var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
+                    Restangular.all('api/customerreport').post(newObj).then(function (res) {
+                        res.data.forEach(function (element) {
+                            element.OrderItems.forEach(function (ele) {
+                                vm.CustomerBasedReports.push(
+                                    {
+                                        id: element.id,
+                                        name: element.Customer.name,
+                                        Design: ele.Design.title,
+                                        Style: ele.Style.title,
+                                        OrderStatus: ele.OrderStatus.title,
+                                        deliveryDate: ele.deliveryDate
+                                    });
+                            }, this);
                         }, this);
-                    }, this);
-                }, function (err) {
-                    console.log(err);
-                });
+                    }, function (err) {
+                        console.log(err);
+                    });
+                }
+                else {
+                    vm.error = "Please Select Date Range.";
+                    vm.showtable4 = false;
+                }
+
             }
 
         }
@@ -204,14 +214,18 @@
                         vm.showtable2 = true;
                         vm.showtable3 = false;
 
+
                         var startDate = new Date();
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
                         endDate.setHours(23, 0, 0, 0);
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
-                            console.log(res.data);
+                            vm.filterTotal = 0;
                             vm.records = res.data;
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                            }, this);
                         }, function (err) {
                             console.log(err);
                         });
@@ -222,26 +236,35 @@
                         vm.showtable2 = false;
                         vm.showtable = true;
 
+
                         vm.records = [];
                         vm.array = [];
 
                         var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 7);
-                        var start = new Date();
-                        start.setDate(start.getDate() - 7);
-                        start.setHours(0, 0, 0, 0);
+                        startDate.setDate(startDate.getDate() - 6);
+                        startDate.setHours(0, 0, 0, 0);
+
                         var endDate = new Date();
+                        endDate.setDate(endDate.getDate() + 1);
                         endDate.setHours(0, 0, 0, 0);
 
-                        while (start < endDate) {
+                        var start = new Date();
+                        start.setDate(start.getDate() - 6);
+                        start.setHours(0, 0, 0, 0);
+
+                        var end = new Date();
+                        end.setHours(0, 0, 0, 0);
+
+                        while (start < end) {
                             vm.array.push({ orderDate: start, totalamount: 0 })
                             var newDate = start.setDate(start.getDate() + 1);
                             start = new Date(newDate);
-
                         }
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
                             res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
                                 var orderDate = new Date(element.orderDate);
                                 orderDate.setHours(0, 0, 0, 0);
 
@@ -258,6 +281,7 @@
                                 res[value.orderDate].totalamount += value.totalamount
                                 return res;
                             }, {});
+                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
                         }, function (err) {
                             console.log(err);
                         });
@@ -276,20 +300,25 @@
                         var startDate = new Date();
                         startDate.setDate(startDate.getDate() - 30);
                         var start = new Date();
-                        start.setDate(start.getDate() - 30);
+                        start.setDate(start.getDate() - 31);
                         start.setHours(0, 0, 0, 0);
                         var endDate = new Date();
+                        endDate.setDate(endDate.getDate() + 1);
                         endDate.setHours(0, 0, 0, 0);
+                        var end = new Date();
+                        end.setHours(0, 0, 0, 0);
 
 
-                        while (start <= endDate) {
+                        while (start < end) {
                             var newDate = start.setDate(start.getDate() + 1);
                             start = new Date(newDate);
                             vm.array.push({ orderDate: start, totalamount: 0 })
                         }
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
                             res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
                                 var orderDate = new Date(element.orderDate);
                                 orderDate.setHours(0, 0, 0, 0);
 
@@ -306,6 +335,7 @@
                                 res[value.orderDate].totalamount += value.totalamount
                                 return res;
                             }, {});
+                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
                         }, function (err) {
                             console.log(err);
                         });
@@ -315,6 +345,7 @@
                         vm.showtable3 = true;
                         vm.showtable2 = false;
                         vm.showtable = false;
+
 
                         vm.records = [];
                         vm.array = [];
@@ -334,13 +365,16 @@
                         }
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                            }, this);
+
                             var groupedByDateData = _.groupBy(res.data, function (date) {
                                 return date.createdAt.substring(5, 7);
                             });
 
-
-
-                            vm.aggregateByDate = _.map(groupedByDateData, function (invoiceObject, createdat) {
+                            var aggregateByDate = _.map(groupedByDateData, function (invoiceObject, createdat) {
                                 return {
                                     createdat: createdat,
                                     val: _.reduce(invoiceObject, function (m, x) {
@@ -349,7 +383,9 @@
                                 };
                             });
 
-                            vm.array.push(vm.aggregateByDate[0]);
+                            aggregateByDate.forEach(function (element) {
+                                vm.array.push(element);
+                            }, this);
 
                             vm.array.reduce(function (res, value) {
                                 if (!res[value.createdat]) {
@@ -378,49 +414,53 @@
                     vm.showtable2 = false;
                     vm.showtable3 = false;
                     vm.error = '';
-
                     vm.records = [];
                     vm.array = [];
 
-                    var startDate = new Date(vm.datefrom);
-                    startDate.setHours(0, 0, 0, 0);
+                    vm.datefrom.setHours(0, 0, 0, 0);
+                    vm.dateto.setHours(23, 0, 0, 0);
 
-                    var start = startDate;
-                    start.setDate(start.getDate() - 2);
+                    console.log(vm.datefrom);
+                    console.log(vm.dateto);
 
-                    var endDate = new Date(vm.dateto);
-                    endDate.setHours(0, 0, 0, 0);
+                    var start = vm.datefrom;
 
                     while (start < endDate) {
                         var newDate = start.setDate(start.getDate() + 1);
                         start = new Date(newDate);
-                        vm.array.push({ orderDate: start, totalamount: 0, id: '-' })
+                        vm.array.push({ orderDate: start, totalamount: 0 })
                     }
 
-                    Restangular.all('api/customerreport').post({ CustomerId: vm.custId, OrderStatusId: 1, start: startDate, end: endDate }).then(function (res) {
+                    Restangular.all('api/report').post({ start: vm.datefrom, end: vm.dateto }).then(function (res) {
+                        vm.filterTotal = 0;
                         res.data.forEach(function (element) {
+                            vm.filterTotal += element.totalamount;
                             var orderDate = new Date(element.orderDate);
                             orderDate.setHours(0, 0, 0, 0);
 
-                            vm.array.push({ orderDate: orderDate, totalamount: element.totalamount, id: element.id });
+                            vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
                         }, this);
                         vm.array.reduce(function (res, value) {
                             if (!res[value.orderDate]) {
                                 res[value.orderDate] = {
                                     totalamount: 0,
                                     orderDate: value.orderDate,
-                                    id: value.id
                                 };
                                 vm.records.push(res[value.orderDate])
                             }
                             res[value.orderDate].totalamount += value.totalamount
                             return res;
                         }, {});
+                        vm.records = _.sortBy(vm.records, 'orderDate');
                     }, function (err) {
                         console.log(err);
                     });
+
                 }
                 else {
+                    vm.showtable = false;
+                    vm.showtable2 = false;
+                    vm.showtable3 = false;
                     vm.error = "Please Select Date Range.";
                 }
             }
