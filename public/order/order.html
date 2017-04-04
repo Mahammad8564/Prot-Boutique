@@ -63,10 +63,10 @@
                                <th>Staus</th>
                            </tr>
                            <tr ng-repeat="oi in obj.OrderItems" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
-                               <td>{{oi.Design.title}}</td>
-                               <td>{{oi.Style.title}}</td>
-                               <td>{{oi.deliveryDate | date:'dd-MM-yyyy'}}</td>
-                               <td>{{oi.OrderStatus.title}}</td>
+                               <td data-th="Design: " class="top-purpal-color-row2">{{oi.Design.title}}</td>
+                               <td data-th="Style: " class="top-purpal-color-row2">{{oi.Style.title}}</td>
+                               <td data-th="Delivery Date: " class="top-purpal-color-row2">{{oi.deliveryDate | date:'dd-MM-yyyy'}}</td>
+                               <td data-th="Staus: " class="top-purpal-color-row2">{{oi.OrderStatus.title}}</td>
                            </tr>
                        </table>
                     </td>

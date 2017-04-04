@@ -143,15 +143,15 @@
                     <div class="addproducttable-Add-BTN" ng-if="!vm.order.id">
                         <input value="+" ng-click="vm.addOrderItem()" type="button">
                         <span>
-                            <input style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="submit">
+                            <input ng-if="vm.order.OrderItems.length > 1" style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="submit">
                         </span>
                     </div>
                 </div>
                 <div class="submit-error" ng-if="(orderForm.$invalid || customerForm.$invalid)&& vm.isSubmitted">
                     <span>Please fill all mandatory fields marked with *.</span>
                 </div>
-                <div class="submit-button Proceed-with-Order-btn">
-                    <input class="btn-align" value="Proceed with Order" ng-click="vm.proceedOrder(orderForm,customerForm)" type="button">
+                <div class="Proceed-with-Order-btn">
+                    <input value="Proceed with Order" ng-click="vm.proceedOrder(orderForm,customerForm)" type="button">
                     <!--<input class="btn btn-info" type="button" value="Cancel" ui-sref="secure.order">-->
                 </div>
                 <div class="cancel-button">
