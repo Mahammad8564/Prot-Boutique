@@ -29,10 +29,10 @@ input {
 .bottom-address-bx{width:100%; display:inline-block;box-sizing: border-box;padding:10px 15px; margin-top:15px; margin-bottom:15px;}
 
 .noti-date-text{width:100%; display: inline-block; border-bottom: 1px solid #ccc; padding: 0 0; margin: 0px 0 12px 0;}
-.noti-date-text input{width:40%;margin-bottom: 16px; float: left; border: 1px solid #ccc; border-radius: 4px; background: #fff; padding: 7px; font-size: 15px; color: #333;}
+.noti-date-text input{width:40%;margin-bottom: 16px;margin-left: 0px; float: left; border: 1px solid #ccc; border-radius: 4px; background: #fff; padding: 7px; font-size: 15px; color: #333;}
 .notification-main-bx{width:600px; margin: 0 auto; display: table; background:#fff;padding: 30px;}
 .notification-box{
-	background: #ededed;
+	background: #f3f3f3;
 	border-radius: 6px;
 	padding: 10px 30px;
 	width: 100%;
@@ -50,6 +50,7 @@ input {
 .right-heading-bx .notification-heading4{color: #40c018;}
 
 .right-heading-bx span{font-size:16px; color:#333; margin:0px; padding:0 0 0px 0;line-height:22px;}
+.right-heading-bx span a{text-decoration: underline; color: #00bfff;}
 
 /*.stats-container > div {
     box-sizing: border-box;
@@ -179,13 +180,14 @@ padding: 5px 10px;}
     background-position: 0 13px;
     clear: none;
     background: #f0f0f0 ;
-    margin: 20px 10px;
+    margin: 20px 0 20px 20px;
     list-style: none;
     text-decoration: none;
     outline: none;
     height: 200px;
     border-radius: 5px;
 }
+.site-m-middle-main ul li:first-child{margin-left: 0px;}
 
 .site-m-middle-main ul li a {
     float: left;
@@ -1135,6 +1137,7 @@ text-align: center;
 /*Media query 1024 to 1170 css start here*/
 
 @media only screen and (min-width: 1024px) and (max-width: 1170px) {
+    .fromtodatepicker{width:23% !important;}
     .order-summary-box .summary-bx-2 .orderdate-bx select{width: 62%;}
   .addproducttable-main-box table {width:198px !important;}
   .main-contant-part {padding:20px;min-height:600px;}
@@ -1162,6 +1165,16 @@ text-align: center;
 /*Media query 768 to 1023 css start here*/
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .orderdate-bx label{width:15%;}
+    .orderdate-bx span{width:17%;}
+    .fromtodatepicker{width:34% !important;}
+    .order-status-checkbox{width:85%;}
+    .order-status-checkbox span {width: 17% !important;}
+    .stats-container .oval span{font-size: 14px;}
+    .stats-number-bx {width: 16.6%;font-size: 13px;}
+    .stats-container .circle{width: 100px;line-height: 90px;height: 90px;margin: 0 auto 10px;}
+    .site-m-middle-main ul li { width: 47%;}
+    .site-m-middle-main ul li:first-child {margin-left: 20px;}
     .order-summary-box .summary-bx-1 .orderdate-bx input{width:45%;}
     .order-summary-box .summary-bx-2 .orderdate-bx select{width:60%;}
     .left-list-addproduct {width: 16% !important;}
@@ -1217,6 +1230,23 @@ text-align: center;
 /*Media query 320 to 767 css start here*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+    .orderdate-bx label{width:100%;}
+    .orderdate-bx select{width:100%;}
+    .orderdate-bx span{width:40%;}
+    .order-status-checkbox span {width: 100% !important;}
+    .order-status-checkbox span{margin-left:0;}
+    .fromtodatepicker {margin-right: 0px !important;width: 100% !important;margin-bottom: 10px;}
+    .date-to-label {width: 19% !important;}
+    .stats-number-bx {width: 33%;font-size: 13px;margin-bottom: 15px;}
+    .stats-container .circle{width: 90px;line-height: 90px;height: 90px;margin: 0px auto 8px;}
+    .oval-margin {width: 97%;}
+    .oval-margin:first-child {margin-left: 2%;}
+    .notification-main-bx{width:100%;padding: 5px;}
+    .notification-box{padding: 10px 10px;}
+    .left-icon-bx {width: 20%;}
+    .right-heading-bx {width: 77%;}
+    .left-icon-bx img{width: 65px;padding-left: 5px;}
+    .site-m-middle-main ul li{width:94%;}
     .dashboad-label-mobile-btm-mar{margin-top: 1px !important}
     .table-part1 .top-purpal-color-row{background: #efefef;}
     .table-part1 .top-purpal-color-row2 {width: 98% !important;}
@@ -1278,7 +1308,7 @@ text-align: center;
 .managecustomer-left-menu-inner-page {width: 100%;margin-bottom: 20px;}
 .managecustomer-right-bx {width: 100%; margin-left: 0px;}
 .inner-heading-bar{padding: 0 0 0 20px;}
-.inner-heading-bar{line-height: 45px;font-size: 22px;}
+.inner-heading-bar{line-height: 45px;font-size: 22px;float: left; margin-top: -8px;}
 .add-new-form{width: 90% !important;padding: 15px;}
 .form-section-box .birthdate {width: 30% !important;}
 .add-new-btm-btn{margin-left: 0px;}
@@ -1337,7 +1367,7 @@ text-align: center;
 }
 .menu-toggle{ display:block; margin-top:18px; cursor:pointer;margin-right: 26px;}
 .menu-toggle i {
-    border-top: 3px solid #f52dac;
+    border-top: 3px solid #00bfff;
     clear: both;
     float: left;
     margin-top: 4px;
@@ -1447,7 +1477,7 @@ text-align: center;
   margin-bottom: 6px;
 }
 .addproducttable-Add-BTN input:hover{
-  background: #f027a7;
+  background: #4ACFFC;
 }
 .addproducttable-Addbx-second-top-bdr-none{border-top: 0px;}
 
