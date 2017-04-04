@@ -20,19 +20,6 @@
                     }
                 }],
             })
-            // .state('home', {
-            //     url: '/',
-            //     templateUrl: '/home/unsecurehome.html',
-            //     title: 'Home',
-            //     highlight : 'home',
-            //     controller: 'HomeController',
-            //     controllerAs: 'vm',
-            //     onEnter: ['$state', 'Authentication', function ($state, Authentication) {
-            //         if (Authentication.isAuthenticated()) {
-            //             $state.go('secure.home');
-            //         }
-            //     }],
-            // })
             .state('secure', {
                 url: '/secure',
                 templateUrl: '/shared/secure.html',
@@ -58,7 +45,7 @@
                 url: '/dashboard',
                 templateUrl: '/dashboard/dashboard.html',
                 title: 'Dashboard',
-                highlight: 'dashboard',
+                highlight: 'home',
                 controller: 'DashboardController',
                 controllerAs: 'vm'
             })
@@ -108,12 +95,11 @@
                 controller: 'OrderController',
                 controllerAs: 'vm'
             })
-            //=======================================New Changes===========================
             .state('secure.reports', {
                 url: '/reports',
                 templateUrl: '/reports/reports.html',
                 title: 'Reports',
-                highlight: 'reports',
+                highlight: 'home',
                 controller: 'ReportsController',
                 controllerAs: 'vm'
             })
@@ -145,7 +131,7 @@
                 url: '/stats',
                 templateUrl: '/stats/stats.html',
                 title: 'Stats',
-                highlight: 'tats',
+                highlight: 'home',
                 controller: 'StatsController',
                 controllerAs: 'vm'
             })
@@ -153,7 +139,7 @@
                 url: '/notifications',
                 templateUrl: '/notifications/notifications.html',
                 title: 'Notifications',
-                highlight: 'notifications',
+                highlight: 'home',
                 controller: 'NotificationsController',
                 controllerAs: 'vm'
             })
@@ -165,7 +151,6 @@
                 controller: 'OrderController',
                 controllerAs: 'vm'
             })
-            //===============================================================================
             .state('secure.setting', {
                 url: '/setting',
                 templateUrl: '/setting/setting.html',

@@ -11,4 +11,5 @@ var passport = passport();
 
 //Listening on port 3002
 app.listen(3002);
+console.log('Server started on http://localhost:3002');
 module.exports = app;

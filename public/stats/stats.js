@@ -16,19 +16,63 @@
         var DesignIds = [];
         var StyleIds = [];
         var DesignIdsStyleIds = [];
+        vm.todayCollection = 0;
+        vm.thisweekCollection = 0;
+        vm.thismonthCollection = 0;
+        vm.todayorder = 0;
+        vm.thisweekorder = 0;
+        vm.thismonthorder = 0;
 
         vm.getList = getList;
+
+        //=======This week data===
+        //  var date = new Date();
+        //  var day = date.getDay();
+        //  var firstDayOfWeek = date.getDate() - day;
+        //  var startDate =  new Date();
+        //  startDate.setDate(firstDayOfWeek);
+        //  var endDate = new Date();
+        //  endDate.setDate(startDate.getDate() + 6);
+
+
+        var endDate = new Date();
+        var startDate = new Date();
+        startDate.setDate(startDate.getDate() - 7);
+
+        var end = new Date();
+        var start = new Date();
+        start.setDate(start.getDate() - 30);
+
         function getList() {
+            var d = new Date();
+
+            Restangular.all('api/listall').getList().then(function (res) {
+                res.data.forEach(function (element) {
+                    var t = new Date(element.orderDate);
+                    if (t.getDate() == d.getDate() && t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()) {
+                        vm.todayCollection += element.totalamount;
+                        vm.todayorder++;
+                    }
+                    if (t >= startDate && t <= endDate) {
+                        vm.thisweekCollection += element.totalamount;
+                        vm.thisweekorder++;
+                    }
+                    if (t >= start && t <= end) {
+                        vm.thismonthCollection += element.totalamount;
+                        vm.thismonthorder++;
+                    }
+                }, this);
+            });
+
             Restangular.all('api/customer').getList(vm.options).then(function (res) {
                 vm.totalCustomers = res.data.length;
             });
 
             Restangular.all('api/notify').getList(vm.options).then(function (res) {
-                console.log(res.data);
                 res.data.forEach(function (element) {
                     DesignIds.push(element.Design.title);
                     StyleIds.push(element.Style.title);
-                    DesignIdsStyleIds.push(element.Design.title+element.Style.title);
+                    DesignIdsStyleIds.push(element.Design.title+" + "+element.Style.title);
                 }, this);
 
                 var newDesignId = DesignIds.slice().sort(), most = [undefined, 0], counter = 0;
@@ -54,7 +98,6 @@
             });
 
             Restangular.all('api/order').getList(vm.options).then(function (res) {
-                console.log(res);
                 vm.totalOrders = res.data.length;
                 res.data.forEach(function (element) {
                     if (element.OrderStatusId == 1) {

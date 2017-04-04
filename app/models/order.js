@@ -5,6 +5,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: false
         },
+        totalamount: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
+        }
 
     }, {
             classMethods: {

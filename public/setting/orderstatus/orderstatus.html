@@ -22,7 +22,7 @@
                         </th>
                         <th>Status</th>
                     </tr>
-                    <tr ng-repeat="obj in vm.list" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
+                    <tr ng-repeat="obj in vm.list | filter : {isActive : true}" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                         <td data-th="Order Status: " class="top-purpal-color-row2">{{obj.title}} </td>
                         <td ng-if="obj.isActive" data-th="Status: " class="top-purpal-color-row2">Active</td>
                         <td ng-if="!obj.isActive" data-th="Status: " class="top-purpal-color-row2">Inactive</td>

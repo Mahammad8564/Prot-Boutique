@@ -38,14 +38,57 @@ exports.list = function (req, res) {
     });
 }
 
+exports.dateByMonth = function (req, res, next) {
+
+    Order.findAll({
+        where: {
+            orderDate: {
+                $between: [req.body.start, req.body.end]
+            }
+        }
+        // group: [Sequelize.fn('date_trunc', 'day', Sequelize.col('orderDate'))]
+    }).then(function (obj) {
+        res.json(obj);
+    }).catch(function (err) {
+        res.json(err);
+    });
+}
+
+
+exports.listOnly = function (req, res) {
+    // req.options.include = [{ model: OrderItem, include: [{ model: OrderItemMeasurement, include: [Measurement] }, Design, Material, OrderStatus, Style] }, Customer, OrderStatus];
+    // req.options.distinct = true;
+    Order.findAll().then(function (arrs) {
+        // res.setHeader('total', arrs.count);
+        res.json(arrs);
+    }).catch(function (err) {
+        res.json(err);
+        // console.log(err);
+        // res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+
+exports.report = function (req, res) {
+    req.options.include = [{ model: OrderItem, include: [Design, OrderStatus, Style] }, Customer];
+    req.options.distinct = true;
+    Order.findAndCountAll(req.options).then(function (arrs) {
+        res.setHeader('total', arrs.count);
+        res.json(arrs.rows);
+    }).catch(function (err) {
+        console.log(err);
+        res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+
+
 exports.read = function (req, res) {
     res.json(req.order);
 }
 
-exports.getById = function (req,res,next) {
+exports.getById = function (req, res, next) {
     Order.findOne({
         where: { id: req.params.orderId },
-        include: [{ model: OrderItem, include: [{ model: OrderItemMeasurement, include : [Measurement] }, Style, Material, Design, OrderStatus] }, Customer, OrderStatus, User]
+        include: [{ model: OrderItem, include: [{ model: OrderItemMeasurement, include: [Measurement] }, Style, Material, Design, OrderStatus] }, Customer, OrderStatus, User]
     }).then(function (obj) {
         req.order = obj;
         next();
@@ -53,6 +96,50 @@ exports.getById = function (req,res,next) {
         console.log(err);
         res.status(400).send({ message: getErrorMessage(err) });
     });
+}
+
+exports.Customerreport = function (req, res, next) {
+    if (req.body.CustomerId == undefined){
+        Order.findAll({
+            include: [{
+                model: OrderItem, where: {
+                    OrderStatusId: {
+                        $in: req.body.OrderStatusId,
+                    },
+                    createdAt: {
+                        $between: [req.body.start, req.body.end]
+                    }
+                }, include: [Design, Style, OrderStatus]
+            }, Customer]
+        }).then(function (obj) {
+            res.json(obj);
+            next();
+        }).catch(function (err) {
+            console.log(err);
+            res.status(400).send({ message: getErrorMessage(err) });
+        });
+    }
+    else {
+        Order.findAll({
+            where: { CustomerId: req.body.CustomerId },
+            include: [{
+                model: OrderItem, where: {
+                    OrderStatusId: {
+                        $in: req.body.OrderStatusId,
+                    },
+                    createdAt: {
+                        $between: [req.body.start, req.body.end]
+                    }
+                }, include: [Design, Style, OrderStatus]
+            }, Customer]
+        }).then(function (obj) {
+            res.json(obj);
+            next();
+        }).catch(function (err) {
+            console.log(err);
+            res.status(400).send({ message: getErrorMessage(err) });
+        });
+    }
 }
 
 
@@ -165,7 +252,7 @@ exports.create = function (req, res) {
             })
             .catch(function (error) {
                 return res.status(400).send({ message: getErrorMessage(error) });
-        });
+            });
     }
 }
 
@@ -175,14 +262,14 @@ exports.update = function (req, res) {
         order.dataValues[key] = val;
     });
     Order.update(order.dataValues, {
-            where: {
-                id: req.params.orderId
-            }
-        })
-     .then(function (obj) {
-         return res.json(obj);
-    }).catch(function (error) {
-        return res.status(400).send({ message: getErrorMessage(error) });
-    });
+        where: {
+            id: req.params.orderId
+        }
+    })
+        .then(function (obj) {
+            return res.json(obj);
+        }).catch(function (error) {
+            return res.status(400).send({ message: getErrorMessage(error) });
+        });
 
 }

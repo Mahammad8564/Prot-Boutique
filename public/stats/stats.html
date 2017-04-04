@@ -1,8 +1,40 @@
-<div class="inner-heading-bar" ng-init="vm.getList()">Boutique Stats </div>
+<div class="inner-heading-bar" ng-init="vm.getList()">Dashboard </div>
 
 <div class="main-contant-part minpageheight">
   <div class="statsinchar">
-    <h2 class="statusUnderline">Stats in Products</h2>
+    <h2 class="statusUnderline">Collection Stats</h2>
+    <div class="stats-container ">
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.todayCollection | currency : '&#8377;'}}</strong> <span>Today's Collection</span></div>
+      </div>
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.thisweekCollection | currency : '&#8377;'}}</strong> <span>Last 7 Days Collection</span></div>
+      </div>
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.thismonthCollection | currency : '&#8377;'}}</strong> <span>Last 30 Days Collection</span></div>
+      </div>
+
+    </div>
+  </div>
+
+    <div class="statsinchar">
+    <h2 class="statusUnderline">Order Stats</h2>
+    <div class="stats-container ">
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.todayorder}}</strong> <span>Today's Order</span></div>
+      </div>
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.thisweekorder}}</strong> <span>Last 7 Days Order</span></div>
+      </div>
+      <div class="oval-margin">
+        <div class="oval"><strong>{{vm.thismonthorder}}</strong> <span>Last 30 Days Order</span></div>
+      </div>
+
+    </div>
+  </div>
+
+    <div class="statsinchar">
+    <h2 class="statusUnderline">Products Stats</h2>
     <div class="stats-container ">
       <div class="oval-margin">
         <div class="oval"><strong>{{vm.bestDesign}}</strong> <span>Best Selling Design</span></div>
@@ -17,8 +49,9 @@
 
     </div>
   </div>
+
   <div class="statsinnumber">
-    <h2 class="statusUnderline">Stats in Numbers</h2>
+    <h2 class="statusUnderline">Numbers Stats</h2>
     <div class="stats-container ">
       <div class="stats-number-bx">
         <div class="circle">{{vm.totalCustomers}}</div>

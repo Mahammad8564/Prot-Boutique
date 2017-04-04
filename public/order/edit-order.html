@@ -189,24 +189,6 @@
                                            ng-model="vm.order.OrderItems[$index].deliveryDate"
                                            ng-click="open.deliveryDate[$index] = !open.deliveryDate[$index]"
                                            ng-min="vm.order.orderDate">
-
-
-                                    <!--<input class="Create-Order-respo-table-mobile" style="width: 90%"
-                                           required
-                                           type="date"
-                                           ng-change="vm.onDeliveryDateChange($index)"
-                                           name="deliveryDate_{{$index}}"
-                                           ng-model="vm.order.OrderItems[$index].deliveryDate"
-                                           convert-to-date
-                                           ng-min="vm.order.orderDate" />-->
-                                           <!--<input type="text" uib-datepicker-popup="" name="dob" placeholder="dd-MM-yyyy"
-                               ng-model="dob" is-open="popup.opened" datepicker-options="dateOptions"
-                               ng-required="true" close-text="Close" class="form-control" />
-                        <span class="input-group-btn">
-                            <button type="button" ng-click="open()" class="btn btn-default">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                        </span>-->
                                 </td>
                                 <td data-th="Stiching Date: " class="top-purpal-color-row2">
                                     <input type="date" readonly class="Create-Order-respo-table-mobile"
@@ -218,22 +200,6 @@
                                            ng-click="open.stitchingDate[$index] = !open.stitchingDate[$index]"
                                            ng-min="vm.order.orderDate" 
                                            ng-max="orderItem.alertDate">
-                                    <!--<input class="Create-Order-respo-table-mobile" style="width: 90%" 
-                                           required 
-                                           type="date"
-                                           name="stitchingDate_{{$index}}"
-                                           ng-model="vm.order.OrderItems[$index].stitchingDate"
-                                           convert-to-date
-                                           ng-min="vm.order.orderDate" 
-                                           ng-max="orderItem.alertDate"/>-->
-                                           <!--<input type="text" uib-datepicker-popup="" name="dob" placeholder="dd-MM-yyyy"
-                                           ng-model="dob" is-open="popup.opened" datepicker-options="dateOptions"
-                                           ng-required="true" close-text="Close" class="form-control" />
-                                            <span class="input-group-btn">
-                                                <button type="button" ng-click="open()" class="btn btn-default">
-                                                    <i class="glyphicon glyphicon-calendar"></i>
-                                                </button>
-                                            </span>-->
                                 </td>
                                 <td data-th="Alert Date: " class="top-purpal-color-row2">
                                     <input type="date" readonly class="Create-Order-respo-table-mobile"
@@ -245,31 +211,23 @@
                                            ng-click="open.alertDate[$index] = !open.alertDate[$index]"
                                            ng-min="vm.order.orderDate" 
                                            ng-max="orderItem.deliveryDate">
-                                    <!--<input class="Create-Order-respo-table-mobile" style="width: 90%"
-                                           required
-                                           type="date"
-                                           name="alertDate_{{$index}}"
-                                           ng-model="vm.order.OrderItems[$index].alertDate"
-                                           convert-to-date
-                                           ng-min="vm.order.orderDate" 
-                                           ng-max="orderItem.deliveryDate"/>-->
-                                           <!--<input type="text" uib-datepicker-popup="" name="dob" placeholder="dd-MM-yyyy"
-                                               ng-model="dob" is-open="popup.opened" datepicker-options="dateOptions"
-                                               ng-required="true" close-text="Close" class="form-control" />
-                                            <span class="input-group-btn">
-                                                <button type="button" ng-click="open()" class="btn btn-default">
-                                                    <i class="glyphicon glyphicon-calendar"></i>
-                                                </button>
-                                            </span>-->
                                 </td>
                                 <td data-th="Amount: " class="top-purpal-color-row2">
-                                    <input class="Create-Order-respo-table-mobile" style="width: 90%" ng-min="0" ng-max="999999999" class="addorder-amount-icon datepicker-input-margin-btm-none" name="amount_{{$index}}" required="required" ng-model="vm.order.OrderItems[$index].amount" type="number" placeholder="* Amount">
+                                    <input class="Create-Order-respo-table-mobile" style="width: 90%" ng-min="0" ng-max="999999999" class="addorder-amount-icon datepicker-input-margin-btm-none" name="amount_{{$index}}" required="required" ng-model="vm.order.OrderItems[$index].amount" ng-change="vm.counttotal()" type="number" placeholder="* Amount">
                                 </td>
                                 <td data-th="Status: " class="top-purpal-color-row2">
                                     <select class="Create-Order-respo-table-mobile" ng-change="vm.changeOrderItemStatus()" class="outside2 edit-order-status-td-input" placeholder="Search by Name" name="customeruser" ng-model="vm.order.OrderItems[$index].OrderStatusId" convert-to-number ng-disabled="!vm.order.id">
                                         <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true}">{{os.title}}</option>
                                     </select>
                                 </td>
+                            </tr>
+                            <tr class="top-purpal-color-row">
+                                <th class="edit-order-design-th-width"></th>
+                                <th></th>
+                                <th></th>
+                                <th>Total Amount</th>
+                                <th class="edit-order-amount-th-width" ng-init="vm.counttotal()">{{vm.totalamount | currency : '&#8377;'}}</th>
+                                <th class="edit-order-status-th-width"></th>
                             </tr>
                         </tbody>
                     </table>
