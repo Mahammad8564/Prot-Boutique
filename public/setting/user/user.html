@@ -42,8 +42,8 @@
                                 </span>
                             </a>
                         </th>
-                        <th>
-                            <a href="" ng-click="vm.order('phone',vm.asc)">
+                        <th>Mobile
+                            <!--<a href="" ng-click="vm.order('phone',vm.asc)">
                                 <font>Mobile </font>
                                 <span ng-if="vm.asc['phone'] === true" class="">
                                     <img ng-src="/images/up-arrow-1.png" alt="">
@@ -51,10 +51,10 @@
                                 <span ng-show="vm.asc['id'] === false" class="">
                                     <img ng-src="/images/down-arrow-1.png" alt="">
                                 </span>
-                            </a>
+                            </a>-->
                         </th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th ng-if="vm.currentUser.userrole === 'admin'">Action</th>
                     </tr>
                     <tr ng-repeat="obj in vm.list" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                         <td data-th="Username: " class="top-purpal-color-row2"><a href="" ng-click="vm.edit(obj)" class="customer-name-link">{{obj.username}} </a></td>
@@ -63,14 +63,14 @@
                         <td data-th="Mobile: "  class="top-purpal-color-row2">{{obj.phone}}</td>
                         <td data-th="Status: "  ng-if="obj.isActive"  class="top-purpal-color-row2">Active</td>
                         <td data-th="Staus: "  ng-if="!obj.isActive"  class="top-purpal-color-row2">Inactive</td>
-                        <td data-th="Action: "  class="top-purpal-color-row2"><a ng-if="vm.currentUser.userrole === 'admin'" ng-click="vm.resetUser(obj)">Reset Password</a></td>
+                        <td ng-if="vm.currentUser.userrole === 'admin'" data-th="Action: "  class="top-purpal-color-row2"><a ng-click="vm.resetUser(obj)">Reset Password</a></td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
     </div>
-    <div class="paging" ng-if="vm.list.length > 0" >
+    <div class="paging" ng-if="vm.options.totalItems > 10" >
         <span class="showing-text-bx">
             Showing {{ ((vm.options.page - 1) * vm.options.pagesize) + 1 }} to
             <t ng-if="(vm.options.page * vm.options.pagesize) > vm.options.totalItems">{{vm.options.totalItems}}</t>

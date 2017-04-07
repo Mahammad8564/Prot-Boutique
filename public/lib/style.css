@@ -8,7 +8,18 @@ input {
 .invoice-main{width:100%; display: inline-block;background: #fff;}
 .invoice-main-table{width:670px; margin: 20px auto; display: table; background:#fff;padding: 30px;border: 1px solid #ccc;}
 .invoice-header{width:100%; display:inline-block; padding: 0px 15px 20px 15px;box-sizing: border-box; position:relative;}
-.print{background:#333; padding: 5px 13px; position:absolute; right:0px; top:-15px;border-radius: 3px;color:#fff; cursor:pointer;}
+.print{    
+    background: #333;
+    padding: 5px 13px;
+    position: absolute;
+    width: 4%;
+    float: right;
+    right: 140px;
+    top: 148px;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
 .print:hover{background:#00bfff;}
 .invoice-header img{border-bottom: 1px solid #00bfff;padding-bottom:5px;}
 .invoice-header p{float:right; width: 100%;padding-top:4px; text-align:left;}
@@ -592,6 +603,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BFFF', end
   font-size: 14px;
   padding: 7px 12px 6px 8px;
   border: 1px solid rgb(178, 178, 178);
+  background: #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -819,7 +831,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BFFF', end
 .order-summary-box .summary-bx-1{width: 100%; float: left;padding-bottom: 20px;}
 .order-summary-box .summary-bx-1 .orderdate-bx{width: 34%; float: left;}
 .order-summary-box .summary-bx-1 .orderdate-bx label{width: 30%; float: left;font-weight: 600; padding-top:5px;}
-.order-summary-box .summary-bx-1 .orderdate-bx input{width: 53%;height: 30px; float: left; background: #f7f7f7; border: 1px solid #333; border-radius: 3px; padding:0px 5px; color: #333;}
+.order-summary-box .summary-bx-1 .orderdate-bx input{width: 53%;height: 30px; float: left; background: #fff; border: 1px solid #333; border-radius: 3px; padding:0px 5px; color: #333;}
 .order-summary-box .summary-bx-1 .orderstatus-bx{width:66%; float: left;}
 .order-summary-box .summary-bx-1 .orderstatus-bx label{width:18%; float: left;font-weight: 600; padding-top: 6px;}
 .order-summary-box .summary-bx-1 .orderstatus-bx span{width:50%; float: left;font-weight: normal; padding-top: 6px;}
@@ -827,7 +839,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BFFF', end
 .order-summary-box .summary-bx-2{width: 100%; float: left;}
 .order-summary-box .summary-bx-2 .orderdate-bx{width: 34%; float: left;}
 .order-summary-box .summary-bx-2 .orderdate-bx label{width: 30%; float: left;font-weight: 600; padding-top: 6px;}
-.order-summary-box .summary-bx-2 .orderdate-bx select{width: 53%; float: left; background: #f7f7f7; border: 1px solid #333; border-radius: 3px; padding:5px; color: #333;}
+.order-summary-box .summary-bx-2 .orderdate-bx select{width: 53%; float: left; background: #fff; border: 1px solid #333; border-radius: 3px; padding:5px; color: #333;}
 .order-summary-box .summary-bx-2 .orderstatus-bx{width:30%; float: left;}
 .order-summary-box .summary-bx-2 .orderstatus-bx label{width:40%; float: left;font-weight: 600; padding-top: 6px;}
 .order-summary-box .summary-bx-2 .orderstatus-bx span{width:55%; float: left;font-weight: normal; padding-top: 6px;}
@@ -1512,6 +1524,7 @@ text-align: center;
 .addproducttable-B a{ line-height: 28px; font-size: 15px;}
 .addproducttable-B a:hover{border-bottom: 1px solid #23527c;}
 .addproducttable-B select{
+    background: #fff;
   border-radius: 3px;
   border: 1px solid #969696;
   padding: 3px 2px 2px 2px;

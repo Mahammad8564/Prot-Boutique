@@ -1,6 +1,4 @@
-﻿
-
-(function () {
+﻿(function () {
     'use strict';
 
     angular.module('myra').controller("ReportsController", ReportsController);
@@ -10,6 +8,7 @@
     function ReportsController(Restangular, $state) {
         var vm = this;
         var d = new Date();
+        vm.today = d;
         vm.getFullYear = d.getFullYear();
         vm.months = ['January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
 
@@ -41,13 +40,6 @@
             roles: [1, 2, 3, 4]
         };
 
-        vm.options = {
-            pagesize: 10,
-            totalItems: 0,
-            page: 1,
-            search: ''
-        }
-
         vm.checkAll = function () {
             vm.user.roles = vm.roles.map(function (item) { return item.id; });
         };
@@ -58,9 +50,284 @@
             if (tmp == true) vm.checkAll();
             else vm.uncheckAll();
         }
-
         vm.something = function () {
             vm.temp = false;
+        }
+
+        function getCustomerList() {
+            Restangular.all('api/customer').getList().then(function (res) {
+                vm.customers = res.data;
+            });
+        }
+
+        function customerChange(custId) {
+            vm.custId = custId;
+        }
+
+        function openCal() {
+            vm.open_orderDate = !vm.open_orderDate;
+        }
+
+        function openCal2() {
+            vm.open_orderDate2 = !vm.open_orderDate2;
+        }
+
+        function filter() {
+
+            if (vm.option == 'frequency') {
+                switch (vm.frequency) {
+                    case 'today':
+                        vm.showtable = false;
+                        vm.showtable2 = true;
+                        vm.showtable3 = false;
+
+
+                        var startDate = new Date();
+                        startDate.setHours(0, 0, 0, 0);
+                        var endDate = new Date();
+                        endDate.setHours(23,59,59,999);
+
+                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
+                            vm.records = res.data;
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                            }, this);
+                        }, function (err) {
+                            console.log(err);
+                        });
+
+                        break;
+                    case 'week':
+                        vm.showtable3 = false;
+                        vm.showtable2 = false;
+                        vm.showtable = true;
+
+
+                        vm.records = [];
+                        vm.array = [];
+
+                        var startDate = new Date();
+                        startDate.setDate(startDate.getDate() - 6);
+                        startDate.setHours(0, 0, 0, 0);
+
+                        var endDate = new Date();
+                        endDate.setHours(23,59,59,999);
+
+                        var start = angular.copy(startDate);  
+
+                        while (start < endDate) {
+                            var startCopy = angular.copy(start);
+                            vm.array.push({ orderDate: startCopy, totalamount: 0 })
+                            var newDate = start.setDate(start.getDate() + 1);
+                            start = new Date(newDate);
+                            
+                        }
+
+                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                                var orderDate = new Date(element.orderDate);
+                                orderDate.setHours(0, 0, 0, 0);
+
+                                vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
+                            }, this);
+                            vm.array.reduce(function (res, value) {
+                                if (!res[value.orderDate]) {
+                                    res[value.orderDate] = {
+                                        totalamount: 0,
+                                        orderDate: value.orderDate
+                                    };
+                                    vm.records.push(res[value.orderDate])
+                                }
+                                res[value.orderDate].totalamount += value.totalamount
+                                return res;
+                            }, {});
+                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
+                        }, function (err) {
+                            console.log(err);
+                        });
+
+
+
+                        break;
+                    case 'month':
+                        vm.showtable3 = false;
+                        vm.showtable2 = false;
+                        vm.showtable = true;
+
+                        vm.records = [];
+                        vm.array = [];
+
+                        var startDate = new Date();
+                        startDate.setDate(startDate.getDate() - 30);
+                        startDate.setHours(0, 0, 0, 0);
+
+                        var start = angular.copy(startDate);
+
+                        var endDate = new Date();
+                        endDate.setHours(23,59,59,999);
+
+
+                        while (start < endDate) {
+                            var startCopy = angular.copy(start);
+                            vm.array.push({ orderDate: startCopy, totalamount: 0 })
+                            var newDate = start.setDate(start.getDate() + 1);
+                            start = new Date(newDate);
+                        }
+
+                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                                var orderDate = new Date(element.orderDate);
+                                orderDate.setHours(0, 0, 0, 0);
+
+                                vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
+                            }, this);
+                            vm.array.reduce(function (res, value) {
+                                if (!res[value.orderDate]) {
+                                    res[value.orderDate] = {
+                                        totalamount: 0,
+                                        orderDate: value.orderDate
+                                    };
+                                    vm.records.push(res[value.orderDate])
+                                }
+                                res[value.orderDate].totalamount += value.totalamount
+                                return res;
+                            }, {});
+                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
+                        }, function (err) {
+                            console.log(err);
+                        });
+
+                        break;
+                    case 'monthly':
+                        vm.showtable3 = true;
+                        vm.showtable2 = false;
+                        vm.showtable = false;
+
+
+                        vm.records = [];
+                        vm.array = [];
+
+                        var startDate = new Date();
+                        startDate.setMonth(0);
+                        startDate.setDate(1);
+                        startDate.setHours(0, 0, 0, 0);
+
+                        var endDate = new Date();
+                        endDate.setMonth(11);
+                        endDate.setDate(31);
+                        endDate.setHours(23,59,59,999);
+
+                        for (var index = 1; index <= 12; index++) {
+                            vm.array.push({ createdat: "0" + index, val: 0 });
+                        }
+                        console.log(vm.array);
+
+                        Restangular.all('api/monthlyReport').post({ start: startDate, end: endDate }).then(function (res) {
+                            vm.filterTotal = 0;
+                            console.log(res);
+                            res.data.forEach(function (element) {
+                                vm.filterTotal += element.totalamount;
+                            }, this);
+
+                            var groupedByDateData = _.groupBy(res.data, function (date) {
+                                return date.createdAt.substring(5, 7);
+                            });
+
+                            var aggregateByDate = _.map(groupedByDateData, function (invoiceObject, createdat) {
+                                return {
+                                    createdat: createdat,
+                                    val: _.reduce(invoiceObject, function (m, x) {
+                                        return m + x.totalamount;
+                                    }, 0)
+                                };
+                            });
+
+                            aggregateByDate.forEach(function (element) {
+                                vm.array.push(element);
+                            }, this);
+
+                            vm.array.reduce(function (res, value) {
+                                if (!res[value.createdat]) {
+                                    res[value.createdat] = {
+                                        val: 0,
+                                        createdat: value.createdat
+                                    };
+                                    vm.records.push(res[value.createdat])
+                                }
+                                res[value.createdat].val += value.val
+                                return res;
+                            }, {});
+                        }, function (err) {
+                            console.log(err);
+                        });
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            else {
+                if (vm.datefrom && vm.dateto) {
+                    vm.showtable = true;
+                    vm.showtable2 = false;
+                    vm.showtable3 = false;
+                    vm.error = '';
+                    vm.records = [];
+                    vm.array = [];
+
+                    vm.datefrom.setHours(0, 0, 0, 0);
+                    vm.dateto.setHours(23,59,59,999);
+
+                    console.log(vm.datefrom);
+                    console.log(vm.dateto);
+
+                    var start = vm.datefrom;
+
+                    while (start < endDate) {
+                        var newDate = start.setDate(start.getDate() + 1);
+                        start = new Date(newDate);
+                        vm.array.push({ orderDate: start, totalamount: 0 })
+                    }
+
+                    Restangular.all('api/report').post({ start: vm.datefrom, end: vm.dateto }).then(function (res) {
+                        vm.filterTotal = 0;
+                        res.data.forEach(function (element) {
+                            vm.filterTotal += element.totalamount;
+                            var orderDate = new Date(element.orderDate);
+                            orderDate.setHours(0, 0, 0, 0);
+
+                            vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
+                        }, this);
+                        vm.array.reduce(function (res, value) {
+                            if (!res[value.orderDate]) {
+                                res[value.orderDate] = {
+                                    totalamount: 0,
+                                    orderDate: value.orderDate,
+                                };
+                                vm.records.push(res[value.orderDate])
+                            }
+                            res[value.orderDate].totalamount += value.totalamount
+                            return res;
+                        }, {});
+                        vm.records = _.sortBy(vm.records, 'orderDate');
+                    }, function (err) {
+                        console.log(err);
+                    });
+
+                }
+                else {
+                    vm.showtable = false;
+                    vm.showtable2 = false;
+                    vm.showtable3 = false;
+                    vm.error = "Please Select Date Range.";
+                }
+            }
         }
 
         function filter3() {
@@ -77,7 +344,7 @@
                         var startDate = new Date();
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
-                        endDate.setHours(23, 0, 0, 0);
+                        endDate.setHours(23,59,59,999);
 
                         var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
@@ -157,7 +424,8 @@
 
             }
             else {
-                if (vm.datefrom && vm.dateto) {
+                if (vm.datefrom3 && vm.dateto3) {
+                    vm.error = null;
                     vm.CustomerBasedReports = [];
                     var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
                     Restangular.all('api/customerreport').post(newObj).then(function (res) {
@@ -185,285 +453,6 @@
 
             }
 
-        }
-
-        function getCustomerList() {
-            Restangular.all('api/customer').getList().then(function (res) {
-                vm.customers = res.data;
-            });
-        }
-
-        function customerChange(custId) {
-            vm.custId = custId;
-        }
-
-        function openCal() {
-            vm.open_orderDate = !vm.open_orderDate;
-        }
-
-        function openCal2() {
-            vm.open_orderDate2 = !vm.open_orderDate2;
-        }
-
-        function filter() {
-
-            if (vm.option == 'frequency') {
-                switch (vm.frequency) {
-                    case 'today':
-                        vm.showtable = false;
-                        vm.showtable2 = true;
-                        vm.showtable3 = false;
-
-
-                        var startDate = new Date();
-                        startDate.setHours(0, 0, 0, 0);
-                        var endDate = new Date();
-                        endDate.setHours(23, 0, 0, 0);
-
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
-                            vm.filterTotal = 0;
-                            vm.records = res.data;
-                            res.data.forEach(function (element) {
-                                vm.filterTotal += element.totalamount;
-                            }, this);
-                        }, function (err) {
-                            console.log(err);
-                        });
-
-                        break;
-                    case 'week':
-                        vm.showtable3 = false;
-                        vm.showtable2 = false;
-                        vm.showtable = true;
-
-
-                        vm.records = [];
-                        vm.array = [];
-
-                        var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 6);
-                        startDate.setHours(0, 0, 0, 0);
-
-                        var endDate = new Date();
-                        endDate.setDate(endDate.getDate() + 1);
-                        endDate.setHours(0, 0, 0, 0);
-
-                        var start = new Date();
-                        start.setDate(start.getDate() - 6);
-                        start.setHours(0, 0, 0, 0);
-
-                        var end = new Date();
-                        end.setHours(0, 0, 0, 0);
-
-                        while (start < end) {
-                            vm.array.push({ orderDate: start, totalamount: 0 })
-                            var newDate = start.setDate(start.getDate() + 1);
-                            start = new Date(newDate);
-                        }
-
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
-                            vm.filterTotal = 0;
-                            res.data.forEach(function (element) {
-                                vm.filterTotal += element.totalamount;
-                                var orderDate = new Date(element.orderDate);
-                                orderDate.setHours(0, 0, 0, 0);
-
-                                vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
-                            }, this);
-                            vm.array.reduce(function (res, value) {
-                                if (!res[value.orderDate]) {
-                                    res[value.orderDate] = {
-                                        totalamount: 0,
-                                        orderDate: value.orderDate
-                                    };
-                                    vm.records.push(res[value.orderDate])
-                                }
-                                res[value.orderDate].totalamount += value.totalamount
-                                return res;
-                            }, {});
-                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
-                        }, function (err) {
-                            console.log(err);
-                        });
-
-
-
-                        break;
-                    case 'month':
-                        vm.showtable3 = false;
-                        vm.showtable2 = false;
-                        vm.showtable = true;
-
-                        vm.records = [];
-                        vm.array = [];
-
-                        var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 30);
-                        var start = new Date();
-                        start.setDate(start.getDate() - 31);
-                        start.setHours(0, 0, 0, 0);
-                        var endDate = new Date();
-                        endDate.setDate(endDate.getDate() + 1);
-                        endDate.setHours(0, 0, 0, 0);
-                        var end = new Date();
-                        end.setHours(0, 0, 0, 0);
-
-
-                        while (start < end) {
-                            var newDate = start.setDate(start.getDate() + 1);
-                            start = new Date(newDate);
-                            vm.array.push({ orderDate: start, totalamount: 0 })
-                        }
-
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
-                            vm.filterTotal = 0;
-                            res.data.forEach(function (element) {
-                                vm.filterTotal += element.totalamount;
-                                var orderDate = new Date(element.orderDate);
-                                orderDate.setHours(0, 0, 0, 0);
-
-                                vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
-                            }, this);
-                            vm.array.reduce(function (res, value) {
-                                if (!res[value.orderDate]) {
-                                    res[value.orderDate] = {
-                                        totalamount: 0,
-                                        orderDate: value.orderDate
-                                    };
-                                    vm.records.push(res[value.orderDate])
-                                }
-                                res[value.orderDate].totalamount += value.totalamount
-                                return res;
-                            }, {});
-                            vm.records = _.sortBy(vm.records, 'orderDate').reverse();
-                        }, function (err) {
-                            console.log(err);
-                        });
-
-                        break;
-                    case 'monthly':
-                        vm.showtable3 = true;
-                        vm.showtable2 = false;
-                        vm.showtable = false;
-
-
-                        vm.records = [];
-                        vm.array = [];
-
-                        var startDate = new Date();
-                        startDate.setMonth(0);
-                        startDate.setDate(1);
-                        startDate.setHours(0, 0, 0, 0);
-
-                        var endDate = new Date();
-                        endDate.setMonth(11);
-                        endDate.setDate(31);
-                        endDate.setHours(0, 0, 0, 0);
-
-                        for (var index = 1; index <= 12; index++) {
-                            vm.array.push({ createdat: "0" + index, val: 0 });
-                        }
-
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
-                            vm.filterTotal = 0;
-                            res.data.forEach(function (element) {
-                                vm.filterTotal += element.totalamount;
-                            }, this);
-
-                            var groupedByDateData = _.groupBy(res.data, function (date) {
-                                return date.createdAt.substring(5, 7);
-                            });
-
-                            var aggregateByDate = _.map(groupedByDateData, function (invoiceObject, createdat) {
-                                return {
-                                    createdat: createdat,
-                                    val: _.reduce(invoiceObject, function (m, x) {
-                                        return m + x.totalamount;
-                                    }, 0)
-                                };
-                            });
-
-                            aggregateByDate.forEach(function (element) {
-                                vm.array.push(element);
-                            }, this);
-
-                            vm.array.reduce(function (res, value) {
-                                if (!res[value.createdat]) {
-                                    res[value.createdat] = {
-                                        val: 0,
-                                        createdat: value.createdat
-                                    };
-                                    vm.records.push(res[value.createdat])
-                                }
-                                res[value.createdat].val += value.val
-                                return res;
-                            }, {});
-                        }, function (err) {
-                            console.log(err);
-                        });
-
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            else {
-                if (vm.datefrom && vm.dateto) {
-                    vm.showtable = true;
-                    vm.showtable2 = false;
-                    vm.showtable3 = false;
-                    vm.error = '';
-                    vm.records = [];
-                    vm.array = [];
-
-                    vm.datefrom.setHours(0, 0, 0, 0);
-                    vm.dateto.setHours(23, 0, 0, 0);
-
-                    console.log(vm.datefrom);
-                    console.log(vm.dateto);
-
-                    var start = vm.datefrom;
-
-                    while (start < endDate) {
-                        var newDate = start.setDate(start.getDate() + 1);
-                        start = new Date(newDate);
-                        vm.array.push({ orderDate: start, totalamount: 0 })
-                    }
-
-                    Restangular.all('api/report').post({ start: vm.datefrom, end: vm.dateto }).then(function (res) {
-                        vm.filterTotal = 0;
-                        res.data.forEach(function (element) {
-                            vm.filterTotal += element.totalamount;
-                            var orderDate = new Date(element.orderDate);
-                            orderDate.setHours(0, 0, 0, 0);
-
-                            vm.array.push({ orderDate: orderDate, totalamount: element.totalamount });
-                        }, this);
-                        vm.array.reduce(function (res, value) {
-                            if (!res[value.orderDate]) {
-                                res[value.orderDate] = {
-                                    totalamount: 0,
-                                    orderDate: value.orderDate,
-                                };
-                                vm.records.push(res[value.orderDate])
-                            }
-                            res[value.orderDate].totalamount += value.totalamount
-                            return res;
-                        }, {});
-                        vm.records = _.sortBy(vm.records, 'orderDate');
-                    }, function (err) {
-                        console.log(err);
-                    });
-
-                }
-                else {
-                    vm.showtable = false;
-                    vm.showtable2 = false;
-                    vm.showtable3 = false;
-                    vm.error = "Please Select Date Range.";
-                }
-            }
         }
     }
 

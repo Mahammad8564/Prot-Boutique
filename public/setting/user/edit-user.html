@@ -6,8 +6,8 @@
             <div class="form-section-box form-section-box-2">
                 <fieldset ng-disabled="vm.currentUser.userrole != 'admin'" style="border:none">
                     <div class="form-box">
-                        <label><em style="color:Red">*</em>Username</label>
-                        <input name="username" placeholder="Username" type="text"  ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-model="vm.user.username"  ng-minlength="2" ng-maxlength="50" required>
+                        <label for="id-checkbox"><em style="color:Red">*</em>Username</label>
+                        <input id="id-checkbox" name="username" placeholder="Username" type="text"  ng-pattern="/^[a-zA-Z0-9 ]+$/" ng-model="vm.user.username"  ng-minlength="2" ng-maxlength="50" required ng-disabled="vm.user.id">
                         <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.pattern">No special characters are allowed.</span>
                         <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.required"><i><b>Username</b></i> is required.</span>
                         <span ng-if="(userForm.username.$dirty || vm.isSubmitted) && userForm.username.$error.minlength"><i><b>Username</b></i> should be at least 2 characters long.</span>
@@ -95,6 +95,12 @@
 
         </div>
     </form>
+    <!--<script>
+        document.querySelector("#id-checkbox").addEventListener("click", function(event){
+            alert("preventDefault will stop you from checking this checkbox!")
+            event.preventDefault();
+        }, false);
+    </script>-->
     <!-- Customer Details page Section End Here -->
 
 

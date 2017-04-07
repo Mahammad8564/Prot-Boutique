@@ -5,19 +5,19 @@
     <!-- Dashboard Tab start here -->
     <div class="tabGroup">
 
-        <input type="radio" name="tabGroup1" id="rad2" checked="checked" />
-        <label for="rad2" class="dashboad-label-mobile-btm-mar wd">Collection Based Reports</label>
+        <input type="radio" name="tabGroup1" id="rad1" checked="checked" />
+        <label for="rad1" class="dashboad-label-mobile-btm-mar wd">Collection Based Reports</label>
 
-        <!--<input type="radio" name="tabGroup1" id="rad3" />
+        <!--<input type="radio" name="tabGroup1" id="rad2" />
         <label for="rad3" class="dashboad-label-mobile-btm-mar wd">Invoice Based Reports</label>-->
 
-        <input type="radio" name="tabGroup1" id="rad1" />
-        <label for="rad1" class="dashboad-label-mobile-btm-mar wd">Customer Based Reports</label>
+        <input type="radio" name="tabGroup1" id="rad3" />
+        <label for="rad3" class="dashboad-label-mobile-btm-mar wd">Customer Based Reports</label>
 
         <br/>
 
         <!--Tab 1 Start Here-->
-        <div class="tab2">
+        <div class="tab1">
             <div class="summary-bx-2">
                 <div class="orderdate-bx">
                     <label>Time Period</label>
@@ -37,25 +37,30 @@
                     </select>
                     </div>
                     <div class="summary-bx-2" ng-if="vm.option == 'custom'">
-                        <div class="orderdate-bx">
-                            <label>Select Date</label>
-                            <div class="fromtodatepicker">
-                                <label class="from-label">From</label>
-                                <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate" convert-to-date ng-model="vm.datefrom"
-                                    ng-click="vm.openCal()" ng-max="" ng-required="true">
+                        <form name="CollectionBasedReports">
+                            <div class="orderdate-bx">
+                                <label>Select Date</label>
+                                <div class="fromtodatepicker">
+                                    <label class="from-label">From</label>
+                                    <input type="date" readonly name="fromdate1" uib-datepicker-popup="" is-open="vm.open_orderDate" convert-to-date ng-model="vm.datefrom"
+                                        ng-click="vm.openCal()" ng-max="vm.today" ng-required="true">
 
-                            </div>
-                            <div class="fromtodatepicker">
-                                <label class="date-to-label">To</label>
-                                <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate2" convert-to-date ng-model="vm.dateto"
-                                    ng-click="vm.openCal2()" ng-max="" ng-required="true">
+                                </div>
+                                <div class="fromtodatepicker">
+                                    <label class="date-to-label">To</label>
+                                    <input type="date" readonly name="todate1" uib-datepicker-popup="" is-open="vm.open_orderDate2" convert-to-date ng-model="vm.dateto"
+                                        ng-click="vm.openCal2()" ng-max="vm.today" ng-min="vm.datefrom" ng-required="true">
 
+                                </div>
+                                <span class="error-msg-reports-1" ng-if="CollectionBasedReports.fromdate1.$dirty && CollectionBasedReports.fromdate1.$error.max"><em>From</em> date should not be future date.</span>
+                                <span class="error-msg-reports-1" ng-if="CollectionBasedReports.todate1.$dirty && CollectionBasedReports.todate1.$error.max"><em>To</em> date should not be future date.</span>
+                                <span class="error-msg-reports-1" ng-if="CollectionBasedReports.todate1.$dirty && CollectionBasedReports.todate1.$error.min">Invalid date range. <em>To</em> date should be greater than <em>From</em> date.</span>
+                                <span class="error-msg-reports-1">{{vm.error}}</span>
                             </div>
-                            <span class="error-msg-reports-1">{{vm.error}}</span>
-                        </div>
+                        </form>
 
                     </div>
-                    
+
                     <div class="submit-button filter-btn-top-mar">
                         <input value="Filter" class="register-submit-btn" type="button" ng-click="vm.filter()">
                     </div>
@@ -83,8 +88,12 @@
                         </tr>
                     </table>
 
+                    <div>
+                        <h2 class="no-record-found-text" ng-if="vm.showtable2 && !vm.records.length">No record found</h2>
+                    </div>
+
                     <!--Last 7 days,Last 30 days,-->
-                    <table ng-if="vm.showtable2 && vm.records" class="table-part" border="0" cellspacing="0" cellpadding="0">
+                    <table ng-if="vm.showtable2 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
                         <tr class="top-purpal-color-row">
                             <th>Sr. No.</th>
                             <th>Order Id</th>
@@ -102,8 +111,12 @@
                         </tr>
                     </table>
 
+                    <div>
+                        <h2 class="no-record-found-text" ng-if="vm.showtable3 && !vm.records.length">No record found</h2>
+                    </div>
+
                     <!--Monthly-->
-                    <table ng-if="vm.showtable3 && vm.records" class="table-part" border="0" cellspacing="0" cellpadding="0">
+                    <table ng-if="vm.showtable3 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
                         <tr class="top-purpal-color-row">
                             <th>Sr. No.</th>
                             <th>Order Date</th>
@@ -128,7 +141,7 @@
 
 
         <!--Tab 3 Start Here-->
-        <div class="tab1">
+        <div class="tab3">
             <div class="summary-bx-2" ng-init="vm.getCustomerList()">
                 <div class="orderdate-bx">
                     <label>Customer Name</label>
@@ -151,27 +164,32 @@
                         <label>Filter by</label>
                         <select ng-init="vm.frequencyOption3 = 'today'" ng-model="vm.frequencyOption3">
                             <option value="today">Today</option>
-                            <option value="week">This Week</option>
-                            <option value="month">This Month</option>
+                            <option value="week">Last 7 Days</option>
+                            <option value="month">Last 30 Days</option>
                     </select>
                     </div>
                     <div class="summary-bx-2" ng-if="vm.option3 == 'custom'">
-                        <div class="orderdate-bx">
-                            <label>Select Date</label>
-                            <div class="fromtodatepicker">
-                                <label class="from-label">From</label>
-                                <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate" convert-to-date ng-model="vm.datefrom3"
-                                    ng-click="vm.openCal()" ng-max="" ng-required="true">
+                        <form name=" CustomerBasedReports">
+                            <div class="orderdate-bx">
+                                <label>Select Date</label>
+                                <div class="fromtodatepicker">
+                                    <label class="from-label">From</label>
+                                    <input type="date" readonly name="fromdate3" uib-datepicker-popup="" is-open="vm.open_orderDate" convert-to-date ng-model="vm.datefrom3"
+                                        ng-click="vm.openCal()" ng-max="vm.today" ng-required="true">
 
-                            </div>
-                            <div class="fromtodatepicker">
-                                <label class="date-to-label">To</label>
-                                <input type="date" readonly name="orderDate" uib-datepicker-popup="" is-open="vm.open_orderDate2" convert-to-date ng-model="vm.dateto3"
-                                    ng-click="vm.openCal2()" ng-max="" ng-required="true">
+                                </div>
+                                <div class="fromtodatepicker">
+                                    <label class="date-to-label">To</label>
+                                    <input type="date" readonly name="todate3" uib-datepicker-popup="" is-open="vm.open_orderDate2" convert-to-date ng-model="vm.dateto3"
+                                        ng-click="vm.openCal2()" ng-max="vm.today" ng-min="vm.datefrom3" ng-required="true">
 
+                                </div>
+                                <span class="error-msg-reports-1" ng-if="CustomerBasedReports.fromdate3.$dirty && CustomerBasedReports.fromdate3.$error.max"><em>From</em> date should not be future date.</span>
+                                <span class="error-msg-reports-1" ng-if="CustomerBasedReports.todate3.$dirty && CustomerBasedReports.todate3.$error.max"><em>To</em> date should not be future date.</span>
+                                <span class="error-msg-reports-1" ng-if="CustomerBasedReports.todate3.$dirty && CustomerBasedReports.todate3.$error.min">Invalid date range. <em>To</em> date should be greater than <em>From</em> date.</span>
+                                <span class="error-msg-reports-1">{{vm.error}}</span>
                             </div>
-                            <span class="error-msg-reports-1">{{vm.error}}</span>
-                        </div>
+                        </form>
 
                     </div>
 
@@ -209,22 +227,6 @@
                             <td data-th="Status: " class="top-purpal-color-row2 ng-binding">{{data.OrderStatus}}</td>
                         </tr>
                     </table>
-
-                    <!--<div class="paging" ng-if="vm.CustomerBasedReports.length > 0">
-                        <span class="showing-text-bx">
-                            Showing {{ ((vm.options.page - 1) * vm.options.pagesize) + 1 }} to
-                            <t ng-if="(vm.options.page * vm.options.pagesize) > vm.options.totalItems">{{vm.options.totalItems}}</t>
-                            <t ng-if="(vm.options.page * vm.options.pagesize) < vm.options.totalItems">{{vm.options.page * vm.options.pagesize}}</t>
-                            of {{vm.options.totalItems}} Records
-                        </span>
-
-                        <div class="paging-text">
-                            <ul uib-pagination ng-change="vm.pageChange()" boundary-links="true" max-size="4" force-ellipses="true" total-items="vm.options.totalItems"
-                                items-per-page="vm.options.pagesize" ng-model="vm.options.page" class="pagination-sm" previous-text="&lsaquo;"
-                                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
-                        </div>
-                    </div>-->
-
                 </div>
             </div>
 

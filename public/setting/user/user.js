@@ -5,7 +5,7 @@
 
     angular.module('myra').controller('UserController', UserController);
 
-    UserController.$inject = ['Restangular', '$state', 'SweetAlert', '$stateParams','Authentication'];
+    UserController.$inject = ['Restangular', '$state', 'SweetAlert', '$stateParams', 'Authentication'];
 
     function UserController(Restangular, $state, SweetAlert, $stateParams, Authentication) {
         var vm = this;
@@ -37,6 +37,15 @@
             });
         }
 
+        // var field = document.querySelector("input[name=username]");
+
+        // field.addEventListener('keypress', function (event) {
+        //     var key = event.keyCode;
+        //     if (key === 32) {
+        //         event.preventDefault();
+        //     }
+        // });
+
         function edit(obj) {
             $state.go('secure.setting.edit-user', { id: obj.id });
         }
@@ -44,7 +53,7 @@
         function resetUser(obj) {
             $state.go('secure.setting.reset-user', { id: obj.id });
         }
-        
+
         function resetPassword(form) {
             vm.error = '';
             if (form.$invalid || vm.user1.password != vm.confirmPassword) {
@@ -65,7 +74,7 @@
                 vm.error = err.data.message;
                 vm.startProcessing = false;
             });
-            
+
         }
 
         function save(form) {

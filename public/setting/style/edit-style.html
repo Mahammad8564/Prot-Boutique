@@ -34,7 +34,7 @@
                        ngf-required
                        ngf-resize>Choose a Image</button>
                     
-                    <span ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required"><i><b>Image</b></i> is required.</span>
+                    <span style="margin-top: 0px;" ng-if="styleForm.designId.$dirty && styleForm.designId.$error.required || vm.error"><i><b>Image</b></i> is required.</span>
                 </div>
                 <div class="form-box">
                     <label></label>
@@ -45,9 +45,9 @@
                     <input ng-model="vm.style.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
                 </div>
                 <div class="register-btm-btn-box register-btm-btn-box-left-mar">
-                    <div class="submit-error" ng-if="vm.error">
+                    <!--<div class="submit-error" ng-if="vm.error">
                         <div>{{vm.error}}</div>
-                    </div>
+                    </div>-->
                     <div class="submit-button">
                         <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(styleForm)">
                     </div>

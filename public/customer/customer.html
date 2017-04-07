@@ -1,6 +1,6 @@
 ﻿<div class="inner-heading-bar">Customer Details</div>
 
-<div class="main-contant-part"  ng-init="vm.getList()">
+<div class="main-contant-part" ng-init="vm.getList()">
     <!-- Customer Details page Section Start Here -->
     <div class="customer-detail-page-contant">
         <div class="customer-search-box-main"><input class="serchInput" placeholder="Search by Customer Name" type="text"  ng-model="vm.options.search" ng-change="vm.search()" ></div>
@@ -35,7 +35,7 @@
 
         </div>
     </div>
-    <div class="paging" ng-if="vm.list.length > 0">
+    <div class="paging" ng-if="vm.options.totalItems > 10">
         <span class="showing-text-bx">
             Showing {{ ((vm.options.page - 1) * vm.options.pagesize) + 1 }} to
             <t ng-if="(vm.options.page * vm.options.pagesize) > vm.options.totalItems">{{vm.options.totalItems}}</t>
