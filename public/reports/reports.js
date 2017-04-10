@@ -20,6 +20,7 @@
 
         vm.getCustomerList = getCustomerList;
         vm.customerChange = customerChange;
+        vm.exportToExcel = exportToExcel;
 
         vm.CustomerId = 0
         vm.collection = 0;
@@ -72,6 +73,40 @@
             vm.open_orderDate2 = !vm.open_orderDate2;
         }
 
+        function generateFile(info) {
+            if (info.data.length > 0) {
+                alasql('SELECT * INTO XLSX("Report.xlsx",{headers:true}) FROM ?', [info.data], function () {
+                    // $scope.query.page = 1
+                    // $scope.query.limit = '10';
+                    // getData();
+                    var page = 1;
+                    var limit = '10';
+                    getData(angular.extend({}, $scope.query, { page: page, limit: limit }));
+                });
+            }
+
+        }
+
+        function exportToExcel() {
+            console.log(document.getElementById('my-table'));
+            html2canvas(document.getElementById('my-table'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [
+                            { text: 'January Transport Inc.', fontSize: 10, bold: false, alignment: 'center', margin: [0, 5, 0, 5] },
+                            { text: 'All Drivers', fontSize: 12, bold: false, alignment: 'center' },
+                            {
+                                image: data,
+                                width: 530
+                            }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("report.pdf");
+                }
+            });
+        }
+
+
         function filter() {
 
             if (vm.option == 'frequency') {
@@ -85,7 +120,7 @@
                         var startDate = new Date();
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
-                        endDate.setHours(23,59,59,999);
+                        endDate.setHours(23, 59, 59, 999);
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
                             vm.filterTotal = 0;
@@ -112,16 +147,16 @@
                         startDate.setHours(0, 0, 0, 0);
 
                         var endDate = new Date();
-                        endDate.setHours(23,59,59,999);
+                        endDate.setHours(23, 59, 59, 999);
 
-                        var start = angular.copy(startDate);  
+                        var start = angular.copy(startDate);
 
                         while (start < endDate) {
                             var startCopy = angular.copy(start);
                             vm.array.push({ orderDate: startCopy, totalamount: 0 })
                             var newDate = start.setDate(start.getDate() + 1);
                             start = new Date(newDate);
-                            
+
                         }
 
                         Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
@@ -161,13 +196,13 @@
                         vm.array = [];
 
                         var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 30);
+                        startDate.setDate(startDate.getDate() - 29);
                         startDate.setHours(0, 0, 0, 0);
 
                         var start = angular.copy(startDate);
 
                         var endDate = new Date();
-                        endDate.setHours(23,59,59,999);
+                        endDate.setHours(23, 59, 59, 999);
 
 
                         while (start < endDate) {
@@ -220,22 +255,24 @@
                         var endDate = new Date();
                         endDate.setMonth(11);
                         endDate.setDate(31);
-                        endDate.setHours(23,59,59,999);
+                        endDate.setHours(23, 59, 59, 999);
 
                         for (var index = 1; index <= 12; index++) {
-                            vm.array.push({ createdat: "0" + index, val: 0 });
+                            if (index < 10) {
+                                vm.array.push({ createdat: "0" + index, val: 0 });
+                            }
+                            else vm.array.push({ createdat: index.toString(), val: 0 });
                         }
-                        console.log(vm.array);
 
-                        Restangular.all('api/monthlyReport').post({ start: startDate, end: endDate }).then(function (res) {
+                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
                             vm.filterTotal = 0;
-                            console.log(res);
+
                             res.data.forEach(function (element) {
                                 vm.filterTotal += element.totalamount;
                             }, this);
 
                             var groupedByDateData = _.groupBy(res.data, function (date) {
-                                return date.createdAt.substring(5, 7);
+                                return date.orderDate.substring(5, 7);
                             });
 
                             var aggregateByDate = _.map(groupedByDateData, function (invoiceObject, createdat) {
@@ -282,10 +319,7 @@
                     vm.array = [];
 
                     vm.datefrom.setHours(0, 0, 0, 0);
-                    vm.dateto.setHours(23,59,59,999);
-
-                    console.log(vm.datefrom);
-                    console.log(vm.dateto);
+                    vm.dateto.setHours(23, 59, 59, 999);
 
                     var start = vm.datefrom;
 
@@ -344,7 +378,7 @@
                         var startDate = new Date();
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
-                        endDate.setHours(23,59,59,999);
+                        endDate.setHours(23, 59, 59, 999);
 
                         var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
@@ -367,10 +401,10 @@
                         break;
                     case 'week':
                         var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 7);
+                        startDate.setDate(startDate.getDate() - 6);
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
-                        endDate.setHours(0, 0, 0, 0);
+                        endDate.setHours(23, 59, 59, 999);
 
                         var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
@@ -393,10 +427,10 @@
                         break;
                     case 'month':
                         var startDate = new Date();
-                        startDate.setDate(startDate.getDate() - 30);
+                        startDate.setDate(startDate.getDate() - 29);
                         startDate.setHours(0, 0, 0, 0);
                         var endDate = new Date();
-                        endDate.setHours(0, 0, 0, 0);
+                        endDate.setHours(23, 59, 59, 999);
 
                         var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
@@ -427,6 +461,10 @@
                 if (vm.datefrom3 && vm.dateto3) {
                     vm.error = null;
                     vm.CustomerBasedReports = [];
+
+                    vm.datefrom3.setHours(0, 0, 0, 0);
+                    vm.dateto3.setHours(23, 59, 59, 999);
+
                     var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
                     Restangular.all('api/customerreport').post(newObj).then(function (res) {
                         res.data.forEach(function (element) {

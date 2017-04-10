@@ -20,12 +20,18 @@
         <div class="tab1">
             <div class="summary-bx-2">
                 <div class="orderdate-bx">
+                    <button class="btn btn-link" ng-click="vm.exportToExcel()">
+		            <span class="glyphicon glyphicon-share"></span> Export to Excel
+	                </button>
+                </div>
+
+                <div class="orderdate-bx">
                     <label>Time Period</label>
                     <span><input type="radio" ng-init="vm.option='frequency'" ng-model="vm.option" value="frequency"><i>Frequency</i></span>
                     <span><input type="radio" ng-model="vm.option" value="custom"><i>Custom</i></span>
 
                 </div>
-                <div>
+                <div id="my-table">
                     <div class="orderdate-bx" ng-if="vm.option == 'frequency'">
                         <label>Filter by</label>
                         <select ng-init="vm.frequency = 'today'" ng-model="vm.frequency">
@@ -70,7 +76,7 @@
                     </div>
 
                     <!--Today-->
-                    <table ng-if="vm.showtable && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
+                    <table ng-if="vm.showtable && vm.records.length" class="export-table table-part" border="0" cellspacing="0" cellpadding="0">
                         <tr class="top-purpal-color-row">
                             <th>Sr. No.</th>
                             <th>Order Date</th>
