@@ -5,21 +5,14 @@
             <div class="order-summary-box">
                 <div class="summary-bx-1">
                     <div class="orderdate-bx">
-                        <label>* Order Date</label>
+                        <label><em style="color:Red">*</em> Order Date</label>
                         <input type="date" readonly
                                name="orderDate"
                                uib-datepicker-popup="" is-open="vm.open_orderDate"
                                convert-to-date ng-model="vm.order.orderDate"
                                ng-click="vm.openCal()"
                                ng-max="vm.today" ng-required="true">
-
-                        <!--<span class="input-group-btn">
-                            <button type="button" class="btn btn-default">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </button>
-                        </span>-->
-                        <!--<input name="orderDate" required type="date" ng-model="vm.order.orderDate" placeholder="dd-MM-yyyy" ng-disabled="vm.isOrderProceed || vm.order.id" ng-max="vm.today">-->
-                        <span class="submit-error" style="float:left;margin-top:7px;" ng-if="(customerForm.orderDate.$dirty || vm.isSubmitted) && customerForm.orderDate.$error.max"><i><b>Order date</b></i> should not be future date.</span>
+                        <span class="submit-error" style="width: 100%;float: left;margin-top: 0px;margin-left: 113px;" ng-if="(customerForm.orderDate.$dirty || vm.isSubmitted) && customerForm.orderDate.$error.max"><i><b>Order date</b></i> should not be future date.</span>
                     </div>
                     <div class="orderstatus-bx">
                         <label>Order Status</label>
@@ -28,7 +21,7 @@
                 </div>
                 <div class="summary-bx-2" ng-init="vm.getCustomerList()">
                     <div class="orderdate-bx">
-                        <label>* Order by</label>
+                        <label><em style="color:Red">*</em> Order by</label>
                         <select required name="customerId" ng-model="vm.order.CustomerId" ng-change="vm.customerChange(vm.order.CustomerId)" ng-disabled="vm.isOrderProceed || vm.order.OrderStatusId != '1'" convert-to-number>
                             <option value="">-- Please Select --</option>
                             <option value="{{cust.id}}" ng-repeat="cust in vm.customers">{{cust.name}}</option>
@@ -49,14 +42,14 @@
             <div class="addproducttable-main-box" ng-if="!vm.isOrderProceed">
                 <div class="left-list-addproduct">
                     <ul>
-                        <li>* Design</li>
-                        <li class="add-photo-textarea-height">* Sub Design</li>
+                        <li><em style="color:Red">*</em> Design</li>
+                        <li class="add-photo-textarea-height"><em style="color:Red">*</em> Sub Design</li>
                         <li>Material Type</li>
                         <li>Color Code</li>
                         <li class="Customization-textarea-height">Customization</li>
                         <li class="Customization-textarea-height">Remarks</li>
                         <!--<li class="add-photo-textarea-height">Add Photo</li>-->
-                        <li class="add-photo-textarea-height">* Measurement</li>
+                        <li class="add-photo-textarea-height"><em style="color:Red">*</em> Measurement</li>
                     </ul>
                 </div>
 
@@ -81,7 +74,7 @@
                                             <option value="">-- Please Select --</option>
                                             <option value="{{stl.id}}" ng-repeat="stl in vm.styles | filter : {DesignId : vm.order.OrderItems[$index].DesignId}">{{stl.title}}</option>
                                         </select>
-                                        <img ng-src="{{vm.order.OrderItems[$index].Style.image}}" alt="{{stl.title}}" width="160" height="150">
+                                        <img ng-if="vm.order.OrderItems[$index].StyleId" ng-src="{{vm.order.OrderItems[$index].Style.image}}" alt="{{stl.title}}" width="160" height="150">
                                     </td>
                                 </tr>
 
@@ -143,7 +136,7 @@
                     <div class="addproducttable-Add-BTN" ng-if="!vm.order.id">
                         <input value="+" ng-click="vm.addOrderItem()" type="button">
                         <span>
-                            <input ng-if="vm.order.OrderItems.length > 1" style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="submit">
+                            <input ng-if="vm.order.OrderItems.length > 1" style="font-size: 16px;font-weight: bold;" value="X" ng-click="vm.removeOrderItem()" type="button">
                         </span>
                     </div>
                 </div>
@@ -167,10 +160,10 @@
                         <tbody>
                             <tr class="top-purpal-color-row">
                                 <th class="edit-order-design-th-width">Design</th>
-                                <th>* Delivery Date</th>
-                                <th>* Stiching Date</th>
-                                <th>* Alert Date</th>
-                                <th class="edit-order-amount-th-width">* Amount</th>
+                                <th><em style="color:Red; display: inline-block;">*</em> Delivery Date</th>
+                                <th><em style="color:Red; display: inline-block;">*</em> Stiching Date</th>
+                                <th><em style="color:Red; display: inline-block;">*</em> Alert Date</th>
+                                <th class="edit-order-amount-th-width"><em style="color:Red; display: inline-block;">*</em> Amount</th>
                                 <th class="edit-order-status-th-width">Status</th>
                             </tr>
                             <tr ng-repeat="orderItem in vm.order.OrderItems track by $index" class="ng-scope" ng-class="{'table-tr-alternate-color': vm.sprayColour($index,vm.order.OrderItems)}">
@@ -213,7 +206,7 @@
                                            ng-max="orderItem.deliveryDate">
                                 </td>
                                 <td data-th="Amount: " class="top-purpal-color-row2">
-                                    <input class="Create-Order-respo-table-mobile" style="width: 90%" ng-min="0" ng-max="999999999" class="addorder-amount-icon datepicker-input-margin-btm-none" name="amount_{{$index}}" required="required" ng-model="vm.order.OrderItems[$index].amount" ng-change="vm.counttotal()" type="number" placeholder="* Amount">
+                                    <input class="Create-Order-respo-table-mobile" style="width: 90%" ng-min="0" ng-max="999999999" class="addorder-amount-icon datepicker-input-margin-btm-none" name="amount_{{$index}}" required="required" ng-model="vm.order.OrderItems[$index].amount" ng-change="vm.counttotal()" type="number" placeholder="Amount">
                                 </td>
                                 <td data-th="Status: " class="top-purpal-color-row2">
                                     <select class="Create-Order-respo-table-mobile" ng-change="vm.changeOrderItemStatus()" class="outside2 edit-order-status-td-input" placeholder="Search by Name" name="customeruser" ng-model="vm.order.OrderItems[$index].OrderStatusId" convert-to-number ng-disabled="!vm.order.id">

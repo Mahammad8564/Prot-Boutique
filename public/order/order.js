@@ -211,6 +211,7 @@
             if ($stateParams.id && $stateParams.id != 'new') {
                 Restangular.one('api/order/' + $stateParams.id).get().then(function (res) {
                     vm.order = res.data;
+                    vm.order.orderDate.setHours(0,0,0,0);   
                     vm.isOrderProceed = true;
                     vm.SubmitOrderText = 'Update order';
                     vm.today = vm.order.orderDate;
@@ -342,13 +343,14 @@
         function getList() {
             Restangular.all('api/order').getList(vm.options).then(function (res) {
                 vm.list = res.data;
+                vm.options.totalItems = parseInt(res.headers('total'));
                 vm.newList = res.data[localStorage.getItem('index')];
                 console.log(vm.newList);
                 vm.totalamount = 0;
                 vm.newList.OrderItems.forEach(function (element) {
                     vm.totalamount += element.amount;
                 }, this);
-                vm.options.totalItems = parseInt(res.headers('total'));
+                
             });
         }
         function getOrderStatusList() {
@@ -432,7 +434,6 @@
 
 
         function onDeliveryDateChange(idx) {
-            console.log(vm.order.OrderItems[idx].deliveryDate);
             // -2 of delivery date is Alert Date if it is greater than orderdate;
             var dileverydate = new Date(vm.order.OrderItems[idx].deliveryDate);
             var orderdate = new Date(vm.order.orderDate);
@@ -440,25 +441,11 @@
             var stitchingdate = dileverydate.setDate(dileverydate.getDate() - 3);
             //-5 of delivery date is Stitiching Date if it is greater then order date;
 
-
             vm.order.OrderItems[idx].stitchingDate = new Date(stitchingdate);
             vm.order.OrderItems[idx].alertDate = new Date(alertdate);
+            
         }
 
-
-
-        //$scope.dateOptions = {
-        //    format: 'dd-MM-yyyy',
-        //    maxDate: new Date(2020, 5, 22),
-        //    minDate: new Date(1970, 1, 1),
-        //    startingDay: 1
-        //};
-        //$scope.open = function () {
-        //    $scope.popup.opened = true;
-        //};
-        //$scope.popup = {
-        //    opened: false
-        //};
         function getDayClass(data) {
             var date = data.date,
                 mode = data.mode;
