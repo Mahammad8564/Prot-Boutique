@@ -20,8 +20,8 @@
         <div class="tab1">
             <div class="summary-bx-2">
                 <div class="orderdate-bx">
-                    <button class="btn btn-link" ng-click="vm.exportToExcel()">
-		            <span class="glyphicon glyphicon-share"></span> Export to Excel
+                    <button class="btn btn-link" ng-click="vm.exportToExcel()" style="padding-left: 0px !important;">
+		            <span class="glyphicon glyphicon-share export-to-excel-btn"></span> Export to Excel
 	                </button>
                 </div>
 
@@ -76,11 +76,11 @@
                     </div>
 
                     <!--Today-->
-                    <table ng-if="vm.showtable && vm.records.length" class="export-table table-part" border="0" cellspacing="0" cellpadding="0">
+                    <table ng-if="vm.showtable && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
                         <tr class="top-purpal-color-row">
-                            <th>Sr. No.</th>
-                            <th>Order Date</th>
-                            <th>Collection</th>
+                            <th>Sr. No.mk</th>
+                            <th>Order Date mk</th>
+                            <th>Collection mk</th>
                         </tr>
                         <tr class="ng-scope" ng-repeat="data in vm.records">
                             <td data-th="Sr. No.: " class="top-purpal-color-row2">{{$index+1}}</td>
