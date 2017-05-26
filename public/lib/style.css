@@ -80,8 +80,8 @@ input {
 }*/
 
 .error-msg-reports-1{
-    width: 100% !important;
-    margin-left: 129px !important;
+    width: 84% !important;
+    margin-left: 16%;
     color: red;
 }
 
@@ -149,8 +149,8 @@ input {
     margin-bottom: 20px;
     font-size: 24px;
 }
-.from-label{width: 19% !important;}
-.date-to-label{width:10% !important;}
+.from-label{width: 19% !important;font-weight: normal;}
+.date-to-label{width:10% !important;font-weight: normal;}
 .fromtodatepicker input{width:81%;
 border: 1px solid #ccc;
 border-radius: 4px;
@@ -1213,6 +1213,7 @@ text-align: center;
 /*Media query 1024 to 1170 css start here*/
 
 @media only screen and (min-width: 1024px) and (max-width: 1170px) {
+    .error-msg-reports-1 {width: 84% !important;margin-left: 16.4%;}
     .site-m-middle-main ul li{margin: 20px 0 20px 25px;}
     .add-new-form{width:85%;}
     .form-section-box{margin-bottom: 0px;}
@@ -1246,6 +1247,7 @@ text-align: center;
 /*Media query 768 to 1023 css start here*/
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .error-msg-reports-1 {width: 78% !important;margin-left: 21.4%;}
     .inner-heading-bar{line-height: 50px;padding: 0 0 0 20px;}
     .form-section-box{margin-bottom: 0px;}
     .Proceed-with-Order-btn {margin-left: 119px;}
@@ -1313,6 +1315,11 @@ text-align: center;
 /*Media query 320 to 767 css start here*/
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
+    .from-label {width: 100% !important;margin-bottom: 0px;}
+    .date-to-label {width: 100% !important;margin-bottom: 0px;}
+    .error-msg-reports-1 {width: 100% !important;margin-left: 0%;margin-top: 0px !important;}
+    .fromtodatepicker input{width: 100%;}
+    .orderdate-bx{margin-bottom: 4px;}
     .statusUnderline{font-size: 20px;}
 
     .choose-image-file-bx {width: 100%;}
@@ -1326,7 +1333,7 @@ text-align: center;
     .order-status-checkbox span {width: 100% !important;}
     .order-status-checkbox span{margin-left:0;}
     .fromtodatepicker {margin-right: 0px !important;width: 100% !important;margin-bottom: 10px;}
-    .date-to-label {width: 19% !important;}
+    
     .stats-number-bx {width: 33%;font-size: 13px;margin-bottom: 15px;}
     .stats-container .circle{width: 90px;line-height: 90px;height: 90px;margin: 0px auto 8px;}
     .oval-margin {width: 100%;margin-left:0px;}
@@ -1681,7 +1688,7 @@ margin-left: 5px;
     float: left;
 }
 .measurement-input2{width:31% !important;float: right; margin-top: 10px;}
-.measurment-box-123{float: left;border-top:1px solid #ccc;}
+.measurment-box-123{float: left;border-top:1px solid #ccc;width:100%;}
 .measurment-box-123:first-child{border-top:0px;}
 
 

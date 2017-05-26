@@ -343,6 +343,7 @@
         function getList() {
             Restangular.all('api/order').getList(vm.options).then(function (res) {
                 vm.list = res.data;
+				console.log(vm.list);
                 vm.options.totalItems = parseInt(res.headers('total'));
                 vm.newList = res.data[localStorage.getItem('index')];
                 console.log(vm.newList);
