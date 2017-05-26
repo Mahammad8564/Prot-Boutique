@@ -8,7 +8,7 @@ input {
 .invoice-main{width:100%; display: inline-block;background: #fff;}
 .invoice-main-table{width:670px; margin: 20px auto; display: table; background:#fff;padding: 30px;border: 1px solid #ccc;}
 .invoice-header{width:100%; display:inline-block; padding: 0px 15px 20px 15px;box-sizing: border-box; position:relative;}
-.print{    
+.print{
     background: #333;
     padding: 5px 13px;
     position: absolute;
@@ -167,7 +167,7 @@ padding: 5px 10px;}
 .orderdate-bx label{float: left; width:12%;padding-top: 5px;}
 .orderdate-bx select{
     width: 26%;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     border-radius: 4px;
     padding: 5px 10px;
 }
@@ -1314,7 +1314,7 @@ text-align: center;
 
 @media only screen and (min-width: 320px) and (max-width: 767px) {
     .statusUnderline{font-size: 20px;}
-    
+
     .choose-image-file-bx {width: 100%;}
     .choose-a-image-btn{width: 100%;}
     .height-60px{height: 75px !important;overflow: scroll;}
@@ -1666,11 +1666,11 @@ text-align: center;
     font-style: normal;
 }
 .Customization-textarea-height{height: 70px !important;}
-.add-photo-textarea-height{height: 200px !important;}
-.add-photo-image-height{height: 200px !important;}
+.add-photo-textarea-height{height: 300px !important;}
+.add-photo-image-height{height: 240px !important;}
 .add-measurement-height{height:500px !important;}
 .addproducttable-B img{
-	margin-top: -7px;
+	margin-top: 4px;
 margin-left: 5px;
 }
 .add-photo-image-height label {

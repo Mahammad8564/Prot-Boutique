@@ -13,4 +13,4 @@ dist/
 typings/
 obj/
 uploads/
-public/lib/bootstrap
+public/lib/

@@ -50,8 +50,6 @@
                         vm.birthdays.push(element);
                     }
                 }, this);
-                console.log(vm.annerversarys);
-                console.log(vm.birthdays);
             });
             Restangular.all('api/orderItem').getList().then(function (res) {
                 
@@ -65,8 +63,6 @@
                         vm.deliverys.push(element);
                     }
                 }, this);
-                console.log(vm.alerts);
-                console.log(vm.deliverys);
             });
         }
 

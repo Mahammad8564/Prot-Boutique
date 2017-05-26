@@ -1,8 +1,8 @@
 ﻿module.exports = {
     host: 'localhost',
     port: 3306,
-    dbname: "prot",
+    dbname: "protDb",
     dbusername: "root",
-    dbpass: "123456",
+    dbpass: "root",
     sessionSecret: 'developmentSessionSecret'
 }
