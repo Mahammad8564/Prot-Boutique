@@ -105,8 +105,9 @@
 
                 <tr>
                   <td class="addproducttable-B add-photo-image-height">
-                    <input ngf-select="vm.displayPhoto($file,$index)" ng-model="vm.order[$index].image" name="file_{{$index}}" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="3MB" style="color: transparent;border: transparent;" type="file">
-                    <img ng-src="{{vm.order.OrderItems[$index].image}}" width="160" height="150">
+                    <input ngf-select="vm.displayPhoto($file,$index)" name="{{$index}}" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="3MB" style="color: transparent;border: transparent;margin-bottom: 12px;" type="file">
+                    <img ng-if="vm.image[$index]" ng-src="{{vm.image[$index]}}" width="185" height="150">
+                    <img ng-if="vm.order.OrderItems[$index].image" ng-src="{{vm.order.OrderItems[$index].image}}" width="185" height="150">
                   </td>
                 </tr>
 
@@ -227,7 +228,7 @@
             </ul>
           </div>
           <div class="submit-button">
-            <input class="register-submit-btn" type="button" ng-disabled="vm.startProcessing" value="{{vm.SubmitOrderText}}" ng-click="vm.submitOrder(orderProceedForm)">
+            <input class="register-submit-btn" type="submit" ng-disabled="vm.startProcessing" value="{{vm.SubmitOrderText}}" ng-click="vm.submitOrder(orderProceedForm)">
             <!--<input class="btn btn-info" type="button" value="Back" ng-click="vm.goBack()">-->
           </div>
           <div class="cancel-button">

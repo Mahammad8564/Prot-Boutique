@@ -96,7 +96,7 @@
             <div>{{vm.error}}</div>
           </div>
           <div class="submit-button">
-            <input ng-disabled="vm.startProcessing" ng-if="vm.currentUser.userrole === 'admin'" value="Save" class="register-submit-btn" type="button" ng-click="vm.save(userForm)">
+            <input ng-disabled="vm.startProcessing" ng-if="vm.currentUser.userrole === 'admin'" value="Save" class="register-submit-btn" type="submit" ng-click="vm.save(userForm)">
           </div>
           <div class="cancel-button">
             <input value="Cancel" class="register-cancel-btn" ui-sref="secure.setting.user" type="button">
