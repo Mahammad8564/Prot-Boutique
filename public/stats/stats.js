@@ -64,7 +64,7 @@
                 }, this);
             });
 
-            Restangular.all('api/customer').getList(vm.options).then(function (res) {
+            Restangular.all('api/getDetail/'+window.user.id).getList(vm.options).then(function (res) {
                 vm.totalCustomers = res.data.length;
             });
 

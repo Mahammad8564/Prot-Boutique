@@ -1,4 +1,4 @@
-(function() {
+  (function() {
   'use strict';
   angular.module('myra').controller('CustomerController', CustomerController);
 
@@ -46,7 +46,7 @@
       }
       vm.startProcessing = true;
       if (!vm.customer.id) {
-        Restangular.all('api/customer').post(vm.customer).then(function(res) {
+        Restangular.all('api/customer/'+window.user.id).post(vm.customer).then(function(res) {
           SweetAlert.swal("Customer saved successfully!");
           $state.go('secure.customer');
         }, function(err) {
@@ -67,7 +67,9 @@
     }
 
     function getList() {
-      Restangular.all('api/customer').getList(vm.options).then(function(res) {
+
+var id=window.user.id;
+      Restangular.all('api/getDetail/'+id).getList(vm.options).then(function(res) {
         vm.list = res.data;
         vm.options.totalItems = parseInt(res.headers('total'));
       });
@@ -116,7 +118,8 @@
           }
         });
         if ($stateParams.id != 'new') {
-          Restangular.one('api/customer/' + $stateParams.id).get().then(function(res) {
+
+            Restangular.one('api/customer/' + $stateParams.id).get().then(function(res) {
             vm.customer = res.data;
             vm.customer.dob = new Date(vm.customer.dob);
             vm.customer.annerversary = new Date(vm.customer.annerversary);

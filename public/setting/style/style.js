@@ -28,7 +28,7 @@
         vm.getDesignList = getDesignList;
         vm.displayPhoto = displayPhoto;
         vm.activate = activate;
-       
+
 
         function edit(obj) {
             $state.go('secure.setting.edit-style', { id: obj.id });
@@ -47,8 +47,9 @@
                 upload('/api/style');
             }
             else {
-               
-                if (vm.file) {
+
+                if (vm.file[0]) {
+
                     upload('api/style/');
                 }
                 else {
@@ -61,8 +62,9 @@
         }
         function upload(url) {
             Upload.upload({
+
                 url: url,
-                data: { file: vm.file, style: vm.style }
+                data: { file: vm.file[0], style: vm.style }
             }).then(function (resp) {
                 console.log(resp);
                 SweetAlert.swal("Style saved successfully!");
@@ -93,7 +95,9 @@
         }
 
         function displayPhoto(file) {
+
             Upload.base64DataUrl(file).then(function (url) {
+              console.log("urllllllllllllllllllllll"+url);
                 vm.localPicture = url;
             });
         }
@@ -126,8 +130,8 @@
                     });
                 }
             });
-           
-        }    
+
+        }
     }
 
 })();

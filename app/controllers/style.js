@@ -22,7 +22,7 @@ function DeleteFile(fileKey) {
     fs.unlinkSync("./uploads/" + fileKey);
 }
 
-//getting List of 
+//getting List of
 //For Geting list of Styles
 exports.list = function (req, res) {
     req.options.include = [Design];
@@ -54,8 +54,9 @@ exports.getById = function (req,res,next) {
 }
 
 exports.create = function (req, res) {
-    if (req.file) {
-        req.body.style.image = req.file.filename;
+
+    if (req.files) {
+        req.body.style.image = req.files[0].filename;
     }
     if (req.body.style.id) {
         Style.update(req.body.style, {

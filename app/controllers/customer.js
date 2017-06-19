@@ -39,11 +39,13 @@ exports.list = function (req, res) {
     //include: [{ model: User, as: 'createdBy' }]
     req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname'] }, { model: CustomerMeasurement }];
     req.options.distinct = true;
+
+    req.options.where = {UserId:req.params.id};
+
     Customer.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
     }).catch(function (err) {
-        console.log(err);
         res.staus(400).send({ message: getErrorMessage(err) });
     });
 }
@@ -51,6 +53,8 @@ exports.list = function (req, res) {
 exports.read = function (req, res) {
     res.json(req.customer);
 }
+
+
 
 exports.getById = function (req,res,next) {
     Customer.findOne({
@@ -65,8 +69,11 @@ exports.getById = function (req,res,next) {
     });
 }
 
+
+
 exports.create = function (req, res) {
-    req.body.createdById = req.user.id;
+     req.body.createdById = req.user.id;
+      req.body.UserId = req.user.id;
     Customer.create(req.body, {
         include: [CustomerMeasurement]
     }).then(function (obj) {
@@ -118,5 +125,8 @@ exports.update = function (req, res) {
     }).catch(function (err) {
         return res.status(400).send({ message: getErrorMessage(error) });
     });
+
+
+
 
 }
