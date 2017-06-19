@@ -75,8 +75,7 @@
                 highlight: 'customer',
                 controller: 'CustomerController',
                 controllerAs: 'vm'
-            })
-            .state('secure.order', {
+            }).state('secure.order', {
                 url: '/order',
                 templateUrl: '/order/order.html',
                 title: 'Order',
@@ -93,6 +92,16 @@
                 title: 'Order',
                 highlight: 'order',
                 controller: 'OrderController',
+                controllerAs: 'vm'
+            }).state('niraj', {
+                url: '/company/{id}',
+                params: {
+                    id: { value: 'new' }
+                },
+                templateUrl: '',
+                title: 'Company',
+                highlight: 'company',
+                controller: 'CompanyController',
                 controllerAs: 'vm'
             })
             .state('secure.reports', {

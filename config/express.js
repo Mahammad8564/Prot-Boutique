@@ -39,13 +39,13 @@ module.exports = function(){
 
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
-    
+
     app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
 
     require('../app/helper/uploadFile')(app);
-    
+
     //define routing here...
     require('../app/routes/user.js')(app);
     require('../app/routes/index.js')(app);
@@ -57,6 +57,7 @@ module.exports = function(){
     require('../app/routes/material.js')(app);
     require('../app/routes/orderStatus.js')(app);
     require('../app/routes/orderItem.js')(app);
+    require('../app/routes/company.js')(app);
 
     app.use(express.static('./public'));
     app.use(express.static('./uploads'));

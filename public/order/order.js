@@ -1,5 +1,3 @@
-﻿
-
 (function() {
   'use strict';
 
@@ -9,6 +7,8 @@
 
   function OrderController(Restangular, $state, SweetAlert, $stateParams, Upload) {
     var vm = this;
+
+
     vm.date = new Date();
     vm.invoice = invoice;
     vm.print = print;
@@ -37,6 +37,8 @@
     vm.onDeliveryDateChange = onDeliveryDateChange;
     vm.goBack = goBack;
     vm.customers = [];
+
+
     vm.designs = [];
     vm.orderItem = {
       DesignId: '',
@@ -150,7 +152,7 @@
     vm.activate = activate;
 
     function getCustomerList() {
-      Restangular.all('api/customer').getList().then(function(res) {
+      Restangular.all('api/getDetail/'+window.user.id).getList().then(function(res) {
         vm.customers = res.data;
       });
     }
@@ -212,9 +214,12 @@
     function initOrder() {
       vm.today = new Date();
       if ($stateParams.id && $stateParams.id != 'new') {
-        Restangular.one('api/order/' + $stateParams.id).get().then(function(res) {
+        Restangular
+        .one('api/order/' + $stateParams.id)
+        .get()
+        .then(function(res) {
           vm.order = res.data;
-          vm.order.orderDate.setHours(0, 0, 0, 0);
+          new Date(vm.order.orderDate).setHours(0,0,0,0);
           vm.isOrderProceed = true;
           vm.SubmitOrderText = 'Update order';
           vm.today = vm.order.orderDate;
@@ -365,16 +370,17 @@
     function getList() {
       Restangular.all('api/order').getList(vm.options).then(function(res) {
         vm.list = res.data;
-        console.log(vm.list);
+
+
         vm.options.totalItems = parseInt(res.headers('total'));
         vm.newList = res.data[localStorage.getItem('index')];
-        console.log(vm.newList);
         vm.totalamount = 0;
         vm.newList.OrderItems.forEach(function(element) {
           vm.totalamount += element.amount;
         }, this);
 
       });
+
     }
 
     function getOrderStatusList() {
@@ -455,6 +461,7 @@
       }
       vm.options.where = arr.join(',');
       getList();
+// console.log("-----------"+ JSON.stringify(vm.mylist));
     }
 
     function getCustomerByOrderList() {

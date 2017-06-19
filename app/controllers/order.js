@@ -38,6 +38,7 @@ exports.list = function(req, res) {
   req.options.distinct = true;
   Order.findAndCountAll(req.options).then(function(arrs) {
     res.setHeader('total', arrs.count);
+  
     res.json(arrs.rows);
   }).catch(function(err) {
     console.log(err);

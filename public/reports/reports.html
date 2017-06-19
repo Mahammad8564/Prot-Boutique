@@ -151,7 +151,7 @@
           <label>Customer Name</label>
           <select required name="customerId" ng-init="vm.order.CustomerId = 'all'" ng-model="vm.order.CustomerId" ng-change="vm.customerChange(vm.order.CustomerId)" convert-to-number>
                             <option value="all">All</option>
-                            <option value="{{cust.id}}" ng-repeat="cust in vm.customers">{{cust.name}}</option>
+                              <option value="{{cust.id}}" ng-repeat="cust in vm.customers | orderBy:'name'">{{cust.name}}</option>
                         </select>
         </div>
       </div>

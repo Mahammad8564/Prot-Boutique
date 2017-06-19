@@ -1,0 +1,27 @@
+<div class="main-contant-part" ng-init="vm.getListCustomer()">
+
+  <h2 class="no-record-found-text" ng-if="!vm.list.length">No record found</h2>
+  <table class="w3-table w3-bordered">
+<tr class="w3-blue">
+  <th>customer name</th>
+  <th>contact Number</th>
+  <th>customer address</th>
+  <th>Action</th>
+</tr>
+  <tr ng-repeat="nm in vm.list"  >
+    <td>
+      {{nm.name}}
+    </td>
+    <td>
+      {{nm.mobile}}
+    </td>
+    <td>
+      {{nm.address}}
+    </td>
+    <td>
+    <input type="button" class="w3-blue" value="view"/>
+    </td>
+  </tr>
+
+</table>
+</div>

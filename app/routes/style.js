@@ -7,7 +7,7 @@ module.exports = function (app) {
         .get(queryBuilder.queryBuilder, style.list)
         .post(style.create);
 
-    app.route('/api/style/:styleId')
+    app.route('/api/style/:UserId/:styleId')
         .get(style.read)
         .patch(style.update)
         //.delete(style.delete);

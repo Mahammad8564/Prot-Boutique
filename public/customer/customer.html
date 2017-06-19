@@ -6,6 +6,9 @@
   <div class="customer-detail-page-contant">
     <div class="customer-search-box-main"><input class="serchInput" placeholder="Search by Customer Name" type="text" ng-model="vm.options.search" ng-change="vm.search()"></div>
     <div class="right-add-new-button"><a ui-sref="secure.edit-customer">Add New</a></div>
+
+        
+
     <div class="details-table">
       <h2 class="no-record-found-text" ng-if="!vm.list.length">No record found</h2>
       <table ng-if="vm.list.length > 0" class="table-part" border="0" cellspacing="0" cellpadding="0">
