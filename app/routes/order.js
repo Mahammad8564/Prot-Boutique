@@ -4,8 +4,13 @@ var queryBuilder = require('../../app/helper/queryBuilder');
 
 module.exports = function (app) {
     app.route('/api/order')
-        .get(queryBuilder.queryBuilder, order.list)
+        // .get(queryBuilder.queryBuilder, order.list)
         .post(order.create);
+
+        app.route('/api/orderDetail/:id')
+            .get(queryBuilder.queryBuilder, order.list)
+
+
 
     app.route('/api/order/:orderId')
         .get(order.read)

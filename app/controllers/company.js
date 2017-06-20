@@ -22,15 +22,33 @@ var getErrorMessage = function (err) {
 
 exports.getById = function (req,res,next) {
 
-  console.log("jljljsldjlkjlj::::::");
+  console.log("jljljsldjlkjlj::::::"+req.params.Initial);
   Company.findOne({
-      where: { id: req.params.id },
+    where:{InitialName:req.params.Initial}
   }).then(function(obj){
-    console.log(obj);
+    // res.json(obj);
+    return res.json(obj);
+    //    console.log(obj);
   })
 
   .catch(function (err) {
         console.log(err);
         res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+
+
+exports.create = function (req, res) {
+        Company.create(req.body).then(function (obj) {
+        if (!obj) {
+            return res.send({ message: "Error Occured while updataing" });
+        }
+        var objData = obj.get({
+            plain: true
+        });
+        return res.json(objData);
+    }).catch(function (error) {
+        console.log(error);
+        res.status(400).send({ message: getErrorMessage(error) });
     });
 }

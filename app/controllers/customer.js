@@ -37,7 +37,14 @@ var getErrorMessage = function (err) {
 //For Geting list of Measurements
 exports.list = function (req, res) {
     //include: [{ model: User, as: 'createdBy' }]
-    req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname'] }, { model: CustomerMeasurement }];
+    var role=[];
+    User.findOne({where: { id: req.params.id }}).then(function(obj){
+
+
+    if(obj.userrole=='user')
+    {
+
+    req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname','userrole'] }, { model: CustomerMeasurement }];
     req.options.distinct = true;
 
     req.options.where = {UserId:req.params.id};
@@ -48,7 +55,29 @@ exports.list = function (req, res) {
     }).catch(function (err) {
         res.staus(400).send({ message: getErrorMessage(err) });
     });
+
+  }
+  else {
+    req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname','userrole'] }, { model: CustomerMeasurement }];
+    req.options.distinct = true;
+
+    // req.options.where = {UserId:req.params.id};
+
+    Customer.findAndCountAll(req.options).then(function (arrs) {
+        res.setHeader('total', arrs.count);
+        res.json(arrs.rows);
+    }).catch(function (err) {
+        res.staus(400).send({ message: getErrorMessage(err) });
+    });
+
+
+  }
+});
 }
+
+
+
+
 
 exports.read = function (req, res) {
     res.json(req.customer);
@@ -68,6 +97,7 @@ exports.getById = function (req,res,next) {
         res.status(400).send({ message: getErrorMessage(err) });
     });
 }
+
 
 
 

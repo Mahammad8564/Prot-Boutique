@@ -3,10 +3,12 @@ var queryBuilder = require('../../app/helper/queryBuilder');
 var passport = require('passport');
 
 module.exports = function (app) {
-    
+
     app.route('/api/user')
         .get(queryBuilder.queryBuilder, users.list)
         .post(users.create);
+  app.route('/api/userDetail')
+        .get(queryBuilder.queryBuilder, users.Userlist)
 
     app.route('/api/user/:userId')
         .get(users.read)
@@ -16,10 +18,10 @@ module.exports = function (app) {
     //.delete(measurement.delete);
 
     app.param('userId', users.getById);
-    
+
     //My Custom routing For Angular JS login and signup
     //Local signin and signup routing
-   
+
     app.post('/signin', function (req, res, next) {
         passport.authenticate('local', function (err, user, info) {
             if (err) { return res.send({ message : err.data.message }) }
@@ -33,6 +35,6 @@ module.exports = function (app) {
             });
         })(req, res, next);
     });
-    
+
     app.get('/signout', users.signout);
 };

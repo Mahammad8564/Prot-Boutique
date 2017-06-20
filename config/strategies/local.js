@@ -6,11 +6,13 @@ var User = models.User;
 var crypto = require('crypto');
 
 
-module.exports = function () {
-    passport.use(new LocalStrategy( 
-        function (username, password, done) {
+ module.exports = function () {
+    passport.use(new LocalStrategy({
+    usernameField: 'email',
+  },
+        function (email, password, done) {
             User.findOne({
-                where: { username : username }
+                where: { email : email }
             }).then(function (user) {
                 if (!user) {
                     return done(null, false, {

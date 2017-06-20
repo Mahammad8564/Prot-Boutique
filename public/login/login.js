@@ -6,7 +6,7 @@
     angular.module('myra').controller("LoginController", LoginController);
 
     LoginController.$inject = ['Restangular','$state'];
-    
+
     function LoginController(Restangular, $state) {
         var vm = this;
         vm.login = login;
@@ -14,6 +14,7 @@
         vm.loginBtnText = 'Login';
 
         function login(form) {
+          console.log("log che bhai"+JSON.stringify(vm.user));
             vm.loginBtnText = 'Login';
             if (form.$invalid) {
                 _.forEach(form.$error.required, function (frm) {
@@ -26,10 +27,13 @@
             vm.loginBtnText = 'Loging In...';
             Restangular.all('signin').post(vm.user).then(function (res) {
                 if (res.data.message) {
+                  console.log("USER dtaa.message::::");
+
                     vm.error = res.data.message;
                     vm.startProcessing = false;
                     vm.loginBtnText = 'Login';
                 } else {
+                  console.log("USER dtaa::::"+JSON.stringify(res.data));
                     window.user = res.data;
                     window.location.reload();
                 }

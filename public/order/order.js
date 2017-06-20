@@ -368,7 +368,7 @@
     }
 
     function getList() {
-      Restangular.all('api/order').getList(vm.options).then(function(res) {
+      Restangular.all('api/orderDetail/'+window.user.id).getList(vm.options).then(function(res) {
         vm.list = res.data;
 
 

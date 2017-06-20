@@ -14,7 +14,7 @@ var getErrorMessage = function (err) {
             default:
                 message = 'Something went wrong';
         }
-    } 
+    }
     else {
         for (var errName in err.errors) {
             if (err.errors[errName].message)
@@ -40,6 +40,18 @@ exports.list = function (req, res) {
     User.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
+
+    }).catch(function (err) {
+        console.log(err);
+        res.status(400).send({ message: getErrorMessage(err) });
+    });
+}
+exports.Userlist = function (req, res) {
+      req.options.where = {Userrole:'user'};
+    User.findAndCountAll(req.options).then(function (arrs) {
+        res.setHeader('total', arrs.count);
+        res.json(arrs.rows);
+
     }).catch(function (err) {
         console.log(err);
         res.status(400).send({ message: getErrorMessage(err) });
@@ -71,7 +83,7 @@ exports.create = function (req, res, next) {
         where: {
             username: req.body.username
         }
-    }).then(function (unqusr) { 
+    }).then(function (unqusr) {
         if (unqusr == null) {
             req.body.salt = salt;
             req.body.pwd = req.body.password;
@@ -93,8 +105,8 @@ exports.create = function (req, res, next) {
     }).catch(function (err) {
         res.status(400).send({ message : getErrorMessage(err) });
     });
-   
-   
+
+
 };
 
 exports.reset = function (req, res, next) {
@@ -173,7 +185,3 @@ exports.isAdmin = function (req, res, next) {
     }
     next();
 };
-
-
-
-

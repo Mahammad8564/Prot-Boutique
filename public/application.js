@@ -1,5 +1,5 @@
 ﻿var mainApplicationModuleName = 'myra';
-var mainApplicationModule = angular.module(mainApplicationModuleName , 
+var mainApplicationModule = angular.module(mainApplicationModuleName ,
     [
         'ui.router',
         'restangular',

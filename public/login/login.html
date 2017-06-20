@@ -4,11 +4,11 @@
       <h1><strong></strong>Please Login</h1>
 
       <p class="paragraph">
-        <input id="username" name="username" required="required" type="text" placeholder="Username" ng-model="vm.user.username" />
+        <input id="email" name="email" required="required" type="text" placeholder="Username"  ng-model="vm.user.email" />
         <span class="submit-error" ng-if="(loginForm.username.$dirty || vm.isSubmitted )&& (loginForm.username.$error.required)"><i><b>Username</b></i> is required.</span>
       </p>
       <p class="paragraph">
-        <input id="password" name="password" required="required" type="password" placeholder="Password" ng-model="vm.user.password" />
+        <input id="password" name="password" required="required" type="password"  placeholder="Password" ng-model="vm.user.password" />
         <span class="submit-error" ng-if="(loginForm.password.$dirty || vm.isSubmitted )&& (loginForm.password.$error.required)"><i><b>Password</b></i> is required.</span>
       </p>
       <p class="">

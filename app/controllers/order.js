@@ -36,9 +36,10 @@ exports.list = function(req, res) {
     }, Design, Material, OrderStatus, Style]
   }, Customer, OrderStatus];
   req.options.distinct = true;
+  req.options.where = {UserId:req.params.id};
   Order.findAndCountAll(req.options).then(function(arrs) {
     res.setHeader('total', arrs.count);
-  
+
     res.json(arrs.rows);
   }).catch(function(err) {
     console.log(err);
