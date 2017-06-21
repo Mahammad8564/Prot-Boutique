@@ -7,11 +7,11 @@
       <!--<input class="serchInput customer-search-box-main-mobile"   ng-model="vm.options.search" ng-change="vm.search()" placeholder="Search here..." type="text">-->
       <select class="outside2 myorder-search-status-select-mobile" placeholder="Search by Status" name="statusid" ng-model="vm.searchBy.OrderStatusId | orderBy:'title'" ng-change="vm.searchByField()" ng-init="vm.getOrderStatusList()">
                 <option value="">Search by Status</option>
-                <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true}  ">{{os.title}}</option>
+                <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true} | orderBy:'title' ">{{os.title}}</option>
             </select>
       <select class="outside2" placeholder="Search by Customer" name="customeruser" ng-model="vm.searchBy.CustomerId" ng-change="vm.searchByField()" ng-init="vm.getCustomerList()">
                 <option value="">Search by Customer</option>
-                <option value="{{os.id}}" ng-repeat="os in vm.customers  ">{{os.name}}</option>
+                <option value="{{os.id}}" ng-repeat="os in vm.customers | orderBy:'name' ">{{os.name}}</option>
             </select>
     </div>
     <div class="right-add-new-button right-add-new-button-mobile"><a ui-sref="secure.edit-order">Add Order</a></div>

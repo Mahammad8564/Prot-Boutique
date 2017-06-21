@@ -1,4 +1,4 @@
-﻿<div class="managecustomer-right-bx">
+﻿<div class="managecustomer-right-bx" ng-if="vm.userrole==='admin'">
     <h4 class="admin-setting-heding">Manage Users</h4>
     <div class="customer-detail-page-contant managecustomer-right-bx-h4" ng-init="vm.getList()">
         <div class="customer-search-box-main"><input class="serchInput"   ng-model="vm.options.search" ng-change="vm.search()"  placeholder="Search by Full Name" type="text"></div>

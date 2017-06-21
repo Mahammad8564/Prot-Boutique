@@ -13,6 +13,8 @@
         vm.list = [];
         vm.save = save;
         vm.edit = edit;
+        vm.userrole=window.user.userrole;
+        
         vm.user = {
             isActive: true
         }
@@ -118,6 +120,7 @@
         function getList() {
             Restangular.all('api/user').getList(vm.options).then(function (res) {
                 vm.list = res.data;
+                //console.log("i m heree bro"+vm.list[0].userrole);
                 vm.options.totalItems = parseInt(res.headers('total'));
             }, function (err) {
                 console.log(err);

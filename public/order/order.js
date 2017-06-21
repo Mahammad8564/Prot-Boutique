@@ -1,5 +1,3 @@
-﻿
-
 (function() {
   'use strict';
 
@@ -212,9 +210,12 @@
     function initOrder() {
       vm.today = new Date();
       if ($stateParams.id && $stateParams.id != 'new') {
-        Restangular.one('api/order/' + $stateParams.id).get().then(function(res) {
+        Restangular
+        .one('api/order/' + $stateParams.id)
+        .get()
+        .then(function(res) {
           vm.order = res.data;
-          vm.order.orderDate.setHours(0, 0, 0, 0);
+          new Date(vm.order.orderDate).setHours(0,0,0,0);
           vm.isOrderProceed = true;
           vm.SubmitOrderText = 'Update order';
           vm.today = vm.order.orderDate;

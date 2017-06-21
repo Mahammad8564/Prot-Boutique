@@ -19,7 +19,7 @@
             <label>  Order by <em style="color:Red">*</em></label>
             <select required name="customerId" ng-model="vm.order.CustomerId" ng-change="vm.customerChange(vm.order.CustomerId)" ng-disabled="vm.isOrderProceed || vm.order.OrderStatusId != '1'" convert-to-number>
                             <option value="">-- Please Select --</option>
-                            <option value="{{cust.id}}" ng-repeat="cust in vm.customers">{{cust.name}}</option>
+                            <option value="{{cust.id}}" ng-repeat="cust in vm.customers | orderBy:'name'">{{cust.name}}</option>
                         </select>
           </div>
           <div class="orderstatus-bx">
@@ -80,7 +80,7 @@
                   <td class="addproducttable-B">
                     <select convert-to-number name="materialId_{{$index}}" ng-model="vm.order.OrderItems[$index].MaterialId">
                                             <option value="">-- Please Select --</option>
-                                            <option value="{{mtrl.id}}" ng-repeat="mtrl in vm.materials">{{mtrl.title}}</option>
+                                            <option value="{{mtrl.id}}" ng-repeat="mtrl in vm.materials | orderBy:'title'">{{mtrl.title}}</option>
                                         </select>
                   </td>
                 </tr>
@@ -110,7 +110,7 @@
                     <img ng-if="vm.order.OrderItems[$index].image" ng-src="{{vm.order.OrderItems[$index].image}}" width="185" height="150">
                   </td>
                 </tr>
-
+<!--
                 <tr>
                   <td class="addproducttable-B add-measurement-height" style="overflow-y: scroll;">
                     <div ng-repeat="oim in orderItem.OrderItemMeasurements" class="measurment-box-123">
@@ -118,6 +118,42 @@
                       <input class="measurement-input2" name="measurement_{{$parent.$index}}_{{$index}}" ng-model="vm.order.OrderItems[$parent.$index].OrderItemMeasurements[$index].val" required type="text">
                     </div>
                   </td>
+                </tr> -->
+
+
+                <tr>
+                <td>
+
+                  <div >
+                  <button ng-click="something = !something" class="w3-button w3-border w3-hover-cyan" style="width:100%;" ng-disabled="orderItem.OrderItemMeasurements.length <= 0 ?'checked':''" >{{orderItem.OrderItemMeasurements.length > 0 ?'measurements':'No measurement'}}</button>
+
+                  <div ng-style="something ? { 'display':'block' } : { 'display':'none' }" class="w3-modal">
+                       <div class="w3-modal-content">
+                         <header class="w3-container w3-cyan">
+                         <span ng-click="something = !something"
+                         class="w3-button w3-display-topright">&times;</span>
+                         <h2 style="color:white;">measurements</h2>
+                       </header>
+                       <div class="w3-container"  ng-repeat="oim in orderItem.OrderItemMeasurements">
+                           <table >
+                             <span ng-if="orderItem.OrderItemMeasurements.length != 0">
+                             <tr >
+                               <td align="center">
+                                  <label style="margin-top:10px;"> {{oim.Measurement.title}}</label>
+                                  <input class="measurement-input2 w3-input  w3-border"  name="measurement_{{$parent.$index}}_{{$index}}" ng-model="vm.order.OrderItems[$parent.$index].OrderItemMeasurements[$index].val" required type="text">
+
+                               </td>
+
+                            </tr>
+                            </span>
+                           </table>
+
+                       </div>
+
+                     </div>
+                   </div>
+                </div>
+                </td>
                 </tr>
 
                 <tr ng-if="!vm.order.id">
@@ -167,8 +203,8 @@
               </tr>
               <tr ng-repeat="orderItem in vm.order.OrderItems track by $index" class="ng-scope" ng-class="{'table-tr-alternate-color': vm.sprayColour($index,vm.order.OrderItems)}">
                 <td data-th="Design: " class="top-purpal-color-row2 ng-binding" ng-click="vm.detail()">
-                  <img height="50" width="50" class="image-text-set-order" ng-src="{{orderItem.Style.image}}">saurabh
-                  <a href="">{{orderItem.Design.title}} ({{orderItem.Style.title}})</a>
+                  <img height="50" width="50" class="image-text-set-order" ng-src="{{orderItem.style.image}}">saurabh
+                    <a href="">{{orderItem.Design.title}} ({{orderItem.Style.title}})</a>
 
                 </td>
                 <td data-th="Delivery Date: " class="top-purpal-color-row2">

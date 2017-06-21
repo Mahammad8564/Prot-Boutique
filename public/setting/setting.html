@@ -1,12 +1,13 @@
 ﻿<div class="inner-heading-bar">Manage Settings</div>
 
-<div class="main-contant-part">
+<div class="main-contant-part" ng-init="vm.getList()">
     <!-- Customer Details page Section Start Here -->
     <div class="customer-detail-page-contant">
         <div class="managecustomer-left-menu-inner-page">
             <h4 class="admin-setting-heding">Settings</h4>
             <ul>
-                <li><a ng-class="{'active' : $root.toState.highlight === 'user'}" ui-sref="secure.setting.user"><span>Manage Users</span></a></li>
+                <li><a ng-class="{'active' : $root.toState.highlight === 'user'}" ui-sref="secure.setting.user" ng-if="vm.userrole==='admin'"><span>Manage Users</span></a></li>
+              
                 <li><a ng-class="{'active' : $root.toState.highlight === 'orderstatus'}" ui-sref="secure.setting.orderstatus"><span>Manage Order Status</span></a></li>
                 <li><a ng-class="{'active' : $root.toState.highlight === 'measurement'}" ui-sref="secure.setting.measurement"><span>Manage Measurements</span></a></li>
                 <li><a ng-class="{'active' : $root.toState.highlight === 'design'}" ui-sref="secure.setting.design"><span>Manage Designs</span></a></li>

@@ -156,7 +156,7 @@
                 templateUrl: '/setting/setting.html',
                 title: 'Setting',
                 highlight: 'setting',
-                controller: 'SettingController',
+                controller: 'UserController',
                 controllerAs: 'vm',
                 abstract: true
             })
