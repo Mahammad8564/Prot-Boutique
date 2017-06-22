@@ -1,0 +1,34 @@
+<div class="inner-heading-bar">
+   Company Details</div>
+
+<div class="main-contant-part" ng-init="vm.getCompanyDetail()">
+    <div class="right-add-new-button"><a ui-sref="secure.edit-company">Add New</a></div>
+  <div class="w3-container">
+<div >
+
+    <table  class="table-part" border="1" cellspacing="0" cellpadding="0">
+  <tr class="top-purpal-color-row">
+    <th><font>Company Name</font></th>
+    <th><font>Initial Name</font></th>
+    <th><font>Url</font></th>
+    <th><font>is Active</font></th>
+
+  </tr>
+  <tr ng-repeat="company in vm.list">
+    <td class="top-purpal-color-row2"><font>{{company.CompanyName}}</font></td>
+      <td class="top-purpal-color-row2"><font>{{company.InitialName}}</font></td>
+    <td class="top-purpal-color-row2"><font>{{company.url}}</font></td>
+    <td class="top-purpal-color-row2"><font>{{company.isActive}}</font></td>
+
+  </tr>
+  </table>
+
+    </div>
+
+    </div>
+    <!-- <div class="w3-quarter">&nbsp;</div> -->
+
+    </div>
+
+
+  </div>

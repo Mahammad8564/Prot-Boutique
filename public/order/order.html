@@ -6,8 +6,8 @@
     <div class="customer-search-box-main customer-search-box-main-mobile">
       <!--<input class="serchInput customer-search-box-main-mobile"   ng-model="vm.options.search" ng-change="vm.search()" placeholder="Search here..." type="text">-->
       <select class="outside2 myorder-search-status-select-mobile" placeholder="Search by Status" name="statusid" ng-model="vm.searchBy.OrderStatusId | orderBy:'title'" ng-change="vm.searchByField()" ng-init="vm.getOrderStatusList()">
-                <option value="">Search by Status</option>
-                <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true} | orderBy:'title' ">{{os.title}}</option>
+                <option value="" >Search by Status</option>
+                <option value="{{os.id}}" ng-repeat="os in vm.orderStatuses | filter : {isActive : true} | orderBy:'title' ">{{os.title}}</option>{{vm.orderStatuses[0].title}}
             </select>
       <select class="outside2" placeholder="Search by Customer" name="customeruser" ng-model="vm.searchBy.CustomerId" ng-change="vm.searchByField()" ng-init="vm.getCustomerList()">
                 <option value="">Search by Customer</option>
@@ -46,7 +46,7 @@
           <th>Invoice</th>
           <th>Action</th>
         </tr>
-        <tr ng-repeat-start="obj in vm.list" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
+        <tr ng-repeat-start="obj in vm.list " ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
           <td data-th="Order Id: " class="top-purpal-color-row2"><a ng-click="vm.edit(obj)" class="customer-name-link">{{obj.id|leadingZero}}</a></td>
           <td data-th="Order Date: " class="top-purpal-color-row2">{{obj.orderDate | date : 'dd-MM-yyyy'}}</td>
           <td data-th="Customer Name: " class="top-purpal-color-row2">{{obj.Customer.name}}</td>

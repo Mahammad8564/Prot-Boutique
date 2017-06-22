@@ -148,7 +148,9 @@
     vm.activate = activate;
 
     function getCustomerList() {
+
       Restangular.all('api/customer').getList().then(function(res) {
+
         vm.customers = res.data;
       });
     }
@@ -445,6 +447,9 @@
     }
 
     function searchByField() {
+      console.log("in searchByfield::::::");
+      console.log("in searchByfield::::::"+vm.searchBy.OrderStatusId);
+      console.log("in searchByfield::::::"+vm.searchBy.CustomerId);
       vm.options.page = 1;
       vm.options.where = '';
       var arr = [];

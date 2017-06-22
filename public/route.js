@@ -8,6 +8,7 @@
     function routeConfig($stateProvider, $urlRouterProvider) {
 
         $stateProvider
+
             .state('login', {
                 url: '/login',
                 templateUrl: '/login/login.html',
@@ -57,6 +58,25 @@
                 controller: 'CustomerController',
                 controllerAs: 'vm'
             })
+            .state('secure.company', {
+                  url: '/company',
+                  templateUrl: '/company/company.html',
+                  title: 'Company',
+                  highlight: 'Company',
+                  controller: 'companyController',
+                  controllerAs: 'vm'
+              })
+              .state('secure.edit-company', {
+                    url: '/company/{id}',
+                    params: {
+                        id: { value: 'new' }
+                    },
+                    templateUrl: '/company/companyDetail.html',
+                    title: 'Company',
+                    highlight: 'Company',
+                    controller: 'companyController',
+                    controllerAs: 'vm'
+                })
             .state('secure.customer-order-detail', {
                 url: '/customer/{customerId}/order',
                 templateUrl: '/order/customer-order-detail.html',

@@ -6,12 +6,16 @@
     angular.module('myra').controller("LoginController", LoginController);
 
     LoginController.$inject = ['Restangular','$state'];
-    
+
     function LoginController(Restangular, $state) {
         var vm = this;
         vm.login = login;
         vm.logout = logout;
         vm.loginBtnText = 'Login';
+        vm.open=open;
+        function open(){
+          $state.go('company')
+        }
 
         function login(form) {
             vm.loginBtnText = 'Login';

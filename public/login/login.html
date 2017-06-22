@@ -4,7 +4,7 @@
       <h1><strong></strong>Please Login</h1>
 
       <p class="paragraph">
-        <input id="username" name="username" required="required" type="text" placeholder="Username" ng-model="vm.user.username" />
+        <input id="email" name="email" required="required" type="text" placeholder="Enter your Email" ng-model="vm.user.email" />
         <span class="submit-error" ng-if="(loginForm.username.$dirty || vm.isSubmitted )&& (loginForm.username.$error.required)"><i><b>Username</b></i> is required.</span>
       </p>
       <p class="paragraph">
@@ -18,6 +18,9 @@
         <input type="submit" value="{{vm.loginBtnText}}" ng-click="vm.login(loginForm)" />
       </p>
 
+      <p class="login button float-left">
+        <a href="" ng-click="vm.open">company</a>
+      </p>
 
     </form>
   </div>
