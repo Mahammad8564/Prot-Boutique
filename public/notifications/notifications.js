@@ -10,7 +10,7 @@
     function NotificationsController(Restangular, $state) {
         var vm = this;
         vm.selectedDate = new Date();
-
+        var C_Id=window.user.CompanyId;
         vm.edit = edit;
         vm.edit2 = edit2;
         vm.edit3 = edit3;
@@ -32,14 +32,15 @@
         function openCal() {
             vm.open_orderDate = !vm.open_orderDate;
         }
-        
+
         function change(date) {
             vm.annerversarys = [];
             vm.birthdays = [];
             vm.alerts = [];
             vm.deliverys = [];
             var date1 = new Date(date);
-            Restangular.all('api/customer').getList().then(function (res) {
+
+            Restangular.all('api/customer').getList({CompanyId:C_Id}).then(function (res) {
                 res.data.forEach(function (element) {
                     var date2 = new Date(element.annerversary);
                     if (date2.getDate() == date1.getDate() && date2.getMonth() == date1.getMonth()) {
@@ -50,9 +51,10 @@
                         vm.birthdays.push(element);
                     }
                 }, this);
+                console.log(vm.annerversarys);
+                console.log(vm.birthdays);
             });
-            Restangular.all('api/orderItem').getList().then(function (res) {
-                
+            Restangular.all('api/orderItem').getList({CompanyId:C_Id}).then(function (res) {
                 res.data.forEach(function (element) {
                     var date4 = new Date(element.alertDate);
                     if (date4.getDate() == date1.getDate() && date4.getMonth() == date1.getMonth()) {
@@ -69,4 +71,3 @@
     }
 
 })();
-

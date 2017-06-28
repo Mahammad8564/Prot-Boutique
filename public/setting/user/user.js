@@ -14,9 +14,10 @@
         vm.save = save;
         vm.edit = edit;
         vm.userrole=window.user.userrole;
-        
+        var C_Id=window.user.CompanyId;
         vm.user = {
-            isActive: true
+            isActive: true,
+            CompanyId:C_Id
         }
         vm.search = search;
         vm.order = order;
@@ -26,11 +27,14 @@
             pagesize: 10,
             totalItems: 0,
             page: 1,
-            search: ''
+            search: '',
+            CompanyId:C_Id
+
         }
         vm.getList = getList;
         vm.resetUser = resetUser;
         if ($stateParams.id && $stateParams.id != 'new') {
+
             Restangular.one('api/user/' + $stateParams.id).get().then(function (res) {
                 vm.user = res.data;
             }, function (err) {
@@ -118,9 +122,17 @@
         }
 
         function getList() {
+
             Restangular.all('api/user').getList(vm.options).then(function (res) {
+
+              if(window.user.userrole=='admin'){
                 vm.list = res.data;
-                //console.log("i m heree bro"+vm.list[0].userrole);
+
+              }
+              else {
+                  vm.list.push(_.find(res.data,{id:window.user.id}));
+              }
+
                 vm.options.totalItems = parseInt(res.headers('total'));
             }, function (err) {
                 console.log(err);

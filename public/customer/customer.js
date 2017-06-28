@@ -11,6 +11,8 @@
     vm.edit = edit;
     vm.getList = getList;
     vm.activate = activate;
+    var C_Id=window.user.CompanyId;
+
     vm.search = search;
     vm.order = order;
     vm.pageChange = pageChange;
@@ -19,8 +21,10 @@
       pagesize: 10,
       totalItems: 0,
       page: 1,
-      search: ''
+      search: '',
+      CompanyId: C_Id
     }
+
     vm.today = new Date();
     //vm.getMeasurementList = getMeasurementList;
 
@@ -45,7 +49,7 @@
         return;
       }
       vm.startProcessing = true;
-      if (!vm.customer.id) {
+        if (!vm.customer.id) {
         Restangular.all('api/customer').post(vm.customer).then(function(res) {
           SweetAlert.swal("Customer saved successfully!");
           $state.go('secure.customer');
@@ -68,7 +72,7 @@
 
     function getList() {
       Restangular.all('api/customer').getList(vm.options).then(function(res) {
-        vm.list = res.data;
+        vm.list =  res.data;
         vm.options.totalItems = parseInt(res.headers('total'));
       });
     }
@@ -100,11 +104,12 @@
     }
 
     function activate() {
-      Restangular.all('api/measurement').getList().then(function(res) {
+      Restangular.all('api/measurement').getList({CompanyId:C_Id}).then(function(res) {
         vm.mesaurements = res.data;
         vm.customer = {
-          CustomerMeasurements: []
-        };
+          CustomerMeasurements: [],
+           CompanyId:C_Id
+          };
         var arr = [];
         _.forEach(vm.mesaurements, function(msr) {
           if (msr.isActive) {

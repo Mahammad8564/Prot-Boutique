@@ -1,6 +1,7 @@
 ﻿var models = require('../models');
 var Measurement = models.Measurement;
 var User = models.User;
+var Company = models.Company;
 var Sequelize = require('sequelize');
 var _ = require('underscore');
 //get Error Message Consized
@@ -16,9 +17,13 @@ var getErrorMessage = function (err) {
     }
 }
 
-//getting List of 
+//getting List of
 //For Geting list of Measurements
 exports.list = function (req, res) {
+  req.options.include = [{model:Company}];
+  //req.options.where = {CompanyId:req.C_Id};
+  req.options.distinct = true;
+
     Measurement.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
         res.json(arrs.rows);
@@ -46,6 +51,7 @@ exports.getById = function (req,res,next) {
 }
 
 exports.create = function (req, res) {
+  console.log("req.body :::::::;");
     Measurement.create(req.body).then(function (obj) {
         if (!obj) {
             return res.send({ message: "Error Occured while updataing" });

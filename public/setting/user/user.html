@@ -1,4 +1,4 @@
-﻿<div class="managecustomer-right-bx" ng-if="vm.userrole==='admin'">
+﻿<div class="managecustomer-right-bx">
     <h4 class="admin-setting-heding">Manage Users</h4>
     <div class="customer-detail-page-contant managecustomer-right-bx-h4" ng-init="vm.getList()">
         <div class="customer-search-box-main"><input class="serchInput"   ng-model="vm.options.search" ng-change="vm.search()"  placeholder="Search by Full Name" type="text"></div>
@@ -54,7 +54,7 @@
                             </a>-->
                         </th>
                         <th>Status</th>
-                        <th ng-if="vm.currentUser.userrole === 'admin'">Action</th>
+                        <th>Action</th>
                     </tr>
                     <tr ng-repeat="obj in vm.list" ng-class="$index % 2 != 0 ? 'table-tr-alternate-color' : 'some'">
                         <td data-th="Username: " class="top-purpal-color-row2"><a href="" ng-click="vm.edit(obj)" class="customer-name-link">{{obj.username}} </a></td>
@@ -63,7 +63,7 @@
                         <td data-th="Mobile: "  class="top-purpal-color-row2">{{obj.phone}}</td>
                         <td data-th="Status: "  ng-if="obj.isActive"  class="top-purpal-color-row2">Active</td>
                         <td data-th="Staus: "  ng-if="!obj.isActive"  class="top-purpal-color-row2">Inactive</td>
-                        <td ng-if="vm.currentUser.userrole === 'admin'" data-th="Action: "  class="top-purpal-color-row2"><a ng-click="vm.resetUser(obj)">Reset Password</a></td>
+                        <td data-th="Action: "  class="top-purpal-color-row2"><a ng-click="vm.resetUser(obj)">Reset Password</a></td>
                     </tr>
                 </tbody>
             </table>

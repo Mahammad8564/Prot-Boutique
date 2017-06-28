@@ -518,7 +518,10 @@ transform: translate(-50%, -50%);
 	box-sizing: border-box;
 }
 
-.inner-heading-bar{width:100%; background: #00BFFF; line-height: 50px; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
+.inner-heading-bar{width:100%; background: #00BFFF; line-height:50px; text-align: left; font-size: 25px; color: #fff; padding: 0 0 0 30px; box-sizing: border-box;}
+
+.inner-header{width:100%; background: #00BFFF; line-height:50px; text-align: left; font-size: 25px; color: #fff; padding: 0 0 0 0px; box-sizing: border-box;}
+
 .main-contant-part{width:100%; float: left; background: #fff; padding: 30px; box-sizing: border-box;min-height: 500px;}
 .main-contant-part p{font-size: 17px; color: #242424; line-height: 5px; margin: 0 auto; padding: 0px 0 15px 0; text-align: center; width:100%;display: table;}
 .cont-image{width: 100%; display: block; margin: 25px 0; text-align: center;}

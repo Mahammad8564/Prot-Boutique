@@ -11,7 +11,7 @@ module.exports = function (app) {
         .get(orderItem.read)
         .patch(orderItem.update);
         //.delete(measurement.delete);
-    
+
     app.route('/api/notify')
         .get(queryBuilder.queryBuilder, orderItem.notify);
 

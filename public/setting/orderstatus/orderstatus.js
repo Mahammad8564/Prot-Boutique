@@ -7,11 +7,13 @@
 
     function OrderStatusController(Restangular, $state, SweetAlert, $stateParams) {
         var vm = this;
+        var C_Id=window.user.CompanyId;
         vm.list = [];
         vm.save = save;
         vm.edit = edit;
         vm.orderStatus = {
-            isActive: true
+            isActive: true,
+            CompanyId:C_Id
         }
         vm.search = search;
         vm.order = order;
@@ -20,7 +22,8 @@
             pagesize: 10,
             totalItems: 0,
             page: 1,
-            search: ''
+            search: '',
+            CompanyId:C_Id
         }
         vm.getList = getList;
         if ($stateParams.id && $stateParams.id != 'new') {

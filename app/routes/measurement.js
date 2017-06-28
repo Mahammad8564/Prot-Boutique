@@ -3,9 +3,16 @@ var measurement = require('../../app/controllers/measurement');
 var queryBuilder = require('../../app/helper/queryBuilder');
 
 module.exports = function (app) {
+
+  // app.route('/api/measurement')
+
+
     app.route('/api/measurement')
-        .get(queryBuilder.queryBuilder, measurement.list)
+    .get(queryBuilder.queryBuilder, measurement.list)
         .post(measurement.create);
+
+
+
 
     app.route('/api/measurement/:measurementId')
         .get(measurement.read)

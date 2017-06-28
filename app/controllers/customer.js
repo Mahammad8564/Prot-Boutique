@@ -37,14 +37,14 @@ var getErrorMessage = function (err) {
 //For Geting list of Measurements
 exports.list = function (req, res) {
     //include: [{ model: User, as: 'createdBy' }]
-    req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname'] }, { model: CustomerMeasurement }];
+    req.options.include = [{ model: User, as: 'createdBy', attributes: ['username', 'id', 'fullname','CompanyId'] }, { model: CustomerMeasurement }];
     req.options.distinct = true;
     Customer.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
-        res.json(arrs.rows);
+        res.json(arrs.rows)
     }).catch(function (err) {
         console.log(err);
-        res.staus(400).send({ message: getErrorMessage(err) });
+        res.status(400).send({ message: getErrorMessage(err) });
     });
 }
 
@@ -54,7 +54,7 @@ exports.read = function (req, res) {
 
 exports.getById = function (req,res,next) {
     Customer.findOne({
-        where: { id: req.params.customerId },
+          where: { id: req.params.customerId },
         include: [{ model: User, as: 'createdBy', attributes: ["fullName", "email", "id"] }, CustomerMeasurement]
     }).then(function (obj) {
         req.customer = obj;
@@ -67,6 +67,7 @@ exports.getById = function (req,res,next) {
 
 exports.create = function (req, res) {
     req.body.createdById = req.user.id;
+    console.log("company id::::"+JSON.stringify(req.body.CompanyId));
     Customer.create(req.body, {
         include: [CustomerMeasurement]
     }).then(function (obj) {

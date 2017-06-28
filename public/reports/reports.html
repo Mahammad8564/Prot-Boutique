@@ -31,7 +31,7 @@
           <span><input type="radio" ng-model="vm.option" value="custom"><i>Custom</i></span>
 
         </div>
-        <div id="my-table">
+        <div >
           <div class="orderdate-bx" ng-if="vm.option == 'frequency'">
             <label>Filter by</label>
             <select ng-init="vm.frequency = 'today'" ng-model="vm.frequency">
@@ -74,7 +74,7 @@
           </div>
 
           <!--Today-->
-          <table ng-if="vm.showtable && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
+          <table ng-if="vm.showtable && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0" id="my-table">
             <tr class="top-purpal-color-row">
               <th>Sr. No.mk</th>
               <th>Order Date mk</th>
@@ -97,7 +97,7 @@
           </div>
 
           <!--Last 7 days,Last 30 days,-->
-          <table ng-if="vm.showtable2 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
+          <table ng-if="vm.showtable2 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0" id="my-table">
             <tr class="top-purpal-color-row">
               <th>Sr. No.</th>
               <th>Order Id</th>
@@ -120,7 +120,7 @@
           </div>
 
           <!--Monthly-->
-          <table ng-if="vm.showtable3 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0">
+          <table ng-if="vm.showtable3 && vm.records.length" class="table-part" border="0" cellspacing="0" cellpadding="0" id="my-table">
             <tr class="top-purpal-color-row">
               <th>Sr. No.</th>
               <th>Order Date</th>
@@ -212,7 +212,7 @@
             <h2 class="no-record-found-text" ng-if="vm.showtable4 && !vm.CustomerBasedReports.length">No record found</h2>
           </div>
 
-          <table ng-if="vm.CustomerBasedReports.length && vm.showtable4" class="table-part" border="0" cellspacing="0" cellpadding="0">
+          <table ng-if="vm.CustomerBasedReports.length && vm.showtable4" class="table-part" border="0" cellspacing="0" cellpadding="0" id="my-table">
             <tr class="top-purpal-color-row">
               <th>Order Id</th>
               <th>Designs</th>

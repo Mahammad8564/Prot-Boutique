@@ -46,7 +46,6 @@ function cModel(obj, key) {
 }
 getRestify.prototype.queryBuilder = function(req, res, next) {
   //for select query
-
   req.options = {
     attributes: [],
     order: '',
@@ -55,7 +54,8 @@ getRestify.prototype.queryBuilder = function(req, res, next) {
     page: req.query.page || 0,
     include: include,
     where: {}
-  }
+  };
+  req.options.where['CompanyId'] = parseInt(req.query.CompanyId);
   if (req.query.select) {
     _.forEach(req.query.select.split(','), function(slt) {
       req.options.attributes.push(slt);

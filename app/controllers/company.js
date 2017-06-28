@@ -22,7 +22,6 @@ var getErrorMessage = function (err) {
 
 exports.getById = function (req,res,next) {
 
-  console.log("jljljsldjlkjlj::::::"+req.params.Initial);
   Company.findOne({
     where:{InitialName:req.params.Initial}
   }).then(function(obj){

@@ -12,6 +12,7 @@
         vm.list = [];
         vm.save = save;
         vm.edit = edit;
+        var C_Id=window.user.CompanyId;
         vm.getList = getList;
         vm.search = search;
         vm.order = order;
@@ -20,12 +21,15 @@
             pagesize: 10,
             totalItems: 0,
             page: 1,
-            search: ''
+            search: '',
+            CompanyId:C_Id
         }
         vm.measurement = {
-            isActive: true
+            isActive: true,
+            CompanyId:C_Id
+
         };
-       
+
         if ($stateParams.id && $stateParams.id != 'new') {
             Restangular.one('api/measurement/' + $stateParams.id).get().then(function (res) {
                 vm.measurement = res.data;
@@ -97,7 +101,7 @@
             vm.options.page = 1;
             getList();
         }
-        
+
     }
 
 })();

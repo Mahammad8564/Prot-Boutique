@@ -38,7 +38,7 @@ exports.list = function(req, res) {
   req.options.distinct = true;
   Order.findAndCountAll(req.options).then(function(arrs) {
     res.setHeader('total', arrs.count);
-  
+
     res.json(arrs.rows);
   }).catch(function(err) {
     console.log(err);
@@ -134,7 +134,11 @@ exports.Customerreport = function(req, res, next) {
           },
           createdAt: {
             $between: [req.body.start, req.body.end]
+          },
+          {
+            CompanyId:req.body.CompanyId
           }
+
         },
         include: [Design, Style, OrderStatus]
       }, Customer]
@@ -213,6 +217,7 @@ exports.Customerreport = function(req, res, next) {
 
 
 exports.create = function(req, res) {
+  console.log("------------------------------------------------------------------order-------------------------------------------------------------- "+JSON.stringify(req.body));
 
   if (req.files) {
     for (var index = 0; index < req.files.length; index++) {
@@ -233,7 +238,9 @@ exports.create = function(req, res) {
   });
   if (!req.body.order.id) {
     req.body.order.UserId = req.user.id;
-
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+    console.log(req.body.order.CompanyId);
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     Order.create(req.body.order, {
       include: [{
         model: OrderItem,

@@ -17,6 +17,18 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
+                  Material.belongsTo(models.Company, {
+                      foreignKey: {
+                          allowNull: false
+                      }
+                  });
+                  Material.belongsTo(models.Company, {
+                    onDelete: "CASCADE",
+                    foreignKey: {
+                      allowNull: false
+                    }
+                    // as: 'createdBy'
+                  });
                 }
             }
         }

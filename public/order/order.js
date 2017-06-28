@@ -7,6 +7,8 @@
 
   function OrderController(Restangular, $state, SweetAlert, $stateParams, Upload) {
     var vm = this;
+    var C_Id=window.user.CompanyId;
+  vm.CompanyId = window.user.CompanyId;
     vm.date = new Date();
     vm.invoice = invoice;
     vm.print = print;
@@ -63,6 +65,7 @@
     };
     vm.order = {
       Customer: {},
+     CompanyId:C_Id,
       OrderStatus: {
         title: "New"
       },
@@ -80,7 +83,8 @@
       pagesize: 10,
       totalItems: 0,
       page: 1,
-      search: ''
+      search: '',
+      CompanyId:C_Id
     }
     vm.searchBy = {
 
@@ -149,20 +153,20 @@
 
     function getCustomerList() {
 
-      Restangular.all('api/customer').getList().then(function(res) {
+      Restangular.all('api/customer').getList({CompanyId:C_Id}).then(function(res) {
 
         vm.customers = res.data;
       });
     }
 
     function getDesignList() {
-      Restangular.all('api/design').getList().then(function(res) {
+      Restangular.all('api/design').getList({CompanyId:C_Id}).then(function(res) {
         vm.designs = res.data;
       });
     }
 
     function getStyleList() {
-      Restangular.all('api/style').getList().then(function(res) {
+      Restangular.all('api/style').getList({CompanyId:C_Id}).then(function(res) {
         vm.styles = [];
         res.data.forEach(function(element) {
           if (element.isActive) {
@@ -173,7 +177,7 @@
     }
 
     function getMaterialList() {
-      Restangular.all('api/material').getList().then(function(res) {
+      Restangular.all('api/material').getList({CompanyId:C_Id}).then(function(res) {
         vm.materials = [];
         res.data.forEach(function(element) {
           if (element.isActive) {
@@ -184,7 +188,7 @@
     }
 
     function getMeasurementList() {
-      Restangular.all('api/measurement').getList().then(function(res) {
+      Restangular.all('api/measurement').getList({CompanyId:C_Id}).then(function(res) {
         vm.measurements = [];
         res.data.forEach(function(element) {
           if (element.isActive) {
@@ -266,6 +270,7 @@
         vm.order.OrderItems[idx].Style = stl;
       } else {
         vm.order.OrderItems[idx].Style = {};
+
       }
     }
 
@@ -338,7 +343,10 @@
 
     function upload() {
       var data = Restangular.stripRestangular(vm.order);
-      data.totalamount = vm.totalamount;
+        data.totalamount = vm.totalamount;
+        console.log("-------------------------------log-------------------------------");
+        console.log(data.CompanyId);
+        //data.CompanyId = C_Id;
       //delete vm.order["0"];
       //delete vm.order["1"];
       Upload.upload({
@@ -381,7 +389,7 @@
     }
 
     function getOrderStatusList() {
-      Restangular.all('api/orderStatus').getList().then(function(res) {
+      Restangular.all('api/orderStatus').getList({CompanyId:C_Id}).then(function(res) {
         vm.orderStatuses = res.data;
       });
     }

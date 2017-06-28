@@ -17,6 +17,13 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
+                  OrderStatus.belongsTo(models.Company, {
+                    onDelete: "CASCADE",
+                    foreignKey: {
+                      allowNull: false
+                    }
+                    // as: 'createdBy'
+                  });
                 }
             }
         }

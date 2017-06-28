@@ -9,12 +9,14 @@
 
     function MaterialController(Restangular, $state, SweetAlert, $stateParams) {
         var vm = this;
+        var C_Id=window.user.CompanyId;
         vm.list = [];
         vm.save = save;
         vm.edit = edit;
         vm.getList = getList;
         vm.material = {
-            isActive: true
+            isActive: true,
+            CompanyId:C_Id
         };
         vm.search = search;
         vm.order = order;
@@ -23,7 +25,8 @@
             pagesize: 10,
             totalItems: 0,
             page: 1,
-            search: ''
+            search: '',
+            CompanyId: C_Id
         }
         if ($stateParams.id && $stateParams.id != 'new') {
             Restangular.one('api/material/' + $stateParams.id).get().then(function (res) {
@@ -66,7 +69,7 @@
 
         function getList() {
             Restangular.all('api/material').getList(vm.options).then(function (res) {
-                vm.list = res.data;
+                vm.list =res.data;
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
         }

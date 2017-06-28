@@ -54,7 +54,7 @@
         <div class="addProduct-createorder-scrollbar-btm">
           <!-- Table Repeat Section Start Here -->
           <div class="addproduct-scrollbar-bx" ng-repeat="orderItem in vm.order.OrderItems track by $index">
-            <table class="measurment-table-width">
+            <table class="measurment-table-width" ng-init="vm.order.OrderItems[$index].CompanyId = vm.CompanyId">
               <tbody>
                 <tr>
                   <td class="addproducttable-B">
@@ -203,7 +203,7 @@
               </tr>
               <tr ng-repeat="orderItem in vm.order.OrderItems track by $index" class="ng-scope" ng-class="{'table-tr-alternate-color': vm.sprayColour($index,vm.order.OrderItems)}">
                 <td data-th="Design: " class="top-purpal-color-row2 ng-binding" ng-click="vm.detail()">
-                  <img height="50" width="50" class="image-text-set-order" ng-src="{{orderItem.style.image}}">saurabh
+                  <img height="50" width="50" class="image-text-set-order" ng-src="{{orderItem.Style.image}}">
                     <a href="">{{orderItem.Design.title}} ({{orderItem.Style.title}})</a>
 
                 </td>

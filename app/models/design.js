@@ -17,7 +17,19 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Design.hasMany(models.DesignMeasurement)
+                    Design.hasMany(models.DesignMeasurement);
+                    Design.belongsTo(models.Company, {
+                        foreignKey: {
+                            allowNull: false
+                        }
+                    });
+                    Design.belongsTo(models.Company, {
+                      onDelete: "CASCADE",
+                      foreignKey: {
+                        allowNull: false
+                      }
+                      // as: 'createdBy'
+                    });
                 }
             }
         }

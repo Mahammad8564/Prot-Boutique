@@ -15,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING,
             allowNull: false
-          
+
         },
         pwd: {
             type: DataTypes.STRING,
@@ -59,18 +59,18 @@ module.exports = function (sequelize, DataTypes) {
                 User.hasMany(models.Order);
 
                 User.hasMany(models.Customer);
+
+                User.belongsTo(models.Company, {
+                  onDelete: "CASCADE",
+                  foreignKey: {
+                    allowNull: false
+                  }
+                  // as: 'createdBy'
+                });
             }
         }
     }
-    //, {
-    //    indexes: [
-    //        // Create a unique index on email
-    //        {
-    //            unique: true,
-    //            fields: ['username']
-    //        }]}
-   
     );
-    
+
     return User;
 };

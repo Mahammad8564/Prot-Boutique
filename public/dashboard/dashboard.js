@@ -6,9 +6,10 @@
     angular.module('myra').controller('DashboardController', DashboardController);
 
     DashboardController.$inject = ['Restangular','$state'];
-    
+
     function DashboardController(Restangular, $state) {
         var vm = this;
+        var C_Id=window.user.CompanyId;
         vm.getList = getList;
         vm.search = search;
         vm.order = order;
@@ -28,7 +29,10 @@
                 page: 1,
                 search: '',
                 where: 'OrderStatusId;$or|a|1.2',
-                sort: 'deliveryDate asc'
+                sort: 'deliveryDate asc',
+                CompanyId:C_Id
+
+
             },
             two: {
                 pagesize: 10,
@@ -36,7 +40,10 @@
                 page: 1,
                 search: '',
                 where: 'OrderStatusId;1',
-                sort: 'deliveryDate asc'
+                sort: 'deliveryDate asc',
+                CompanyId:C_Id
+
+
             },
             three: {
                 pagesize: 10,
@@ -44,7 +51,10 @@
                 page: 1,
                 search: '',
                 where: 'OrderStatusId;3',
-                sort: 'completeDate desc'
+                sort: 'completeDate desc',
+                CompanyId:C_Id
+
+
             },
             four: {
                 pagesize: 10,
@@ -52,7 +62,10 @@
                 page: 1,
                 search: '',
                 where: 'OrderStatusId;4',
-                sort: 'cancelDate desc'
+                sort: 'cancelDate desc',
+                Com panyId:C_Id
+
+
             }
         }
 

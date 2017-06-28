@@ -57,6 +57,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
+
         Customer.hasMany(models.CustomerMeasurement);
 
         Customer.hasMany(models.Order);
@@ -68,6 +69,15 @@ module.exports = function(sequelize, DataTypes) {
           },
           as: 'createdBy'
         });
+
+        Customer.belongsTo(models.Company, {
+          onDelete: "CASCADE",
+          foreignKey: {
+            allowNull: false
+          }
+          // as: 'createdBy'
+        });
+
       }
     }
   });

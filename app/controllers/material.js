@@ -16,7 +16,7 @@ var getErrorMessage = function (err) {
     }
 }
 
-//getting List of 
+//getting List of
 //For Geting list of Materials
 exports.list = function (req, res) {
     Material.findAndCountAll(req.options).then(function (arrs) {

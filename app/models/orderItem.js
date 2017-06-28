@@ -50,12 +50,22 @@ module.exports = function (sequelize, DataTypes) {
                 associate: function (models) {
                     OrderItem.hasMany(models.OrderItemMeasurement);
 
+
+                    OrderItem.belongsTo(models.Company, {
+                      onDelete: "CASCADE",
+                      foreignKey: {
+                        allowNull: false
+                      }
+                      // as: 'createdBy'
+                    });
+
                     OrderItem.belongsTo(models.Design, {
                         onDelete: "CASCADE",
                         foreignKey: {
                             allowNull: false
                         }
                     });
+
 
                     OrderItem.belongsTo(models.Order, {
                         onDelete: "CASCADE",

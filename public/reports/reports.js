@@ -8,6 +8,7 @@
     function ReportsController(Restangular, $state) {
         var vm = this;
         var d = new Date();
+        var C_Id=window.user.CompanyId;
         vm.today = d;
         vm.getFullYear = d.getFullYear();
         vm.months = ['January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
@@ -56,7 +57,7 @@
         }
 
         function getCustomerList() {
-            Restangular.all('api/customer').getList().then(function (res) {
+            Restangular.all('api/customer').getList({CompanyId:C_Id}).then(function (res) {
                 vm.customers = res.data;
             });
         }
@@ -90,8 +91,11 @@
         function exportToExcel() {
             console.log(document.getElementById('my-table'));
             html2canvas(document.getElementById('my-table'), {
+
                 onrendered: function (canvas) {
-                    var data = canvas.toDataURL();
+                  var data = canvas.toDataURL();
+
+                    console.log("report::::::::::"+data);
                     var docDefinition = {
                         content: [
                             { text: 'January Transport Inc.', fontSize: 10, bold: false, alignment: 'center', margin: [0, 5, 0, 5] },
@@ -380,7 +384,7 @@
                         var endDate = new Date();
                         endDate.setHours(23, 59, 59, 999);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate ,CompanyId};
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             res.data.forEach(function (element) {
                                 element.OrderItems.forEach(function (ele) {

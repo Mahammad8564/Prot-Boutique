@@ -9,6 +9,7 @@
 
     function StatsController(Restangular, $state) {
         var vm = this;
+        var C_Id=window.user.CompanyId;
         vm.newOrders = 0;
         vm.stitchingOrders = 0;
         vm.completedOrders = 0;
@@ -22,7 +23,9 @@
         vm.todayorder = 0;
         vm.thisweekorder = 0;
         vm.thismonthorder = 0;
-
+vm.options={
+  CompanyId:C_Id
+}
         vm.getList = getList;
 
         //=======This week data===
@@ -46,7 +49,7 @@
         function getList() {
             var d = new Date();
 
-            Restangular.all('api/listall').getList().then(function (res) {
+            Restangular.all('api/listall').getList({CompanyId:C_Id}).then(function (res) {
                 res.data.forEach(function (element) {
                     var t = new Date(element.orderDate);
                     if (t.getDate() == d.getDate() && t.getMonth() == d.getMonth() && t.getFullYear() == d.getFullYear()) {

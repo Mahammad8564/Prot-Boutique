@@ -1,4 +1,4 @@
-﻿
+
 
 (function () {
     'use strict';
@@ -10,10 +10,14 @@
     function StyleController(Restangular, $state, SweetAlert, $stateParams, Upload) {
         var vm = this;
         vm.list = [];
+        var C_Id=window.user.CompanyId;
+
         vm.save = save;
         vm.edit = edit;
         vm.style = {
-            isActive: true
+            isActive: true,
+            CompanyId:C_Id
+
         };
         vm.search = search;
         vm.order = order;
@@ -22,7 +26,8 @@
             pagesize: 10,
             totalItems: 0,
             page: 1,
-            search: ''
+            search: '',
+            CompanyId:C_Id
         }
         vm.getList = getList;
         vm.getDesignList = getDesignList;
@@ -80,14 +85,23 @@
         }
 
         function getList() {
+
             Restangular.all('api/style').getList(vm.options).then(function (res) {
-                vm.list = res.data;
+                // vm.list = res.data;
+
+
+                vm.list= res.data;
+
+
+
+
                 vm.options.totalItems = parseInt(res.headers('total'));
             });
         }
         function getDesignList() {
-            Restangular.all('api/design').getList().then(function (res) {
+            Restangular.all('api/design').getList({CompanyId:C_Id}).then(function (res) {
                 vm.designs = res.data;
+
                 _.forEach(vm.designs, function (dgn) {
                     dgn.id = '' + dgn.id;
                 });
@@ -121,8 +135,9 @@
         }
 
         function activate() {
-            Restangular.all('api/design').getList().then(function (res) {
+            Restangular.all('api/design').getList({CompanyId:C_Id}).then(function (res) {
                 vm.designs = res.data;
+
                 if ($stateParams.id != 'new') {
                     Restangular.one('api/style/' + $stateParams.id).get().then(function (res) {
                         vm.style = res.data;
@@ -130,7 +145,7 @@
                     });
                 }
             });
-
+            console.log('hahaha');
         }
     }
 

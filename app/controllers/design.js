@@ -1,6 +1,7 @@
 ﻿var models = require('../models');
 var Design = models.Design;
 var Measurement = models.Measurement;
+var Company = models.Company;
 var User = models.User;
 var DesignMeasurement = models.DesignMeasurement;
 var Sequelize = require('sequelize');
@@ -18,7 +19,7 @@ var getErrorMessage = function (err) {
     }
 }
 
-//getting List of 
+//getting List of
 //For Geting list of Measurements
 //
 
@@ -30,7 +31,7 @@ exports.list = function (req, res) {
             model: Measurement,
             attributes: ['id', 'title', 'isActive']
         }]
-    }];
+    },Company];
     req.options.distinct = true;
     Design.findAndCountAll(req.options).then(function (arrs) {
         res.setHeader('total', arrs.count);
@@ -61,6 +62,8 @@ exports.getById = function (req,res,next) {
 exports.create = function (req, res) {
     Design.create(req.body, {
         include: [DesignMeasurement]
+
+
     }).then(function (obj) {
         if (!obj) {
             return res.send({ message: "Error Occured while updataing" });
@@ -82,7 +85,7 @@ exports.update = function (req, res) {
         design.dataValues[key] = val;
     });
     var arrAdd = [];
-        //add newly added measurments 
+        //add newly added measurments
         _.forEach(req.body.DesignMeasurements, function (dt) {
             arrAdd.push({ DesignId: design.dataValues.id, MeasurementId: dt.MeasurementId });
         });
@@ -110,5 +113,5 @@ exports.update = function (req, res) {
             }).catch(function (err) {
                 return res.status(400).send({ message: getErrorMessage(error) });
             });
-      
+
 }

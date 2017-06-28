@@ -17,10 +17,27 @@ module.exports = function (sequelize, DataTypes) {
     }, {
             classMethods: {
                 associate: function (models) {
-                    Measurement.hasMany(models.DesignMeasurement)
+                    Measurement.hasMany(models.DesignMeasurement);
+
+                    Measurement.belongsTo(models.Company, {
+
+                        foreignKey: {
+                            allowNull: false
+                        }
+                    });
+
+                    Measurement.belongsTo(models.Company, {
+                      onDelete: "CASCADE",
+                      foreignKey: {
+                        allowNull: false
+                      }
+                      // as: 'createdBy'
+                    });
                 }
             }
         }
+
+
     );
 
     return Measurement;

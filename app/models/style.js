@@ -27,6 +27,14 @@ module.exports = function (sequelize, DataTypes) {
                             allowNull: false
                         }
                     });
+
+                    Style.belongsTo(models.Company, {
+                      onDelete: "CASCADE",
+                      foreignKey: {
+                        allowNull: false
+                      }
+                      // as: 'createdBy'
+                    });
                 }
             }
         }

@@ -26,6 +26,22 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: true
     }
+  },{
+      classMethods: {
+          associate: function (models) {
+
+              Company.hasMany(models.Customer);
+              Company.hasMany(models.Design);
+              Company.hasMany(models.Material);
+              Company.hasMany(models.Measurement);
+              Company.hasMany(models.Order);
+              Company.hasMany(models.OrderStatus);
+              Company.hasMany(models.Style);
+              Company.hasMany(models.User);
+
+
+          }
+      }
   });
 
   return Company;
