@@ -8,7 +8,7 @@
     function ReportsController(Restangular, $state) {
         var vm = this;
         var d = new Date();
-        var C_Id=window.user.CompanyId;
+        vm.CompanyId=window.user.CompanyId;
         vm.today = d;
         vm.getFullYear = d.getFullYear();
         vm.months = ['January ', 'February ', 'March ', 'April ', 'May ', 'June ', 'July ', 'August ', 'September ', 'October ', 'November ', 'December '];
@@ -57,7 +57,7 @@
         }
 
         function getCustomerList() {
-            Restangular.all('api/customer').getList({CompanyId:C_Id}).then(function (res) {
+            Restangular.all('api/customer').getList({CompanyId:vm.CompanyId}).then(function (res) {
                 vm.customers = res.data;
             });
         }
@@ -126,7 +126,7 @@
                         var endDate = new Date();
                         endDate.setHours(23, 59, 59, 999);
 
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                        Restangular.all('api/report').post({ start: startDate, end: endDate ,CompanyId:vm.CompanyId}).then(function (res) {
                             vm.filterTotal = 0;
                             vm.records = res.data;
                             res.data.forEach(function (element) {
@@ -163,7 +163,7 @@
 
                         }
 
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                        Restangular.all('api/report').post({ start: startDate, end: endDate,CompanyId:vm.CompanyId }).then(function (res) {
                             vm.filterTotal = 0;
                             res.data.forEach(function (element) {
                                 vm.filterTotal += element.totalamount;
@@ -216,7 +216,7 @@
                             start = new Date(newDate);
                         }
 
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                        Restangular.all('api/report').post({ start: startDate, end: endDate,CompanyId:vm.CompanyId }).then(function (res) {
                             vm.filterTotal = 0;
                             res.data.forEach(function (element) {
                                 vm.filterTotal += element.totalamount;
@@ -268,7 +268,7 @@
                             else vm.array.push({ createdat: index.toString(), val: 0 });
                         }
 
-                        Restangular.all('api/report').post({ start: startDate, end: endDate }).then(function (res) {
+                        Restangular.all('api/report').post({ start: startDate, end: endDate ,CompanyId:vm.CompanyId}).then(function (res) {
                             vm.filterTotal = 0;
 
                             res.data.forEach(function (element) {
@@ -333,7 +333,7 @@
                         vm.array.push({ orderDate: start, totalamount: 0 })
                     }
 
-                    Restangular.all('api/report').post({ start: vm.datefrom, end: vm.dateto }).then(function (res) {
+                    Restangular.all('api/report').post({ start: vm.datefrom, end: vm.dateto,CompanyId:vm.CompanyId }).then(function (res) {
                         vm.filterTotal = 0;
                         res.data.forEach(function (element) {
                             vm.filterTotal += element.totalamount;
@@ -384,7 +384,7 @@
                         var endDate = new Date();
                         endDate.setHours(23, 59, 59, 999);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate ,CompanyId};
+                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate,CompanyId:vm.CompanyId };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             res.data.forEach(function (element) {
                                 element.OrderItems.forEach(function (ele) {
@@ -410,7 +410,7 @@
                         var endDate = new Date();
                         endDate.setHours(23, 59, 59, 999);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate,CompanyId:vm.CompanyId };
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
                             res.data.forEach(function (element) {
                                 element.OrderItems.forEach(function (ele) {
@@ -436,7 +436,7 @@
                         var endDate = new Date();
                         endDate.setHours(23, 59, 59, 999);
 
-                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate };
+                        var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: startDate, end: endDate ,CompanyId:vm.CompanyId};
                         Restangular.all('api/customerreport').post(newObj).then(function (res) {
 
                             res.data.forEach(function (element) {
@@ -469,7 +469,7 @@
                     vm.datefrom3.setHours(0, 0, 0, 0);
                     vm.dateto3.setHours(23, 59, 59, 999);
 
-                    var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 };
+                    var newObj = { CustomerId: vm.custId, OrderStatusId: vm.user.roles, start: vm.datefrom3, end: vm.dateto3 ,CompanyId:vm.CompanyId};
                     Restangular.all('api/customerreport').post(newObj).then(function (res) {
                         res.data.forEach(function (element) {
                             element.OrderItems.forEach(function (ele) {

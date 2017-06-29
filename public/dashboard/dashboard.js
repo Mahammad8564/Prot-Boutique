@@ -63,7 +63,7 @@
                 search: '',
                 where: 'OrderStatusId;4',
                 sort: 'cancelDate desc',
-                Com panyId:C_Id
+                CompanyId:C_Id
 
 
             }

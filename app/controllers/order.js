@@ -54,7 +54,8 @@ exports.dateByMonth = function(req, res, next) {
     where: {
       orderDate: {
         $between: [req.body.start, req.body.end]
-      }
+      },
+      CompanyId:req.body.CompanyId
     }
     // group: [Sequelize.fn('date_trunc', 'day', Sequelize.col('orderDate'))]
   }).then(function(obj) {
@@ -124,6 +125,7 @@ exports.getById = function(req, res, next) {
 }
 
 exports.Customerreport = function(req, res, next) {
+  console.log("req.body.ID=============================="+req.body.CompanyId);
   if (req.body.CustomerId == undefined) {
     Order.findAll({
       include: [{
@@ -135,9 +137,9 @@ exports.Customerreport = function(req, res, next) {
           createdAt: {
             $between: [req.body.start, req.body.end]
           },
-          {
+
             CompanyId:req.body.CompanyId
-          }
+
 
         },
         include: [Design, Style, OrderStatus]

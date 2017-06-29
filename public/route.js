@@ -17,7 +17,13 @@
                 title : 'Login',
                 onEnter: ['$state', 'Authentication', function ($state, Authentication) {
                     if (Authentication.isAuthenticated()) {
-                        $state.go('secure.home');
+                      if(window.user.userrole=='admin' || window.user.userrole=='user'){
+
+                         $state.go('secure.home');
+                      }else {
+
+                        $state.go('secure.company');
+                      }
                     }
                 }],
             })

@@ -6,13 +6,14 @@
     angular.module('myra').controller('SecureController', SecureController);
 
     SecureController.$inject = ['Authentication','$state'];
-    
+
     function SecureController(Authentication,$state) {
         var vm = this;
         vm.user = Authentication.user;
         vm.logout = logout;
         vm.toggle = toggle;
         vm.toggleActive = toggleActive;
+        vm.userrole=window.user.userrole;
 
         function toggleActive() {
             $(this).toggleClass("active");
