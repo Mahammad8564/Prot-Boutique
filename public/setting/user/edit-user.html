@@ -40,6 +40,9 @@
             <span ng-if="(userForm.userrole.$dirty || vm.isSubmitted) && userForm.userrole.$error.required"><i><b>Type of User</b></i> is required.</span>
           </div>
 
+        </fieldset>
+
+
           <div class="form-box">
             <label> Email Address</label>
             <input ng-model="vm.user.email" name="email" ng-pattern="/^[_A-Za-z0-9]+[a-zA-Z0-9_+-]+(\.[_A-Za-z0-9+-]+)*@[A-Za-z0-9+-_]+(\.[A-Za-z0-9+-]+)*(\.[A-Za-z]{2,5})$/ " placeholder="Email address" ng-minlength="5" ng-maxlength="250" type="email">
@@ -85,18 +88,17 @@
             <span ng-if="(userForm.address.$dirty || vm.isSubmitted) && userForm.address.$error.minlength"><i><b>Address</b></i> should be at least 2 characters long.</span>
             <span ng-if="(userForm.address.$dirty || vm.isSubmitted) && userForm.address.$error.maxlength"><i><b>Address</b></i> should not be more than 250 characters long.</span>
           </div>
-          <div class="form-box">
+          <div class="form-box"  >
             <label>Is Active</label>
-            <input ng-model="vm.user.isActive" class="billing-addres-checkbox clothcheck" type="checkbox">
+            <input ng-model="vm.user.isActive" ng-disabled="vm.currentUser.userrole !='admin'" class="billing-addres-checkbox clothcheck" type="checkbox">
           </div>
-        </fieldset>
 
         <div class="register-btm-btn-box register-btm-btn-box-left-mar">
           <div class="submit-error" ng-if="vm.error">
             <div>{{vm.error}}</div>
           </div>
           <div class="submit-button">
-            <input ng-disabled="vm.startProcessing" ng-if="vm.currentUser.userrole === 'admin'" value="Save" class="register-submit-btn" type="submit" ng-click="vm.save(userForm)">
+            <input ng-disabled="vm.startProcessing" value="Save" class="register-submit-btn" type="submit" ng-click="vm.save(userForm)">
           </div>
           <div class="cancel-button">
             <input value="Cancel" class="register-cancel-btn" ui-sref="secure.setting.user" type="button">

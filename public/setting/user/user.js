@@ -11,9 +11,12 @@
         var vm = this;
         vm.currentUser = Authentication.user;
         vm.list = [];
+        vm.list = [];
+        vm.userlist = [];
         vm.save = save;
         vm.edit = edit;
         vm.userrole=window.user.userrole;
+        vm.userid=window.user.id;
         var C_Id=window.user.CompanyId;
         vm.user = {
             isActive: true,
@@ -130,7 +133,9 @@
 
               }
               else {
-                  vm.list.push(_.find(res.data,{id:window.user.id}));
+                  vm.list=res.data;
+                  vm.userlist=_.find(res.data,{id:window.user.id});
+                  console.log("str"+JSON.stringify(vm.userlist));
               }
 
                 vm.options.totalItems = parseInt(res.headers('total'));

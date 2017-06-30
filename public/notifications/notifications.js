@@ -43,7 +43,8 @@
             Restangular.all('api/customer').getList({CompanyId:C_Id}).then(function (res) {
                 res.data.forEach(function (element) {
                     var date2 = new Date(element.annerversary);
-                    if (date2.getDate() == date1.getDate() && date2.getMonth() == date1.getMonth()) {
+
+                      if (date2.getDate() == date1.getDate() && date2.getMonth() == date1.getMonth()) {
                         vm.annerversarys.push(element);
                     }
                     var date3 = new Date(element.dob);
